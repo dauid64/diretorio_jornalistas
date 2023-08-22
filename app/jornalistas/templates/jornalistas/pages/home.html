@@ -1,0 +1,79 @@
+{% extends 'global/base.html' %}
+{% load static %}
+{% block content %}
+
+<main>
+    <form action={% url 'jornalistas:home' %} method="GET" style="padding-top: 8vh;">
+        <div class="textoApjor">
+            <h1>Diretório Piloto de<br>Jornalistas no Brasil</h1>
+            <h2>Busque um jornalista</h2>
+        </div>
+
+        <div class="texto-botoes">
+            <input type="text" class="form-control" name="name" placeholder="Buscar por nome">
+
+            <div class="col form-group mb-0">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="alfabeto">
+        <form action={% url 'jornalistas:home' %} method="GET" id="alfabeto">
+            <button type="submit" name="inicial" value="A">A</button>
+            <button type="submit" name="inicial" value="B">B</button>
+            <button type="submit" name="inicial" value="C">C</button>
+            <button type="submit" name="inicial" value="D">D</button>
+            <button type="submit" name="inicial" value="E">E</button>
+            <button type="submit" name="inicial" value="F">F</button>
+            <button type="submit" name="inicial" value="G">G</button>
+            <button type="submit" name="inicial" value="H">H</button>
+            <button type="submit" name="inicial" value="I">I</button>
+            <button type="submit" name="inicial" value="J">J</button>
+            <button type="submit" name="inicial" value="K">K</button>
+            <button type="submit" name="inicial" value="L">L</button>
+            <button type="submit" name="inicial" value="M">M</button>
+            <button type="submit" name="inicial" value="N">N</button>
+            <button type="submit" name="inicial" value="O">O</button>
+            <button type="submit" name="inicial" value="P">P</button>
+            <button type="submit" name="inicial" value="Q">Q</button>
+            <button type="submit" name="inicial" value="R">R</button>
+            <button type="submit" name="inicial" value="S">S</button>
+            <button type="submit" name="inicial" value="T">T</button>
+            <button type="submit" name="inicial" value="U">U</button>
+            <button type="submit" name="inicial" value="V">V</button>
+            <button type="submit" name="inicial" value="W">W</button>
+            <button type="submit" name="inicial" value="X">X</button>
+            <button type="submit" name="inicial" value="Y">Y</button>
+            <button type="submit" name="inicial" value="Z">Z</button>
+        </form>
+    </div>
+
+    {% csrf_token %}
+    {% if form %}
+    <div class="jornaListas">
+        {% for f in form %}
+            <button style="border: none; display: flex; width: fit-content; background-color: transparent;">
+                <div class="image-pessoa" style="border: none;">
+                    <img
+                        src="{% static 'img/perfil.png' %}"
+                        width="130"
+                        height="130"
+                        alt=""
+                    />
+                </div>
+                <div class="card">
+                    <h5>{{ f.nome_de_guerra }}</h5>
+                    <span><b >Associação:</b> {{ f.associacao }}</span>
+                    <span><b>Localidade:</b> {{ f.get_cidade_display }}</span>
+                    <span><b>Especialidade/Áreas de Atuação:</b> {{f.site}}</span>
+                </div>
+            </button>
+            
+        {% endfor %}
+    </div>
+    {% endif %}
+
+</main>
+
+{% endblock content %}
