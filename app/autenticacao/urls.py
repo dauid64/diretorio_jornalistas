@@ -7,7 +7,7 @@ app_name = 'autenticacao'
 
 urlpatterns = [
     path(
-        'registrar',
+        'login',
         LoginUserView.as_view(),
         name='registrar'
     )
