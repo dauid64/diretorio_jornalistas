@@ -29,12 +29,13 @@
               <form class="text-center" method="POST" action="">
                 {% csrf_token %}
                 <div class="small">
-                  <p>Não é um membro? <a class="fw-bold link" href="{% url 'autenticacao:registrar' %}">Registre agora</a></p>
+                  <p>Não é um membro? <a class="fw-bold link" href="{% url 'autenticacao:login' %}">Login</a></p>
                 </div>
                 <div>
                   <div class="form-group row g-2 p-2 m-2">
                   
                     {{ form.username }}
+                    {{ form.email }}
                     {{ form.password }}
 
                     {% for erro in f.errors %}
@@ -44,9 +45,6 @@
                     <button type="submit" class = "btn btn-primary btn-block">Entrar</button>
                   </div>
                 </div>      
-                <div class="small">
-                  <p class="">Esqueceu sua senha? <a class="fw-bold link" href="#">Clique aqui</a></p>
-                </div>
               </form>
             </div>
           </div>

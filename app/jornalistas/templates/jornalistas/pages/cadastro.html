@@ -1,0 +1,218 @@
+{% extends 'global/base.html' %} 
+{% load static %} 
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/cadastro.css' %}">
+{% endblock styles %}
+{% block content %}
+
+<main>
+
+  <div>
+    {% if message is not None %}
+    <div class="alert alert-{{ message.type }}">{{ message.text }}</div>
+  {% endif %}
+  </div>
+
+  <body>
+
+
+
+      <div class="tela-cadastro" id="Primeiro">
+        <div class="subtitulo">
+          <h3>Crie uma nova conta</h3>
+        </div>
+        
+        <div class="foto-perfil">
+          <img
+            src="{% static 'img/perfil.png' %}"
+            width="128"
+            height="130"
+            alt=""
+            style="margin-left: 2.5vh;"
+          />
+          <img
+            src="{% static 'img/upload.png' %}"
+            width="140"
+            height="39"
+            alt=""
+            style="margin-top: -4vh;"
+          />
+        </div>
+
+        <form method="POST" action="" class="form-cadastro" enctype='multipart/form-data'>
+          {% csrf_token %}
+
+        <div class="box">
+          <div class="titulo">
+            <div class="circ-l"> </div>   
+            Dados Pessoais
+          </div>
+          <div class="dadoscoluna">
+
+            {{ jornalista_form.nome_de_guerra }}
+            {{ jornalista_form.associacao }}
+            {{ jornalista_form.cpf }}
+            {{ jornalista_form.data_de_nascimento }}
+            {{ jornalista_form.telefone }}
+            {{ jornalista_form.genero }}
+            {{ jornalista_form.estado_civil }} 
+
+          </div>
+
+          <div class="separador"> </div>
+
+          <div class="titulo">
+            <div class="circ-l"> </div>   
+            Formação
+          </div>
+          <div class="dadoscoluna">
+            {{ jornalista_form.registro }}
+            <label for="id_diploma" class="input-type">Enviar Diploma</label>
+            {{ jornalista_form.diploma }}
+          </div>
+          
+          <div class="separador"> </div>   
+
+          <div class="titulo">
+            <div class="circ-l"> 
+            
+          </div> 
+            Dados Profissionais
+          </div>
+          <h2 class="subtitulo">Redes Sociais</h2>
+          <div class="dadoscoluna">
+            {{ redes.telegram }}
+            {{ redes.facebook }}
+            {{ redes.podcast}}
+
+            {{ redes.linkedin }}
+            {{ redes.twitter }}
+            {{ redes.site }}
+          </div>
+          
+          <h2 class="subtitulo">Histórico Profissional</h2>
+          
+          {% for his_form in historico_forms %}
+          <div class="box" id="historico-form">
+            <div class="dadoscoluna">
+              {{ his_form.veiculo_de_comunicacao}}
+              {{ his_form.cargo }}
+              {{ his_form.data_inicio }}
+              {{ his_form.data_de_termino }}
+              {{ his_form.referencia }}
+              {{ his_form.contato_da_referencia }}
+              {{ his_form.descricao }}
+            </div>
+            <div class="butoes">
+            </div>
+          </div>
+          {% endfor %}
+          {{ historico_forms.management_form }}
+          
+          <div class="separador"> </div> 
+
+          <div class="titulo">
+            <div class="circ-l"> </div>   
+            Obras
+          </div>
+          
+          <h2 class="subtitulo">Livros</h2>
+          {% for liv_form in livro_forms %}
+          <div class="box" id="livro-form">
+            <div class="dadoscoluna">
+                {{ liv_form.titulo }}
+                {{ liv_form.paginas }}
+                {{ liv_form.ano_publicacao }}
+                {{ liv_form.cidade }}
+                {{ liv_form.estado }}
+                {{ liv_form.isbn13 }}
+                {{ liv_form.isbn10 }}
+                {{ liv_form.descricao }}
+            </div>
+            <div class="butoes">
+            </div>
+          </div>
+          {% endfor %}
+          {{ livro_forms.management_form }}
+
+          <h2 class="subtitulo">Publicações</h2>
+          <div>
+            {% for pub_form in publicacao_forms %}
+            <div class="box" id="publicacao-form">
+              <div class="dadoscoluna">
+                {{ pub_form.veiculo_de_comunicacao }}
+                {{ pub_form.titulo }}
+                {{ pub_form.link }}
+                {{ pub_form.anexo }}
+                {{ pub_form.data }}
+                {{ pub_form.descricao }}
+              </div>
+              <div class="butoes">
+              </div>
+            </div>
+            {% endfor %}
+            {{ publicacao_forms.management_form }}
+          </div>
+          
+          <div class="butoes">
+            <button class="cancel">Cancelar</button>
+  
+            <button class="prox" type="submit">
+              Salvar
+            </button>
+          </div>
+
+        </div>
+
+        </div>
+      </div>
+    </form>
+  </body>
+</main>
+
+{% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'js/jquery-3.7.0.min.js' %}"></script>
+<script src="{% static 'js/jquery.mask.min.js' %}"></script>
+<script src="{% static 'js/cadastro_mask.js' %}"></script>
+<script src="{% static 'js/jquery.formset.js' %}"></script>
+<script type="text/javascript">
+  $(function() {
+      $('#historico-form').formset({
+        prefix: '{{ historico_forms.prefix }}',
+        addCssClass: 'incluir btn-centralizar',
+        addText: 'Incluir Experiência',
+        deleteText: 'Excluir Experiência',
+        deleteContainerClass: 'butoes',
+        deleteCssClass: 'cancel',
+      });
+  })
+</script>
+<script type="text/javascript">
+  $(function() {
+      $('#livro-form').formset({
+        prefix: '{{ livro_forms.prefix }}',
+        addCssClass: 'incluir btn-centralizar',
+        addText: 'Incluir Livro',
+        deleteText: 'Excluir Livro',
+        deleteContainerClass: 'butoes',
+        deleteCssClass: 'cancel',
+      });
+  })
+</script>
+<script type="text/javascript">
+  $(function() {
+      $('#publicacao-form').formset({
+        prefix: '{{ publicacao_forms.prefix }}',
+        addCssClass: 'incluir btn-centralizar',
+        addText: 'Incluir Publicacao',
+        deleteText: 'Excluir Publicacao',
+        deleteContainerClass: 'butoes',
+        deleteCssClass: 'cancel',
+      });
+  })
+</script>
+{% endblock scripts %}
+

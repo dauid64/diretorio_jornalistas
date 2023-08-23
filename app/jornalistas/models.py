@@ -19,7 +19,7 @@ class HistoricoProfissional(models.Model):
     referencia = models.CharField(max_length=254)
     contato_da_referencia = models.CharField(max_length=254)
     validado = models.BooleanField(blank=True, null=True)
-    # revisor_responsavel = models.ForeignKey(Revisor, on_delete=models.DO_NOTHING, null=True)
+    revisor_responsavel = models.ForeignKey(Revisor, on_delete=models.DO_NOTHING, null=True)
 
     def __str__(self):
         return '{} - {} - {}/{}'.format(self.veiculo_de_comunicacao, 
@@ -41,11 +41,11 @@ class Jornalista(models.Model):
     estado_civil = models.ForeignKey(EstadoCivil, on_delete=models.DO_NOTHING,null=True, blank = True)
     foto = models.ImageField(null=True, blank = True)
     registro = models.CharField( max_length=50,null=True, blank = True)
-    # diploma = models.ImageField( upload_to=None, height_field=None, width_field=None, max_length=None)
+    diploma = models.ImageField( upload_to=None, height_field=None, width_field=None, max_length=None)
     criado_em = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateTimeField(auto_now=True)
     aprovado = models.BooleanField(default=False)
-    # revisor_responsavel = models.ForeignKey(Revisor,on_delete=models.DO_NOTHING)
+    revisor_responsavel = models.ForeignKey(Revisor,on_delete=models.DO_NOTHING, null=True)
     obras_jornalisticas = models.ManyToManyField(ObraJornalistica)
     historico_profissional = models.ManyToManyField(HistoricoProfissional)
 

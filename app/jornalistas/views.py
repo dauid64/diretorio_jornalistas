@@ -1,5 +1,10 @@
 from django.shortcuts import render
 from django.views.generic import View
+from .models import HistoricoProfissional
+from .forms import HistoricoForm, JornalistaForm
+from obras.models import Livro, Publicao
+from obras.forms import LivroForm, PublicacaoForm
+from django.forms import modelformset_factory
 
 
 class HomeView(View):
@@ -8,4 +13,41 @@ class HomeView(View):
             request,
             'jornalistas/pages/home.html',
             {}
+        )
+
+
+class CadastroJornalistaView(View):
+    def get(self, request):
+        jornalista_form = JornalistaForm()
+        historico_formset = modelformset_factory(
+            HistoricoProfissional,
+            form=HistoricoForm
+        )
+        historico_forms = historico_formset(
+            prefix='historico'
+        )
+        livro_formset = modelformset_factory(
+            Livro,
+            form=LivroForm
+        )
+        livro_forms = livro_formset(
+            prefix='livro'
+        )
+        publicacao_formset = modelformset_factory(
+            Publicao,
+            form=PublicacaoForm
+        )
+        publicacao_forms = publicacao_formset(
+            prefix='publicacao'
+        )
+
+        return render(
+            request,
+            'jornalistas/pages/cadastro.html',
+            context={
+                'jornalista_form': jornalista_form,
+                'historico_forms': historico_forms,
+                'livro_forms': livro_forms,
+                'publicacao_forms': publicacao_forms
+            }
         )
