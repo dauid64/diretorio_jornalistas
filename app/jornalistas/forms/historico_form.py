@@ -37,14 +37,18 @@ class HistoricoForm(forms.ModelForm):
             "data_inicio": forms.DateInput(
                 attrs={
                     "class": "form-control2 mask-date",
-                    "placeholder": "Data de Inicio"
-                }
+                    "placeholder": "Data de Inicio",
+                    "type": "date"
+                },
+                format='%d/%m/%Y'
             ),
             "data_de_termino": forms.DateInput(
                 attrs={
                     "class": "form-control2 mask-date",
-                    "placeholder": "Data de Encerramento"
-                }
+                    "placeholder": "Data de Encerramento",
+                    "type": "date"
+                },
+                format='%d/%m/%Y'
             ),
             "referencia": forms.TextInput(
                 attrs={

@@ -3,6 +3,7 @@ from django.db import models
 from obras.models import ObraJornalistica
 from opcoes.models import Estados, Cidades
 
+
 class Livro(models.Model):
     isbn10 = models.IntegerField(blank=True, null=True)
     isbn13 = models.IntegerField(blank=True, null=True)
@@ -15,5 +16,3 @@ class Livro(models.Model):
 
     def __str__(self):
         return '{}'.format(self.obra_jornalistica)
-
-

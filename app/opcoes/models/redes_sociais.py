@@ -1,10 +1,12 @@
 from django.db import models
 
+
 class TipoDeRedeSocial(models.Model):
     descricao = models.CharField(max_length=64)
 
     def __str__(self):
         return '{}'.format(self.descricao)
+
 
 class RedesSociais(models.Model):
     jornalista = models.ForeignKey('Jornalista',on_delete=models.CASCADE),

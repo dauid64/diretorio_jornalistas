@@ -1,14 +1,6 @@
 from django.db import models
-from opcoes.models import VeiculoDeComunicacao
+from opcoes.models import VeiculoDeComunicacao, TipoDePublicacao
 from obras.models import ObraJornalistica
-
-
-class TipoDePublicacao(models.Model):
-    descricao = models.CharField(max_length=64)
-
-    def __str__(self):
-        return '{}'.format(self.descricao)
-
 
 
 class Publicao(models.Model):
@@ -18,7 +10,6 @@ class Publicao(models.Model):
     link = models.URLField(max_length=254, blank=True, null=True)
     anexo = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=None,blank=True, null=True)
     obra_jornalistica = models.ForeignKey(ObraJornalistica, models.DO_NOTHING)
-
 
     def __str__(self):
         return '{}'.format(self.obra_jornalistica)

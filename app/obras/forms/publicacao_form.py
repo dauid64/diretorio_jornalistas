@@ -27,12 +27,13 @@ class PublicacaoForm(forms.ModelForm):
     class Meta:
         model = Publicao
         fields = [
-            "veiculo_de_comunicacao",
             "titulo",
+            "veiculo_de_comunicacao",
             "link",
             "anexo",
             "data",
-            "descricao"
+            "tipo",
+            "descricao",
         ]
         widgets = {
             "veiculo_de_comunicacao": forms.Select(
@@ -52,21 +53,28 @@ class PublicacaoForm(forms.ModelForm):
                     "placeholder": "Anexo"
                 }
             ),
-            "data": forms.TextInput(
+            "data": forms.DateInput(
                 attrs={
                     "class": "form-control2 mask-date",
-                    "placeholder": "Data"
+                    "placeholder": "Data",
+                    "type": "date"
+                },
+                format='%d/%m/%Y'
+            ),
+            "tipo": forms.Select(
+                attrs={
+                    "class": "form-control2",
                 }
             ),
         }
 
     def save(self, commit=True):
         instance = super().save(commit)
+        if commit:
+            instance.save()
         obra_jornalistica = ObraJornalistica.objects.create(
             titulo=self.cleaned_data['titulo'],
             descricao=self.cleaned_data['descricao']
         )
         instance.obra_jornalistica = obra_jornalistica
-        if commit:
-            instance.save()
         return instance

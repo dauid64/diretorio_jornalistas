@@ -26,21 +26,24 @@ class CadastroJornalistaView(View):
             form=HistoricoForm
         )
         historico_forms = historico_formset(
-            prefix='historico'
+            prefix='historico',
+            queryset=HistoricoProfissional.objects.none()
         )
         livro_formset = modelformset_factory(
             Livro,
             form=LivroForm
         )
         livro_forms = livro_formset(
-            prefix='livro'
+            prefix='livro',
+            queryset=Livro.objects.none()
         )
         publicacao_formset = modelformset_factory(
             Publicao,
-            form=PublicacaoForm
+            form=PublicacaoForm,
         )
         publicacao_forms = publicacao_formset(
-            prefix='publicacao'
+            prefix='publicacao',
+            queryset=Publicao.objects.none()
         )
 
         return render(
@@ -53,7 +56,7 @@ class CadastroJornalistaView(View):
                 'publicacao_forms': publicacao_forms
             }
         )
-    
+
     def post(self, request):
         POST = request.POST
         jornalista_form = JornalistaForm(POST, request.FILES)
@@ -71,7 +74,7 @@ class CadastroJornalistaView(View):
         )
         livro_forms = livro_formset(
             POST,
-            prefix='livro'
+            prefix='publicacao'
         )
         publicacao_formset = modelformset_factory(
             Publicao,
@@ -82,17 +85,18 @@ class CadastroJornalistaView(View):
             prefix='publicacao'
         )
         if jornalista_form.is_valid() and historico_forms.is_valid():
-            if livro_forms.is_valid() and publicacao_forms.is_valid():
+            if publicacao_forms.is_valid() and livro_forms.is_valid():
                 jornalista = jornalista_form.save(commit=False)
                 jornalista.usuario = request.user
                 jornalista.save()
-                historico_forms.save()
+                livro_forms.save(commit=False)
                 livro_forms.save()
+                historico_forms.save()
+                publicacao_forms.save(commit=False)
                 publicacao_forms.save()
                 return redirect(
                     reverse("jornalistas:home")
                 )
-
         return redirect(
             reverse("jornalistas:cadastrar")
         )

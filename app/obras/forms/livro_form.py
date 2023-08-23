@@ -1,4 +1,3 @@
-from typing import Any
 from django import forms
 from obras.models import Livro
 from obras.models import ObraJornalistica
@@ -66,14 +65,14 @@ class LivroForm(forms.ModelForm):
                 }
             ),
         }
-
+    
     def save(self, commit=True):
         instance = super().save(commit)
+        if commit:
+            instance.save()
         obra_jornalistica = ObraJornalistica.objects.create(
             titulo=self.cleaned_data['titulo'],
             descricao=self.cleaned_data['descricao']
         )
         instance.obra_jornalistica = obra_jornalistica
-        if commit:
-            instance.save()
         return instance

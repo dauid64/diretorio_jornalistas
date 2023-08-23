@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import EstadoCivil, Genero, Pais, Cidades, Estados, RedesSociais, TipoDeRedeSocial, VeiculoDeComunicacao, TipoDeVeiculo
+from .models import EstadoCivil, Genero, Pais, Cidades, Estados, RedesSociais, TipoDeRedeSocial, VeiculoDeComunicacao, TipoDeVeiculo, TipoDePublicacao
 
 
 @admin.register(EstadoCivil)
@@ -44,4 +44,9 @@ class VeiculoDeComunicacaoAdmin(admin.ModelAdmin):
 
 @admin.register(TipoDeVeiculo)
 class TipoDeVeiculoAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(TipoDePublicacao)
+class TipoDePublicacaoAdmin(admin.ModelAdmin):
     pass

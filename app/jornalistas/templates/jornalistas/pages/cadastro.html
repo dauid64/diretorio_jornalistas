@@ -130,31 +130,30 @@
                 {{ liv_form.isbn10 }}
                 {{ liv_form.descricao }}
             </div>
-            <div class="butoes">
+            <div class="butoes botao-livro">
             </div>
           </div>
           {% endfor %}
           {{ livro_forms.management_form }}
 
           <h2 class="subtitulo">Publicações</h2>
-          <div>
-            {% for pub_form in publicacao_forms %}
-            <div class="box" id="publicacao-form">
-              <div class="dadoscoluna">
-                {{ pub_form.veiculo_de_comunicacao }}
-                {{ pub_form.titulo }}
-                {{ pub_form.link }}
-                <label for="{{pub_form.anexo.id_for_label}}" class="input-type">{{ pub_form.anexo.label }}</label>
-                {{ pub_form.anexo }}
-                {{ pub_form.data }}
-                {{ pub_form.descricao }}
-              </div>
-              <div class="butoes">
-              </div>
+          {% for pub_form in publicacao_forms %}
+          <div class="box" id="publicacao-form">
+            <div class="dadoscoluna">
+              {{ pub_form.veiculo_de_comunicacao }}
+              {{ pub_form.titulo }}
+              {{ pub_form.link }}
+              <label for="{{pub_form.anexo.id_for_label}}" class="input-type">{{ pub_form.anexo.label }}</label>
+              {{ pub_form.anexo }}
+              {{ pub_form.data }}
+              {{ pub_form.tipo }}
+              {{ pub_form.descricao }}
             </div>
-            {% endfor %}
-            {{ publicacao_forms.management_form }}
+            <div class="butoes">
+            </div>
           </div>
+          {% endfor %}
+          {{ publicacao_forms.management_form }}
           
           <div class="butoes">
             <button class="cancel">Cancelar</button>
@@ -171,7 +170,6 @@
     </form>
   </body>
 </main>
-
 {% endblock content %}
 
 {% block scripts %}
@@ -183,7 +181,7 @@
   $(function() {
       $('#historico-form').formset({
         prefix: '{{ historico_forms.prefix }}',
-        addCssClass: 'incluir btn-centralizar',
+        addCssClass: 'incluir btn-centralizar ',
         addText: 'Incluir Experiência',
         deleteText: 'Excluir Experiência',
         deleteContainerClass: 'butoes',
@@ -193,14 +191,14 @@
 </script>
 <script type="text/javascript">
   $(function() {
-      $('#livro-form').formset({
-        prefix: '{{ livro_forms.prefix }}',
-        addCssClass: 'incluir btn-centralizar',
-        addText: 'Incluir Livro',
-        deleteText: 'Excluir Livro',
-        deleteContainerClass: 'butoes',
-        deleteCssClass: 'cancel',
-      });
+    $('#livro-form').formset({
+      prefix: '{{ livro_forms.prefix }}',
+      addCssClass: 'incluir btn-centralizar btn_adicionar',
+      addText: 'Incluir Livro',
+      deleteText: 'Excluir Livro',
+      deleteContainerClass: 'butoes',
+      deleteCssClass: 'cancel',
+    });
   })
 </script>
 <script type="text/javascript">

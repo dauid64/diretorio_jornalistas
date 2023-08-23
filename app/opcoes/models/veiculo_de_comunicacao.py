@@ -7,6 +7,7 @@ class TipoDeVeiculo(models.Model):
     def __str__(self):
         return '{}'.format(self.descricao)
 
+
 class VeiculoDeComunicacao(models.Model):
     nome = models.CharField(max_length=254)
     tipo_de_veiculo = models.ForeignKey(TipoDeVeiculo, on_delete=models.DO_NOTHING)
