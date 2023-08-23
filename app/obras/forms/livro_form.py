@@ -1,5 +1,7 @@
+from typing import Any
 from django import forms
 from obras.models import Livro
+from obras.models import ObraJornalistica
 
 
 class LivroForm(forms.ModelForm):
@@ -8,7 +10,7 @@ class LivroForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={
                 "class": "form-control2",
-                "placeholder": "Descrição"
+                "placeholder": "Título"
             }
         )
     )
@@ -28,7 +30,6 @@ class LivroForm(forms.ModelForm):
         fields = [
             "titulo",
             "paginas",
-            "ano_publicacao",
             "cidade",
             "estado",
             "isbn13",
@@ -42,22 +43,14 @@ class LivroForm(forms.ModelForm):
                     "placeholder": "Páginas"
                 }
             ),
-            "ano_publicacao": forms.TextInput(
+            "cidade": forms.Select(
                 attrs={
-                    "class": "form-control2",
-                    "placeholder": "Data"
+                    "class": "form-control2"
                 }
             ),
-            "cidade": forms.TextInput(
+            "estado": forms.Select(
                 attrs={
-                    "class": "form-control2",
-                    "placeholder": "Cidade"
-                }
-            ),
-            "estado": forms.TextInput(
-                attrs={
-                    "class": "form-control2",
-                    "placeholder": "Estado"
+                    "class": "form-control2"
                 }
             ),
             "isbn13": forms.TextInput(
@@ -73,3 +66,14 @@ class LivroForm(forms.ModelForm):
                 }
             ),
         }
+
+    def save(self, commit=True):
+        instance = super().save(commit)
+        obra_jornalistica = ObraJornalistica.objects.create(
+            titulo=self.cleaned_data['titulo'],
+            descricao=self.cleaned_data['descricao']
+        )
+        instance.obra_jornalistica = obra_jornalistica
+        if commit:
+            instance.save()
+        return instance

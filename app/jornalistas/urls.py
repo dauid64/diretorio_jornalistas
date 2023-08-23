@@ -14,6 +14,6 @@ urlpatterns = [
     path(
         'cadastro',
         views.CadastroJornalistaView.as_view(),
-        name='cadastro'
+        name='cadastrar'
     )
 ]

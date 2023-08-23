@@ -11,7 +11,7 @@ class Livro(models.Model):
     obra_jornalistica = models.ForeignKey(ObraJornalistica, on_delete=models.DO_NOTHING)
     estado = models.ForeignKey(Estados, on_delete=models.DO_NOTHING)
     cidade = models.ForeignKey(Cidades, on_delete=models.DO_NOTHING)
-    ano_publicacao = models.DateField()
+    # ano_publicacao = models.IntegerField()
 
     def __str__(self):
         return '{}'.format(self.obra_jornalistica)

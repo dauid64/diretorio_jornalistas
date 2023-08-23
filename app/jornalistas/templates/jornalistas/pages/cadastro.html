@@ -68,7 +68,7 @@
           </div>
           <div class="dadoscoluna">
             {{ jornalista_form.registro }}
-            <label for="id_diploma" class="input-type">Enviar Diploma</label>
+            <label for="{{ jornalista_form.diploma.id_for_label }}" class="input-type">Enviar Diploma</label>
             {{ jornalista_form.diploma }}
           </div>
           
@@ -144,6 +144,7 @@
                 {{ pub_form.veiculo_de_comunicacao }}
                 {{ pub_form.titulo }}
                 {{ pub_form.link }}
+                <label for="{{pub_form.anexo.id_for_label}}" class="input-type">{{ pub_form.anexo.label }}</label>
                 {{ pub_form.anexo }}
                 {{ pub_form.data }}
                 {{ pub_form.descricao }}

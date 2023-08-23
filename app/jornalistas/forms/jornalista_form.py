@@ -34,20 +34,20 @@ class JornalistaForm(forms.ModelForm):
             ),
             'cpf': forms.TextInput(
                 attrs={
-                    'class': 'form-control2',
+                    'class': 'form-control2 mask-cpf',
                     'placeholder': 'CPF',
                     'required': 'True'
                 }
             ),
             'telefone': forms.TextInput(
                 attrs={
-                    'class': 'form-control2',
+                    'class': 'form-control2 mask-phone',
                     'placeholder': 'Telefone'
                 }
             ),
             'data_de_nascimento': forms.DateInput(
                 attrs={
-                    'class': 'form-control2',
+                    'class': 'form-control2 mask-date',
                     'placeholder': 'Data de nascimento'
                 }
             ),

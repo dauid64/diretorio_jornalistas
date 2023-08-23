@@ -1,5 +1,6 @@
 from django import forms
 from obras.models import Publicao
+from obras.models import ObraJornalistica
 
 
 class PublicacaoForm(forms.ModelForm):
@@ -8,7 +9,7 @@ class PublicacaoForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={
                 "class": "form-control2",
-                "placeholder": "Descrição"
+                "placeholder": "Titulo"
             }
         )
     )
@@ -34,19 +35,18 @@ class PublicacaoForm(forms.ModelForm):
             "descricao"
         ]
         widgets = {
-            "veiculo_de_comunicacao": forms.TextInput(
+            "veiculo_de_comunicacao": forms.Select(
                 attrs={
                     "class": "form-control2",
-                    "placeholder": "Veiculo Jornalístico"
                 }
             ),
-            "link": forms.TextInput(
+            "link": forms.URLInput(
                 attrs={
                     "class": "form-control2",
                     "placeholder": "Link"
                 }
             ),
-            "anexo": forms.TextInput(
+            "anexo": forms.FileInput(
                 attrs={
                     "class": "form-control2",
                     "placeholder": "Anexo"
@@ -54,8 +54,19 @@ class PublicacaoForm(forms.ModelForm):
             ),
             "data": forms.TextInput(
                 attrs={
-                    "class": "form-control2",
+                    "class": "form-control2 mask-date",
                     "placeholder": "Data"
                 }
             ),
         }
+
+    def save(self, commit=True):
+        instance = super().save(commit)
+        obra_jornalistica = ObraJornalistica.objects.create(
+            titulo=self.cleaned_data['titulo'],
+            descricao=self.cleaned_data['descricao']
+        )
+        instance.obra_jornalistica = obra_jornalistica
+        if commit:
+            instance.save()
+        return instance

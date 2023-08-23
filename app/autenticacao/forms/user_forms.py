@@ -40,7 +40,7 @@ class RegisterUserForm(forms.ModelForm):
 
     def clean_username(self):
         username = self.cleaned_data['username']
-        exist_username = User.objects.exists(username=username)
+        exist_username = User.objects.filter(username=username).exists()
         if exist_username:
             raise ValidationError(
                 'Já existe um usuário com este username!'
@@ -49,7 +49,7 @@ class RegisterUserForm(forms.ModelForm):
     
     def clean_email(self):
         email = self.cleaned_data['email']
-        exist_email = User.objects.exists(email=email)
+        exist_email = User.objects.filter(email=email).exists()
         if exist_email:
             raise ValidationError(
                 'Já existe um usuário com este email!'

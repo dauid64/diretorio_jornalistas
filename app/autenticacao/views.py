@@ -26,6 +26,7 @@ class RegisterUserView(View):
             user = register_form.save(commit=False)
             user.set_password(user.password)
             user.save()
+            login(request, user)
             del (request.session['register_form_data'])
             return redirect(
                 reverse('jornalistas:cadastrar')

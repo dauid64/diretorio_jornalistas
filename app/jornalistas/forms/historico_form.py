@@ -17,10 +17,9 @@ class HistoricoForm(forms.ModelForm):
         }
 
         widgets = {
-            "veiculo_de_comunicacao": forms.TextInput(
+            "veiculo_de_comunicacao": forms.Select(
                 attrs={
-                    "class": "form-control2",
-                    "placeholder": "Veiculo"
+                    "class": "form-control2"
                 }
             ),
             "cargo": forms.TextInput(
