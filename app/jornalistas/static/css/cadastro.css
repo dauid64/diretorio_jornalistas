@@ -40,15 +40,6 @@ a:hover {
     border-radius: 25px;
   }
   
-  .subtitulo {
-    font-family: "Roboto", sans-serif;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 13px;
-    line-height: 28px;
-    color: rgba(0, 0, 0, 0.8);
-  }
-  
   .texto-imag-salvar {
     font-family: "Poppins", sans-serif;
     font-style: normal;
@@ -100,6 +91,14 @@ a:hover {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2vh;
+  }
+
+  .circ-l {
+    border-radius: 100%;
+    border: solid 2px #fe975c;
+    height: 1.5vh;
+    width: 1.5vh;
+    background: transparent;
   }
   
   .dadoscoluna input,
@@ -203,14 +202,6 @@ a:hover {
     width: 50%;
     background: rgba(217, 217, 217, 0.6);
     margin: 5vh 25%;
-  }
-  
-  .circ-l {
-    border-radius: 100%;
-    border: solid 2px #fe975c;
-    height: 1.5vh;
-    width: 1.5vh;
-    background: transparent;
   }
   
   .obras {

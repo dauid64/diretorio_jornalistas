@@ -23,7 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('__debug__/', include('debug_toolbar.urls')),
     path('', include('jornalistas.urls')),
-    path('autenticacao/', include('autenticacao.urls'))
+    path('autenticacao/', include('autenticacao.urls')),
+    path('revisor/', include('revisores.urls'))
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

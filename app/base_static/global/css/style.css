@@ -165,14 +165,49 @@ footer {
 }
 
 .card{
+    position: relative;
     padding: 2vh 4vh;
-    width: 70vh;
+    width: 100vh;
     justify-content: start;
     text-align: start;
     border-radius: 20px;
+}
+
+.dados-card {
+    display: flex;
+}
+
+.dados {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-bottom: 1vh;
+    padding-right: 10vh;
 }
 
 .card h5{
     color: #fd7e14;
     font-weight: bold;
 }
+
+.circ-p {
+    border-radius: 100%;
+    background-color: #fe975c;
+    height: 1.0vh;
+    width: 1.0vh;
+  }
+
+.subtitulo {
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 28px;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.card-butoes {
+    position: absolute;
+    bottom: 1rem;
+    right: 2.5rem;
+  }

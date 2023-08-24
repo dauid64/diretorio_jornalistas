@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import RegisterUserView, LoginUserView
+from .views import RegisterUserView, LoginUserView, LogoutUserView
 
 
 app_name = 'autenticacao'
@@ -15,5 +15,10 @@ urlpatterns = [
         'login',
         LoginUserView.as_view(),
         name='login'
+    ),
+    path(
+        'logout',
+        LogoutUserView.as_view(),
+        name='logout'
     )
 ]

@@ -66,3 +66,12 @@ class LoginUserView(View):
         return redirect(
             reverse('autenticacao:login')
         )
+    
+class LogoutUserView(View):
+    def get(self, request):
+        logout(request)
+        return redirect(
+            reverse(
+                "jornalistas:home"
+            )
+        )
