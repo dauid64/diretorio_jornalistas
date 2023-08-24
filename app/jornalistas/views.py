@@ -74,7 +74,7 @@ class CadastroJornalistaView(View):
         )
         livro_forms = livro_formset(
             POST,
-            prefix='publicacao'
+            prefix='livro'
         )
         publicacao_formset = modelformset_factory(
             Publicao,
@@ -97,6 +97,7 @@ class CadastroJornalistaView(View):
                 return redirect(
                     reverse("jornalistas:home")
                 )
+        print(livro_forms.errors)
         return redirect(
             reverse("jornalistas:cadastrar")
         )

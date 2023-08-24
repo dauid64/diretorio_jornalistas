@@ -47,8 +47,7 @@ class JornalistaForm(forms.ModelForm):
             ),
             'data_de_nascimento': forms.DateInput(
                 attrs={
-                    'class': 'form-control2 mask-date',
-                    'placeholder': 'Data de nascimento',
+                    'class': 'form-control2',
                     'type': 'date'
                 },
                 format='%d/%m/%Y'

@@ -55,8 +55,7 @@ class PublicacaoForm(forms.ModelForm):
             ),
             "data": forms.DateInput(
                 attrs={
-                    "class": "form-control2 mask-date",
-                    "placeholder": "Data",
+                    "class": "form-control2",
                     "type": "date"
                 },
                 format='%d/%m/%Y'
