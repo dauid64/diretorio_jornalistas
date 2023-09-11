@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic import View
-from .models import HistoricoProfissional
+from .models import HistoricoProfissional, Jornalista
 from .forms import HistoricoForm, JornalistaForm
 
 from obras.models import Livro, Publicao
@@ -11,10 +11,27 @@ from django.forms import modelformset_factory
 
 class HomeView(View):
     def get(self, request):
+        GET = request.GET
+        inicial = GET.get('inicial')
+
+        name = GET.get('name')
+        jornalistas = None
+        if inicial:
+            jornalistas = Jornalista.objects.filter(
+                nome_de_guerra__istartswith=inicial,
+                # aprovado=True
+            )
+        if name:
+            jornalistas = Jornalista.objects.filter(
+                nome_de_guerra__icontains=name,
+                # aprovado=True
+            )
         return render(
             request,
             'jornalistas/pages/home.html',
-            {}
+            context={
+                'jornalistas': jornalistas
+            }
         )
 
 
@@ -59,6 +76,10 @@ class CadastroJornalistaView(View):
 
     def post(self, request):
         POST = request.POST
+        if Jornalista.objects.filter(usuario=request.user).exists():
+            return redirect(
+                'jornalistas:home'
+            )
         jornalista_form = JornalistaForm(POST, request.FILES)
         historico_formset = modelformset_factory(
             HistoricoProfissional,
@@ -90,14 +111,20 @@ class CadastroJornalistaView(View):
                 jornalista.usuario = request.user
                 jornalista.save()
                 livro_forms.save(commit=False)
-                livro_forms.save()
-                historico_forms.save()
+                livros = livro_forms.save()
+                for l in livros:
+                    jornalista.obras_jornalisticas.add(l.obra_jornalistica)
+                historicos = historico_forms.save()
+                for h in historicos:
+                    jornalista.historico_profissional.add(h)
                 publicacao_forms.save(commit=False)
-                publicacao_forms.save()
+                publicacoes = publicacao_forms.save()
+                for p in publicacoes:
+                    jornalista.obras_jornalisticas.add(p.obra_jornalistica)
                 return redirect(
                     reverse("jornalistas:home")
                 )
-        print(livro_forms.errors)
+
         return redirect(
             reverse("jornalistas:cadastrar")
         )

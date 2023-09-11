@@ -50,9 +50,9 @@
     </div>
 
     {% csrf_token %}
-    {% if form %}
+    {% if jornalistas %}
     <div class="jornaListas">
-        {% for f in form %}
+        {% for j in jornalistas %}
             <button style="border: none; display: flex; width: fit-content; background-color: transparent;">
                 <div class="image-pessoa" style="border: none;">
                     <img
@@ -63,13 +63,12 @@
                     />
                 </div>
                 <div class="card">
-                    <h5>{{ f.nome_de_guerra }}</h5>
-                    <span><b >Associação:</b> {{ f.associacao }}</span>
-                    <span><b>Localidade:</b> {{ f.get_cidade_display }}</span>
-                    <span><b>Especialidade/Áreas de Atuação:</b> {{f.site}}</span>
+                    <h5>{{ j.nome_de_guerra }}</h5>
+                    <span><b >Associação:</b> {{ j.associacao }}</span>
+                    <span><b>Localidade:</b> {{ j.get_cidade_display }}</span>
+                    <span><b>Especialidade/Áreas de Atuação:</b> {{ j.site }}</span>
                 </div>
             </button>
-            
         {% endfor %}
     </div>
     {% endif %}
