@@ -59,9 +59,14 @@
                     <div class="circ-p"> </div>
                         <span>Telegram:</span>
                     </div>
-                    <div class="card-butoes">
-                        <button class="btn btn-success">Aprovar</button>
-                        <button class="btn btn-danger">Rejeitar</button>
+                    <div class="card-butoes" style="display: flex; gap: 2rem;">
+                        <form action="{% url 'revisores:aprovar' j.id %}" method="POST">
+                            {% csrf_token %}
+                            <button class="btn btn-success">Aprovar</button>
+                        </form>
+                        <form action="">
+                            <button class="btn btn-danger">Rejeitar</button>
+                        </form>
                     </div>
                 </div>
             </div>

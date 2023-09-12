@@ -1,12 +1,17 @@
 from django.urls import path
-from .views import RevisorAnaliseView
+from . import views
 
 app_name = "revisores"
 
 urlpatterns = [
     path(
-        'analise',
-        RevisorAnaliseView.as_view(),
+        'analise/jornalistas',
+        views.RevisorAnaliseView.as_view(),
         name='analise'
+    ),
+    path(
+        'analise/jornalistas/aprovar/<int:id>',
+        views.RevisorAprovarView.as_view(),
+        name='aprovar'
     )
 ]

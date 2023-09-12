@@ -5,7 +5,7 @@ from opcoes.models import RedesSociais
 class Associacao(models.Model):
     nome_fantasia = models.CharField(max_length=254)
     razao_social = models.CharField(max_length=254)
-    cnpj = models.IntegerField()
+    cnpj = models.BigIntegerField()
     ddd_telefone = models.CharField(max_length=2)
     telefone = models.CharField(max_length=9)
     email = models.EmailField(max_length=254)

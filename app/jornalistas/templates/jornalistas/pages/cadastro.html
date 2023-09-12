@@ -2,7 +2,7 @@
 {% load static %} 
 
 {% block styles %}
-<link rel="stylesheet" href="{% static 'css/cadastro.css' %}">
+<link rel="stylesheet" href="{% static 'global/css/cadastro.css' %}">
 {% endblock styles %}
 {% block content %}
 
@@ -25,14 +25,14 @@
         
         <div class="foto-perfil">
           <img
-            src="{% static 'img/perfil.png' %}"
+            src="{% static 'jornalistas/img/perfil.png' %}"
             width="128"
             height="130"
             alt=""
             style="margin-left: 2.5vh;"
           />
           <img
-            src="{% static 'img/upload.png' %}"
+            src="{% static 'jornalistas/img/upload.png' %}"
             width="140"
             height="39"
             alt=""
@@ -173,10 +173,10 @@
 {% endblock content %}
 
 {% block scripts %}
-<script src="{% static 'js/jquery-3.7.0.min.js' %}"></script>
-<script src="{% static 'js/jquery.mask.min.js' %}"></script>
-<script src="{% static 'js/cadastro_mask.js' %}"></script>
-<script src="{% static 'js/jquery.formset.js' %}"></script>
+<script src="{% static 'global/js/jquery-3.7.0.min.js' %}"></script>
+<script src="{% static 'global/js/jquery.mask.min.js' %}"></script>
+<script src="{% static 'jornalistas/js/cadastro_mask.js' %}"></script>
+<script src="{% static 'global/js/jquery.formset.js' %}"></script>
 <script type="text/javascript">
   $(function() {
       $('#historico-form').formset({

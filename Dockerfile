@@ -14,7 +14,7 @@ EXPOSE 8000
 
 RUN python -m venv /venv && \
     /venv/bin/pip install --upgrade pip && \
-    /venv/bin/pip install -r /app/requirements.txt && \
+    /venv/bin/pip install -r /app/requirements_docker.txt && \
     adduser --disabled-password --no-create-home duser && \
     mkdir -p /data/web/static && \
     mkdir -p /data/web/media

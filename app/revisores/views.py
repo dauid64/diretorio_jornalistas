@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views import View
 from jornalistas.models import Jornalista
+from revisores.models import Revisor
 
 
 class RevisorAnaliseView(View):
@@ -13,3 +15,18 @@ class RevisorAnaliseView(View):
                 'jornalistas': jornalistas_em_analise
             }
         )
+
+
+class RevisorAprovarView(View):
+    def post(self, request, id):
+        jornalista = Jornalista.objects.get(id=id)
+        revisor_responsavel = Revisor.objects.get(usuario=request.user)
+        jornalista.aprovado = True
+        jornalista.revisor_responsavel = revisor_responsavel
+        jornalista.save()
+        return redirect(
+            reverse('revisores:analise')
+        )
+
+
+

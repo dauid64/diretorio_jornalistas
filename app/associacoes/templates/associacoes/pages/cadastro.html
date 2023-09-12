@@ -1,0 +1,66 @@
+{% extends 'global/base.html' %} 
+{% load static %} 
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'global/css/cadastro.css' %}">
+{% endblock styles %}
+{% block content %}
+
+<main>
+
+  <div>
+    {% if message is not None %}
+    <div class="alert alert-{{ message.type }}">{{ message.text }}</div>
+  {% endif %}
+  </div>
+
+  <body>
+
+
+
+      <div class="tela-cadastro" id="Primeiro">
+        <div class="subtitulo">
+          <h3>Crie uma nova Associação</h3>
+        </div>
+
+        <form method="POST" action="" class="form-cadastro" enctype='multipart/form-data'>
+          {% csrf_token %}
+
+        <div class="box">
+          <div class="titulo">
+            <div class="circ-l"> </div>   
+            Dados da Associação
+          </div>
+          <div class="dadoscoluna">
+
+            {{ associacao_form.nome_fantasia }}
+            {{ associacao_form.razao_social }}
+            {{ associacao_form.cnpj }}
+            {{ associacao_form.ddd_telefone }}
+            {{ associacao_form.telefone }}
+            {{ associacao_form.email }}
+            {{ associacao_form.presidente }} 
+
+          </div>
+          </div>
+        </div>
+        <div class="butoes">
+          <button class="cancel">Cancelar</button>
+
+          <button class="prox" type="submit">
+            Salvar
+          </button>
+        </div>
+      </div>
+    </form>
+  </body>
+</main>
+{% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'global/js/jquery-3.7.0.min.js' %}"></script>
+<script src="{% static 'global/js/jquery.mask.min.js' %}"></script>
+<script src="{% static 'associacoes/js/cadastro_mask.js' %}"></script>
+<script src="{% static 'global/js/jquery.formset.js' %}"></script>
+{% endblock scripts %}
+
