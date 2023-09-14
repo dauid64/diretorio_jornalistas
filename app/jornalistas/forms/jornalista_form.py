@@ -29,7 +29,7 @@ class JornalistaForm(forms.ModelForm):
             'nome_de_guerra': forms.TextInput(
                 attrs={
                     'class': 'form-control',
-                    'placeholder': 'Nome de Gerra'
+                    'placeholder': 'Nome de Guerra'
                 }
             ),
             'cpf': forms.TextInput(
