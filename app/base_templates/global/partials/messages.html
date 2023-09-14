@@ -1,5 +1,7 @@
-<div>
-    {% if message is not None %}
-        <div class="alert alert-{{ message.type }}">{{ message.text }}</div>
-    {% endif %}
-</div>
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}

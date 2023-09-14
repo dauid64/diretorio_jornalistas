@@ -4,8 +4,6 @@
 
 <main>
 
-{% include 'global/partials/messages.html' %}
-
 <div class="container-fluid">
   <div class="row">
     <div class ="col p-0">
@@ -37,7 +35,7 @@
                     {{ form.username }}
                     {{ form.password }}
 
-                    {% for erro in f.errors %}
+                    {% for erro in form.errors %}
                       <div class="invalid-feedback" style="display: initial;">{{ error }}</div>
                     {% endfor %}
                       
