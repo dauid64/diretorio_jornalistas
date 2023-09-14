@@ -30,8 +30,8 @@ class HistoricoProfissional(models.Model):
 
 class Jornalista(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
-    associacao = models.ForeignKey(Associacao,on_delete=models.DO_NOTHING)
     nome_de_guerra = models.CharField(max_length=50)
+    associacao = models.ForeignKey(Associacao,on_delete=models.DO_NOTHING)
     cpf = models.CharField(max_length=11)
     data_de_nascimento = models.DateField(null=True, blank = True)
     telefone = models.CharField( max_length=11,null=True, blank = True)
