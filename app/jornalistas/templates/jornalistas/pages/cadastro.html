@@ -7,17 +7,12 @@
 {% block content %}
 
 <main>
-
   <div>
     {% if message is not None %}
     <div class="alert alert-{{ message.type }}">{{ message.text }}</div>
   {% endif %}
   </div>
-
   <body>
-
-
-
       <div class="tela-cadastro" id="Primeiro">
         <div class="subtitulo">
           <h3>Crie uma nova conta</h3>
@@ -48,28 +43,118 @@
             <div class="circ-l"> </div>   
             Dados Pessoais
           </div>
-          <div class="dadoscoluna">
-
-            {{ jornalista_form.nome_de_guerra }}
-            {{ jornalista_form.associacao }}
-            {{ jornalista_form.cpf }}
-            {{ jornalista_form.data_de_nascimento }}
-            {{ jornalista_form.telefone }}
-            {{ jornalista_form.genero }}
-            {{ jornalista_form.estado_civil }} 
-
+          <div class="row gy-2 gx-3 align-items-center">
+            <div class="col">
+              <div class="form-group">
+                <label for="{{jornalista_form.nome_de_guerra.id_for_label }}" class="form-label">{{ jornalista_form.nome_de_guerra.label }}</label>
+                {{ jornalista_form.nome_de_guerra }}
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="{{ jornalista_form.associacao.id_for_label }}" class="form-label">{{ jornalista_form.associacao.label }}</label>
+                {{ jornalista_form.associacao }}
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="{{ jornalista_form.estado_civil.id_for_label }}" class="form-label">{{ jornalista_form.estado_civil.label }}</label>
+                {{ jornalista_form.estado_civil }}
+              </div>
+            </div>
+          </div>
+          <div class="row gy-2 gx-3 align-items-center">
+            <div class="col">
+              <div class="form-group">
+                <label for="{{ jornalista_form.data_de_nascimento.id_for_label }}" class="form-label">{{ jornalista_form.data_de_nascimento.label }}</label>
+                {{ jornalista_form.data_de_nascimento }}
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="{{ jornalista_form.genero.id_for_label }}" class="form-label">{{ jornalista_form.genero.label }}</label>
+                {{ jornalista_form.genero }}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="{{ jornalista_form.telefone.id_for_label }}" class="form-label">{{ jornalista_form.telefone.label }}</label>
+                {{ jornalista_form.telefone }}
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="{{ jornalista_form.cpf.id_for_label }}" class="form-label">{{ jornalista_form.cpf.label }}</label>
+                {{ jornalista_form.cpf }}
+              </div>
+            </div>
           </div>
 
+          <h2 class="subtitulo">Redes Sociais</h2>
+
+          <div class="row gy-2 gx-3 align-items-center">
+            <div class="col">
+              <div class="form-group">
+                <label for="{{ redes_sociais_form.link_telegram.id_for_label }}"  class="form-label">{{ redes_sociais_form.link_telegram.label }}</label>
+                {{ redes_sociais_form.link_telegram }}
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="{{ redes_sociais_form.link_facebook.id_for_label }}" class="form-label">{{ redes_sociais_form.link_facebook.label }}</label>
+                {{ redes_sociais_form.link_facebook }}
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="{{ redes_sociais_form.link_podcast.id_for_label }}" class="form-label">{{ redes_sociais_form.link_podcast.label }}</label>
+                {{ redes_sociais_form.link_podcast }}
+              </div>
+            </div>
+          </div>
+          <div class="row gy-2 gx-3 align-items-center">
+            <div class="col">
+              <div class="form-group">
+                <label for="{{ redes_sociais_form.link_linkedin.id_for_label }}"  class="form-label">{{ redes_sociais_form.link_linkedin.label }}</label>
+                {{ redes_sociais_form.link_linkedin }}
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="{{ redes_sociais_form.link_twitter.id_for_label }}" class="form-label">{{ redes_sociais_form.link_twitter.label }}</label>
+                {{ redes_sociais_form.link_twitter }}
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="{{ redes_sociais_form.link_site.id_for_label }}" class="form-label">{{ redes_sociais_form.link_site.label }}</label>
+                {{ redes_sociais_form.link_site }}
+              </div>
+            </div>
+          </div>
           <div class="separador"> </div>
 
           <div class="titulo">
             <div class="circ-l"> </div>   
             Formação
           </div>
-          <div class="dadoscoluna">
-            {{ jornalista_form.registro }}
-            <label for="{{ jornalista_form.diploma.id_for_label }}" class="input-type">Enviar Diploma</label>
-            {{ jornalista_form.diploma }}
+          <div class="row gy-2 gx-3 align-items-center">
+            <div class="col">
+              <div class="form-group">
+                <label for="{{ jornalista_form.registro.id_for_label }}"  class="form-label">{{ jornalista_form.registro.label }}</label>
+                {{ jornalista_form.registro }}
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="{{ jornalista_form.diploma.id_for_label }}" class="form-label">{{ jornalista_form.diploma.label }}</label>
+                {{ jornalista_form.diploma }}
+              </div>
+            </div>
           </div>
           
           <div class="separador"> </div>   
@@ -80,7 +165,6 @@
           </div> 
             Dados Profissionais
           </div>
-          <h2 class="subtitulo">Redes Sociais</h2>
           <div class="dadoscoluna">
             {{ redes.telegram }}
             {{ redes.facebook }}

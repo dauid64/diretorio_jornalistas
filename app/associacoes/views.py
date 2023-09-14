@@ -24,7 +24,7 @@ class CadastroAssociacoesView(View):
             return redirect(
                 reverse('jornalistas:home')
             )
-        print(associacao_form.errors)
+
         return redirect(
             reverse('associacoes:cadastro')
         )

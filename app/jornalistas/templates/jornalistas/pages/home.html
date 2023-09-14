@@ -48,7 +48,10 @@
             <button type="submit" name="inicial" value="Z">Z</button>
         </form>
     </div>
-
+    <div class="mb-3">
+        <label for="formFile" class="form-label">Default file input example</label>
+        <input class="form-control" type="file" id="formFile">
+      </div>
     {% csrf_token %}
     {% if jornalistas %}
     <div class="jornaListas">
@@ -56,7 +59,7 @@
             <button style="border: none; display: flex; width: fit-content; background-color: transparent;">
                 <div class="image-pessoa" style="border: none;">
                     <img
-                        src="{% static 'img/perfil.png' %}"
+                        src="{% static 'jornalistas/img/perfil.png' %}"
                         width="130"
                         height="130"
                         alt=""

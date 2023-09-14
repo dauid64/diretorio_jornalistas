@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from django.contrib.messages import constants
 from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -158,3 +159,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+# MESSAGES
+
+MESSAGE_TAGS = {
+    constants.DEBUG: 'debug',
+    constants.ERROR: 'alert',
+    constants.INFO: 'info',
+    constants.SUCCESS: 'success',
+    constants.WARNING: 'danger',
+}
