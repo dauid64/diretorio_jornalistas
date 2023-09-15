@@ -1,8 +1,6 @@
 from django.db import models
 from django.db import models
 from django.contrib.auth.models import User
-from django.dispatch import receiver
-from django.db.models.signals import post_save
 from associacoes.models import Associacao
 from revisores.models import Revisor
 from opcoes.models import RedesSociais, Cidades, Estados, Genero, EstadoCivil, VeiculoDeComunicacao
@@ -14,7 +12,7 @@ class HistoricoProfissional(models.Model):
     descricao = models.CharField(max_length=254)
     cargo = models.CharField(max_length=254)
     data_inicio = models.DateField()
-    data_de_termino = models.DateField()
+    data_de_termino = models.DateField(blank=True, null=True)
     # duracao = models.TextField()  # This field type is a guess.
     referencia = models.CharField(max_length=254)
     contato_da_referencia = models.CharField(max_length=254)
