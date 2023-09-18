@@ -11,6 +11,8 @@ class JornalistaForm(forms.ModelForm):
         fields = [
             'associacao',
             'nome_de_guerra',
+            'nome',
+            'sobrenome',
             'cpf',
             'telefone',
             'data_de_nascimento',
@@ -29,20 +31,32 @@ class JornalistaForm(forms.ModelForm):
             'nome_de_guerra': forms.TextInput(
                 attrs={
                     'class': 'form-control',
-                    'placeholder': 'Nome de Guerra'
+                    'placeholder': 'Carlos Neto'
+                }
+            ),
+            'nome': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Carlos David'
+                }
+            ),
+            'sobrenome': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Castro de Souza Neto'
                 }
             ),
             'cpf': forms.TextInput(
                 attrs={
                     'class': 'form-control mask-cpf',
-                    'placeholder': 'CPF',
+                    'placeholder': '123.456.789-00',
                     'required': 'True'
                 }
             ),
             'telefone': forms.TextInput(
                 attrs={
-                    'class': 'form-control mask-phone',
-                    'placeholder': 'Telefone'
+                    'class': 'form-control mask-phone-international',
+                    'type': 'tel',
                 }
             ),
             'data_de_nascimento': forms.DateInput(

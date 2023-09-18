@@ -16,11 +16,11 @@ class HistoricoForm(forms.ModelForm):
         model = HistoricoProfissional
         exclude = ["duracao", "validado", "revisor_responsavel"]
         labels = {
-            "veiculo_de_comunicacao": "veiculo",
-            "cargo": "cargo",
+            "veiculo_de_comunicacao": "Veículo de comunicação",
+            "cargo": "Cargo",
             "data_inicio": "Data de Início",
             "data_de_termino": "Data de Termino",
-            "referencia": "referência",
+            "referencia": "Referência",
             "contato_da_referencia": "Contato de Referência",
             "descricao": "Descrição",
         }

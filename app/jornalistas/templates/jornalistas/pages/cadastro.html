@@ -3,6 +3,12 @@
 
 {% block styles %}
 <link rel="stylesheet" href="{% static 'global/css/cadastro.css' %}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
+<style>
+  .iti {
+    width: 100%
+  }
+</style>
 {% endblock styles %}
 {% block content %}
 
@@ -52,44 +58,56 @@
             </div>
             <div class="col-md-4">
               <div class="form-group">
+                <label for="{{ jornalista_form.nome.id_for_label }}" class="form-label">{{ jornalista_form.nome.label }}</label>
+                {{ jornalista_form.nome }}
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="{{ jornalista_form.sobrenome.id_for_label }}" class="form-label">{{ jornalista_form.sobrenome.label }}</label>
+                {{ jornalista_form.sobrenome }}
+              </div>
+            </div>
+          </div>
+          <div class="row gy-2 gx-3 align-items-center">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="{{ jornalista_form.data_de_nascimento.id_for_label }}" class="form-label">{{ jornalista_form.data_de_nascimento.label }}</label>
+                {{ jornalista_form.data_de_nascimento }}
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="{{ jornalista_form.genero.id_for_label }}" class="form-label">{{ jornalista_form.genero.label }}</label>
+                {{ jornalista_form.genero }}
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
                 <label for="{{ jornalista_form.associacao.id_for_label }}" class="form-label">{{ jornalista_form.associacao.label }}</label>
                 {{ jornalista_form.associacao }}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <p for="{{ jornalista_form.telefone.id_for_label }}" class="form-label" id="output">{{ jornalista_form.telefone.label }}</p>
+                {{ jornalista_form.telefone }}
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="{{ jornalista_form.cpf.id_for_label }}" class="form-label">{{ jornalista_form.cpf.label }}</label>
+                {{ jornalista_form.cpf }}
               </div>
             </div>
             <div class="col-md-4">
               <div class="form-group">
                 <label for="{{ jornalista_form.estado_civil.id_for_label }}" class="form-label">{{ jornalista_form.estado_civil.label }}</label>
                 {{ jornalista_form.estado_civil }}
-              </div>
-            </div>
-          </div>
-          <div class="row gy-2 gx-3 align-items-center">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="{{ jornalista_form.data_de_nascimento.id_for_label }}" class="form-label">{{ jornalista_form.data_de_nascimento.label }}</label>
-                {{ jornalista_form.data_de_nascimento }}
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="{{ jornalista_form.genero.id_for_label }}" class="form-label">{{ jornalista_form.genero.label }}</label>
-                {{ jornalista_form.genero }}
-              </div>
-            </div>
-          </div>
-          <div class="row">
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="{{ jornalista_form.telefone.id_for_label }}" class="form-label">{{ jornalista_form.telefone.label }}</label>
-                {{ jornalista_form.telefone }}
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="{{ jornalista_form.cpf.id_for_label }}" class="form-label">{{ jornalista_form.cpf.label }}</label>
-                {{ jornalista_form.cpf }}
               </div>
             </div>
           </div>
@@ -232,44 +250,7 @@
             <div class="circ-l"> </div>   
             Obras
           </div>
-          
-          <h2 class="subtitulo">Livros</h2>
-          {% for liv_form in livro_forms %}
-          <div class="box" id="livro-form">
-            <div class="dadoscol-md-4una">
-                {{ liv_form.titulo }}
-                {{ liv_form.paginas }}
-                {{ liv_form.ano_publicacao }}
-                {{ liv_form.cidade }}
-                {{ liv_form.estado }}
-                {{ liv_form.isbn13 }}
-                {{ liv_form.isbn10 }}
-                {{ liv_form.descricao }}
-            </div>
-            <div class="butoes botao-livro">
-            </div>
-          </div>
-          {% endfor %}
-          {{ livro_forms.management_form }}
-
-          <h2 class="subtitulo">Publicações</h2>
-          {% for pub_form in publicacao_forms %}
-          <div class="box" id="publicacao-form">
-            <div class="dadoscol-md-4una">
-              {{ pub_form.veiculo_de_comunicacao }}
-              {{ pub_form.titulo }}
-              {{ pub_form.link }}
-              <label for="{{pub_form.anexo.id_for_label}}" class="input-type">{{ pub_form.anexo.label }}</label>
-              {{ pub_form.anexo }}
-              {{ pub_form.data }}
-              {{ pub_form.tipo }}
-              {{ pub_form.descricao }}
-            </div>
-            <div class="butoes">
-            </div>
-          </div>
-          {% endfor %}
-          {{ publicacao_forms.management_form }}
+        
           
           <div class="butoes">
             <button class="cancel">Cancelar</button>
@@ -319,30 +300,6 @@
       });
   })
 </script>
-<script type="text/javascript">
-  $(function() {
-    $('#livro-form').formset({
-      prefix: '{{ livro_forms.prefix }}',
-      addCssClass: 'incluir btn-centralizar btn_adicionar',
-      addText: 'Incluir Livro',
-      deleteText: 'Excluir',
-      deleteContainerClass: 'butoes',
-      deleteCssClass: 'cancel',
-    });
-  })
-</script>
-<script type="text/javascript">
-  $(function() {
-      $('#publicacao-form').formset({
-        prefix: '{{ publicacao_forms.prefix }}',
-        addCssClass: 'incluir btn-centralizar',
-        addText: 'Incluir Publicacao',
-        deleteText: 'Excluir',
-        deleteContainerClass: 'butoes',
-        deleteCssClass: 'cancel',
-      });
-  })
-</script>
 <script>
   $(document).ready(function() {
     $('#id_historico-0-cargo_atual').change(function() {
@@ -354,6 +311,13 @@
           $("#id_historico-0-data_de_termino").prop("disabled", false);
       }
     });
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+<script>
+  const input2 = document.querySelector(".mask-phone-international");
+  window.intlTelInput(input2, {
+    utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
   });
 </script>
 {% endblock scripts %}
