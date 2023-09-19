@@ -1,5 +1,6 @@
 from django import forms
 from jornalistas.models import HistoricoProfissional
+from django.core.exceptions import ValidationError
 
 
 class HistoricoForm(forms.ModelForm):
@@ -73,3 +74,13 @@ class HistoricoForm(forms.ModelForm):
                 }
             ),
         }
+    
+    def clean(self):
+        cleaned_data = super().clean()
+        cargo_atual = cleaned_data.get('cargo_atual', False)
+        data_de_termino = cleaned_data.get('data_de_termino', None)
+        if cargo_atual is False and data_de_termino is None:
+            raise ValidationError({
+                "data_de_termino": "Marque a opção cargo atual ou insira uma data final do cargo"
+            })
+        return cleaned_data

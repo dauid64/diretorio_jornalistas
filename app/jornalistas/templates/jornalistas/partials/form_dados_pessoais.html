@@ -1,0 +1,105 @@
+<div class="row gy-2 gx-3">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="{{jornalista_form.nome_de_guerra.id_for_label }}" class="form-label">{{ jornalista_form.nome_de_guerra.label }}</label>
+        {{ jornalista_form.nome_de_guerra }}
+        {% if jornalista_form.nome_de_guerra.errors %}
+          {% for error in jornalista_form.nome_de_guerra.errors %}
+            <div class="alert alert-danger"> {{ error }}</div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="{{ jornalista_form.nome.id_for_label }}" class="form-label">{{ jornalista_form.nome.label }}</label>
+        {{ jornalista_form.nome }}
+        {% if jornalista_form.nome.errors %}
+          {% for error in jornalista_form.nome.errors %}
+            <div class="alert alert-danger"> {{ error }}</div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="{{ jornalista_form.sobrenome.id_for_label }}" class="form-label">{{ jornalista_form.sobrenome.label }}</label>
+        {{ jornalista_form.sobrenome }}
+        {% if jornalista_form.sobrenome.errors %}
+          {% for error in jornalista_form.sobrenome.errors %}
+            <div class="alert alert-danger"> {{ error }}</div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="row gy-2 gx-3 align-items-center">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="{{ jornalista_form.data_de_nascimento.id_for_label }}" class="form-label">{{ jornalista_form.data_de_nascimento.label }}</label>
+        {{ jornalista_form.data_de_nascimento }}
+        {% if jornalista_form.data_de_nascimento.errors %}
+          {% for error in jornalista_form.data_de_nascimento.errors %}
+            <div class="alert alert-danger"> {{ error }}</div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="{{ jornalista_form.genero.id_for_label }}" class="form-label">{{ jornalista_form.genero.label }}</label>
+        {{ jornalista_form.genero }}
+        {% if jornalista_form.genero.errors %}
+          {% for error in jornalista_form.genero.errors %}
+            <div class="alert alert-danger"> {{ error }}</div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="{{ jornalista_form.associacao.id_for_label }}" class="form-label">{{ jornalista_form.associacao.label }}</label>
+        {{ jornalista_form.associacao }}
+        {% if jornalista_form.associacao.errors %}
+          {% for error in jornalista_form.associacao.errors %}
+            <div class="alert alert-danger"> {{ error }}</div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="row">
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <p for="{{ jornalista_form.telefone.id_for_label }}" class="form-label" id="output">{{ jornalista_form.telefone.label }}</p>
+        {{ jornalista_form.telefone }}
+      </div>
+      <div id="valid-msg" class="hide alert alert-success">✓ Valido</div>
+      <div id="error-msg" class="hide alert alert-danger"></div>
+     
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="{{ jornalista_form.cpf.id_for_label }}" class="form-label">{{ jornalista_form.cpf.label }}</label>
+        {{ jornalista_form.cpf }}
+        {% if jornalista_form.cpf.errors %}
+          {% for error in jornalista_form.cpf.errors %}
+            <div class="alert alert-danger"> {{ error }}</div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="{{ jornalista_form.estado_civil.id_for_label }}" class="form-label">{{ jornalista_form.estado_civil.label }}</label>
+        {{ jornalista_form.estado_civil }}
+        {% if jornalista_form.estado_civil.errors %}
+          {% for error in jornalista_form.estado_civil.errors %}
+            <div class="alert alert-danger"> {{ error }}</div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+</div>

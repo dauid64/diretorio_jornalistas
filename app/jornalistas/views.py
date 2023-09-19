@@ -5,6 +5,7 @@ from .models import HistoricoProfissional, Jornalista
 from .forms import HistoricoForm, JornalistaForm
 from opcoes.forms import RedesSociaisForm
 from opcoes.models import RedesSociais
+from django.contrib import messages
 from obras.models import Livro, Publicao, ObraJornalistica
 from obras.forms import LivroForm, PublicacaoForm
 from django.forms import modelformset_factory
@@ -68,7 +69,7 @@ class CadastroJornalistaView(View):
         redes_sociais_form = RedesSociaisForm(
             jornalist_form_data
         )
-        
+
         return render(
             request,
             'jornalistas/pages/cadastro.html',
@@ -85,6 +86,7 @@ class CadastroJornalistaView(View):
         POST = request.POST
         request.session['register_jornalist_data'] = POST
         if Jornalista.objects.filter(usuario=request.user).exists():
+            messages.warning(request, 'Você já está cadastrado')
             return redirect(
                 'jornalistas:home'
             )
@@ -202,7 +204,6 @@ class CadastroJornalistaView(View):
                 return redirect(
                     reverse("jornalistas:home")
                 )
-        print(historico_forms.errors)
         return redirect(
             reverse("jornalistas:cadastrar")
         )

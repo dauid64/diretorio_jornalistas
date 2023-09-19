@@ -1,0 +1,89 @@
+<div class="card card-jornalista w-75" id="historico-form">
+    <div class="row gy-2 gx-3">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="{{ his_form.veiculo_de_comunicacao.id_for_label }}" class="form-label">{{ his_form.veiculo_de_comunicacao.label }}</label>
+          {{ his_form.veiculo_de_comunicacao }}
+          {% if his_form.veiculo_de_comunicacao.errors %}
+            {% for error in his_form.veiculo_de_comunicacao.errors %}
+              <div class="alert alert-danger"> {{ error }}</div>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="{{ his_form.cargo.id_for_label }}" class="form-label">{{ his_form.cargo.label }}</label>
+          {{ his_form.cargo }}
+          {% if his_form.cargo.errors %}
+            {% for error in his_form.cargo.errors %}
+              <div class="alert alert-danger"> {{ error }}</div>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          {{ his_form.cargo_atual }}
+          <label for="{{ his_form.cargo_atual.id_for_label }}" class="form-label">{{ his_form.cargo_atual.label }}</label>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="{{ his_form.data_inicio.id_for_label }}" class="form-label">{{ his_form.data_inicio.label }}</label>
+          {{ his_form.data_inicio }}
+          {% if his_form.data_inicio.errors %}
+            {% for error in his_form.data_inicio.errors %}
+              <div class="alert alert-danger"> {{ error }}</div>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="{{ his_form.data_de_termino.id_for_label }}" class="form-label">{{ his_form.data_de_termino.label }}</label>
+          {{ his_form.data_de_termino }}
+          {% if his_form.data_de_termino.errors %}
+            {% for error in his_form.data_de_termino.errors %}
+              <div class="alert alert-danger"> {{ error }}</div>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="{{ his_form.referencia.id_for_label }}" class="form-label">{{ his_form.referencia.label }}</label>
+          {{ his_form.referencia }}
+          {% if his_form.referencia.errors %}
+            {% for error in his_form.referencia.errors %}
+              <div class="alert alert-danger"> {{ error }}</div>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="{{ his_form.contato_da_referencia.id_for_label }}" class="form-label">{{ his_form.contato_da_referencia.label }}</label>
+          {{ his_form.contato_da_referencia }}
+          {% if his_form.contato_da_referencia.errors %}
+            {% for error in his_form.contato_da_referencia.errors %}
+              <div class="alert alert-danger"> {{ error }}</div>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="{{ his_form.descricao.id_for_label }}" class="form-label">{{ his_form.descricao.label }}</label>
+          {{ his_form.descricao }}
+          {% if his_form.descricao.errors %}
+            {% for error in his_form.descricao.errors %}
+              <div class="alert alert-danger"> {{ error }}</div>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="butoes">
+    </div>
+</div>

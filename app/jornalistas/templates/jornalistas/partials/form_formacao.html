@@ -1,0 +1,24 @@
+<div class="row gy-2 gx-3">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="{{ jornalista_form.registro.id_for_label }}"  class="form-label">{{ jornalista_form.registro.label }}</label>
+        {{ jornalista_form.registro }}
+        {% if jornalista_form.registro.errors %}
+          {% for error in jornalista_form.registro.errors %}
+            <div class="alert alert-danger"> {{ error }}</div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="{{ jornalista_form.diploma.id_for_label }}" class="form-label">{{ jornalista_form.diploma.label }}</label>
+        {{ jornalista_form.diploma }}
+        {% if jornalista_form.diploma.errors %}
+          {% for error in jornalista_form.diploma.errors %}
+            <div class="alert alert-danger"> {{ error }}</div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+</div>
