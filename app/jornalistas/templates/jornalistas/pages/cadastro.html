@@ -8,6 +8,9 @@
   .iti {
     width: 100%
   }
+  .hide {
+    display: none;
+  }
 </style>
 {% endblock styles %}
 {% block content %}
@@ -97,6 +100,9 @@
                 <p for="{{ jornalista_form.telefone.id_for_label }}" class="form-label" id="output">{{ jornalista_form.telefone.label }}</p>
                 {{ jornalista_form.telefone }}
               </div>
+              <div id="valid-msg" class="hide alert alert-success">✓ Valido</div>
+              <div id="error-msg" class="hide alert alert-warning"></div>
+             
             </div>
             <div class="col-md-4">
               <div class="form-group">
@@ -272,6 +278,7 @@
 {% block scripts %}
 <script src="{% static 'global/js/jquery-3.7.0.min.js' %}"></script>
 <script src="{% static 'global/js/jquery.mask.min.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
 <script src="{% static 'jornalistas/js/cadastro_mask.js' %}"></script>
 <script src="{% static 'global/js/jquery.formset.js' %}"></script>
 <script type="text/javascript">
@@ -286,6 +293,13 @@
         added: function(row) {
           const numberForms = document.getElementById('id_historico-TOTAL_FORMS').value
           const numberFormActual = numberForms - 1
+          const checkbox = document.getElementById(`id_historico-${numberFormActual}-cargo_atual`);
+          // Verifica o estado do checkbox imediatamente na carga da página
+          if (checkbox.checked) {
+            $(`#id_historico-${numberFormActual}-data_de_termino`).prop("disabled", true);
+          } else {
+            $(`#id_historico-${numberFormActual}-data_de_termino`).prop("disabled", false);
+          }
           $(`#id_historico-${numberFormActual}-cargo_atual`).change(function() {
             // Verifica se a caixa de seleção está marcada
             if ($(this).is(":checked")) {
@@ -302,22 +316,23 @@
 </script>
 <script>
   $(document).ready(function() {
+
+    const checkbox = document.getElementById("id_historico-0-cargo_atual");
+    // Verifica o estado do checkbox imediatamente na carga da página
+    if (checkbox.checked) {
+      $("#id_historico-0-data_de_termino").prop("disabled", true);
+    } else {
+      $("#id_historico-0-data_de_termino").prop("disabled", false);
+    }
     $('#id_historico-0-cargo_atual').change(function() {
       if ($(this).is(":checked")) {
         // Se marcado, desabilite o campo de entrada
         $("#id_historico-0-data_de_termino").prop("disabled", true);
       } else {
-          // Se não marcado, habilite o campo de entrada
-          $("#id_historico-0-data_de_termino").prop("disabled", false);
+        // Se não marcado, habilite o campo de entrada
+        $("#id_historico-0-data_de_termino").prop("disabled", false);
       }
     });
-  });
-</script>
-<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
-<script>
-  const input2 = document.querySelector(".mask-phone-international");
-  window.intlTelInput(input2, {
-    utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
   });
 </script>
 {% endblock scripts %}

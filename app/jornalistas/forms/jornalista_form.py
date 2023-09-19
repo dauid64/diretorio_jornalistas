@@ -1,5 +1,6 @@
 from django import forms
 from jornalistas.models import Jornalista
+from associacoes.models import Associacao
 
 
 class JornalistaForm(forms.ModelForm):

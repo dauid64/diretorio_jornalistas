@@ -41,7 +41,6 @@ class RegisterUserView(View):
 class LoginUserView(View):
     def get(self, request):
         form = LoginForm()
-
         return render(
             request,
             'autenticacao/pages/login.html',
@@ -51,7 +50,7 @@ class LoginUserView(View):
         )
     
     def post(self, request):
-        login_form = LoginForm()
+        login_form = LoginForm(request.POST)
         if login_form.is_valid():
             authenticated_user = authenticate(
                 username=login_form.cleaned_data.get('username', ''),

@@ -38,12 +38,14 @@ class HomeView(View):
 
 class CadastroJornalistaView(View):
     def get(self, request):
-        jornalista_form = JornalistaForm()
+        jornalist_form_data = request.session.get('register_jornalist_data', None)
+        jornalista_form = JornalistaForm(jornalist_form_data)
         historico_formset = modelformset_factory(
             HistoricoProfissional,
             form=HistoricoForm
         )
         historico_forms = historico_formset(
+            jornalist_form_data,
             prefix='historico',
             queryset=HistoricoProfissional.objects.none()
         )
@@ -63,7 +65,9 @@ class CadastroJornalistaView(View):
             prefix='publicacao',
             queryset=Publicao.objects.none()
         )
-        redes_sociais_form = RedesSociaisForm()
+        redes_sociais_form = RedesSociaisForm(
+            jornalist_form_data
+        )
         
         return render(
             request,
@@ -79,125 +83,126 @@ class CadastroJornalistaView(View):
 
     def post(self, request):
         POST = request.POST
-        print(POST)
-        # if Jornalista.objects.filter(usuario=request.user).exists():
-        #     return redirect(
-        #         'jornalistas:home'
-        #     )
-        # jornalista_form = JornalistaForm(POST, request.FILES)
-        # historico_formset = modelformset_factory(
-        #     HistoricoProfissional,
-        #     form=HistoricoForm
-        # )
-        # historico_forms = historico_formset(
-        #     POST,
-        #     prefix='historico',
-        # )
-        # livro_formset = modelformset_factory(
-        #     Livro,
-        #     form=LivroForm
-        # )
-        # livro_forms = livro_formset(
-        #     POST,
-        #     prefix='livro'
-        # )
-        # publicacao_formset = modelformset_factory(
-        #     Publicao,
-        #     form=PublicacaoForm
-        # )
-        # publicacao_forms = publicacao_formset(
-        #     POST,
-        #     prefix='publicacao'
-        # )
-        # redes_sociais_form = RedesSociaisForm(
-        #     POST
-        # )
-        # if jornalista_form.is_valid() and historico_forms.is_valid() and redes_sociais_form.is_valid():
-        #     if publicacao_forms.is_valid() and livro_forms.is_valid():
-        #         jornalista = jornalista_form.save(commit=False)
-        #         jornalista.usuario = request.user
-        #         jornalista.save()
-        #         livro_forms.save(commit=False)
-        #         livros = livro_forms.save()
-        #         redes_sociais_list = []
-        #         for field, key in redes_sociais_form.cleaned_data.items():
-        #             if key is not None:
-        #                 match field:
-        #                     case 'link_telegram':
-        #                         redes_sociais_list.append(
-        #                             RedesSociais(
-        #                                 jornalista=jornalista,
-        #                                 link=key,
-        #                                 tipo_de_rede_social=1
-        #                             )
-        #                         )
-        #                     case 'link_facebook':
-        #                         redes_sociais_list.append(
-        #                             RedesSociais(
-        #                                 jornalista=jornalista,
-        #                                 link=key,
-        #                                 tipo_de_rede_social=2
-        #                             )
-        #                         )
-        #                     case 'link_podcast':
-        #                         redes_sociais_list.append(
-        #                             RedesSociais(
-        #                                 jornalista=jornalista,
-        #                                 link=key,
-        #                                 tipo_de_rede_social=3
-        #                             )
-        #                         )
-        #                     case 'link_linkedin':
-        #                         redes_sociais_list.append(
-        #                             RedesSociais(
-        #                                 jornalista=jornalista,
-        #                                 link=key,
-        #                                 tipo_de_rede_social=4
-        #                             )
-        #                         )
-        #                     case 'link_twitter':
-        #                         redes_sociais_list.append(
-        #                             RedesSociais(
-        #                                 jornalista=jornalista,
-        #                                 link=key,
-        #                                 tipo_de_rede_social=5
-        #                             )
-        #                         )
-        #                     case 'link_site':
-        #                         redes_sociais_list.append(
-        #                             RedesSociais(
-        #                                 jornalista=jornalista,
-        #                                 link=key,
-        #                                 tipo_de_rede_social=6
-        #                             )
-        #                         )
-        #         RedesSociais.objects.bulk_create(redes_sociais_list)
-        #         obras_jornalisticas_livros_list = []
-        #         for l in livros:
-        #             obras_jornalisticas_livros_list.append(
-        #                 ObraJornalistica(
-        #                     l.cleaned_data['titulo'],
-        #                     l.cleaned_data['descricao']
-        #                 )
-        #             )
-        #         jornalista.obras_jornalisticas.add(*obras_jornalisticas_livros_list)
-        #         historicos = historico_forms.save()
-        #         jornalista.historico_profissional.add(*historicos)
-        #         publicacao_forms.save(commit=False)
-        #         publicacoes = publicacao_forms.save()
-        #         obras_jornalisticas_publicacoes_list = []
-        #         for p in publicacoes:
-        #             obras_jornalisticas_publicacoes_list.append(
-        #                 ObraJornalistica(
-        #                     p.cleaned_data['titulo'],
-        #                     p.cleaned_data['descricao']
-        #                 )
-        #             )
-        #         jornalista.obras_jornalisticas.add(*obras_jornalisticas_publicacoes_list)
-        #         return redirect(
-        #             reverse("jornalistas:home")
-        #         )
-
+        request.session['register_jornalist_data'] = POST
+        if Jornalista.objects.filter(usuario=request.user).exists():
+            return redirect(
+                'jornalistas:home'
+            )
+        jornalista_form = JornalistaForm(POST, request.FILES)
+        historico_formset = modelformset_factory(
+            HistoricoProfissional,
+            form=HistoricoForm
+        )
+        historico_forms = historico_formset(
+            POST,
+            prefix='historico',
+        )
+        livro_formset = modelformset_factory(
+            Livro,
+            form=LivroForm
+        )
+        livro_forms = livro_formset(
+            POST,
+            prefix='livro'
+        )
+        publicacao_formset = modelformset_factory(
+            Publicao,
+            form=PublicacaoForm
+        )
+        publicacao_forms = publicacao_formset(
+            POST,
+            prefix='publicacao'
+        )
+        redes_sociais_form = RedesSociaisForm(
+            POST
+        )
+        if jornalista_form.is_valid() and historico_forms.is_valid() and redes_sociais_form.is_valid():
+                jornalista=jornalista_form.save(commit=False)
+                jornalista.usuario = request.user
+                jornalista.save()
+                # livro_forms.save(commit=False)
+                # livros = livro_forms.save()
+                redes_sociais_list = []
+                for field, key in redes_sociais_form.cleaned_data.items():
+                    if key is not None:
+                        match field:
+                            case 'link_telegram':
+                                redes_sociais_list.append(
+                                    RedesSociais(
+                                        jornalista=jornalista,
+                                        link=key,
+                                        tipo_de_rede_social_id=1
+                                    )
+                                )
+                            case 'link_facebook':
+                                redes_sociais_list.append(
+                                    RedesSociais(
+                                        jornalista=jornalista,
+                                        link=key,
+                                        tipo_de_rede_social_id=2
+                                    )
+                                )
+                            case 'link_podcast':
+                                redes_sociais_list.append(
+                                    RedesSociais(
+                                        jornalista=jornalista,
+                                        link=key,
+                                        tipo_de_rede_social_id=3
+                                    )
+                                )
+                            case 'link_linkedin':
+                                redes_sociais_list.append(
+                                    RedesSociais(
+                                        jornalista=jornalista,
+                                        link=key,
+                                        tipo_de_rede_social_id=4
+                                    )
+                                )
+                            case 'link_twitter':
+                                redes_sociais_list.append(
+                                    RedesSociais(
+                                        jornalista=jornalista,
+                                        link=key,
+                                        tipo_de_rede_social_id=5
+                                    )
+                                )
+                            case 'link_site':
+                                redes_sociais_list.append(
+                                    RedesSociais(
+                                        jornalista=jornalista,
+                                        link=key,
+                                        tipo_de_rede_social_id=6
+                                    )
+                                )
+                RedesSociais.objects.bulk_create(redes_sociais_list)
+                historicos = historico_forms.save()
+                jornalista.historico_profissional.add(*historicos)
+                # obras_jornalisticas_livros_list = []
+                # for l in livros:
+                #     obras_jornalisticas_livros_list.append(
+                #         ObraJornalistica(
+                #             l.cleaned_data['titulo'],
+                #             l.cleaned_data['descricao']
+                #         )
+                #     )
+                # jornalista.obras_jornalisticas.add(*obras_jornalisticas_livros_list)
+                # jornalista.historico_profissional.add(*historicos)
+                # publicacao_forms.save(commit=False)
+                # publicacoes = publicacao_forms.save()
+                # obras_jornalisticas_publicacoes_list = []
+                # for p in publicacoes:
+                #     obras_jornalisticas_publicacoes_list.append(
+                #         ObraJornalistica(
+                #             p.cleaned_data['titulo'],
+                #             p.cleaned_data['descricao']
+                #         )
+                #     )
+                # jornalista.obras_jornalisticas.add(*obras_jornalisticas_publicacoes_list)
+                del (request.session['register_jornalist_data'])
+                return redirect(
+                    reverse("jornalistas:home")
+                )
+        print(historico_forms.errors)
         return redirect(
             reverse("jornalistas:cadastrar")
         )

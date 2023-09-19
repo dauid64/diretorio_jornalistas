@@ -4,6 +4,7 @@ from jornalistas.models import HistoricoProfissional
 
 class HistoricoForm(forms.ModelForm):
     cargo_atual = forms.BooleanField(
+        required=False,
         label='Trabalho atualmente neste cargo',
         widget=forms.CheckboxInput(
             attrs={

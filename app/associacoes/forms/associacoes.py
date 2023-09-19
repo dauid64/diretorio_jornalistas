@@ -9,7 +9,6 @@ class AssociacaoForm(forms.ModelForm):
             'nome_fantasia',
             'razao_social',
             'cnpj',
-            'ddd_telefone',
             'telefone',
             'email',
             'presidente',
@@ -18,7 +17,6 @@ class AssociacaoForm(forms.ModelForm):
             'nome_fantasia': 'Nome fantasia',
             'razao_social': 'Razão Social',
             'cnpj': 'CNPJ',
-            'ddd_telefone': 'DDD',
             'telefone': 'telefone',
             'email': 'e-mail',
             'presidente': 'presidente'
@@ -50,7 +48,7 @@ class AssociacaoForm(forms.ModelForm):
             ),
             'telefone': forms.TextInput(
                 attrs={
-                    'class': 'form-control2 mask-telefone',
+                    'class': 'form-control2',
                     'placeholder': 'Telefone'
                 }
             ),

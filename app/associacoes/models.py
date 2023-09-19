@@ -1,13 +1,11 @@
 from django.db import models
-from opcoes.models import RedesSociais
 
 
 class Associacao(models.Model):
     nome_fantasia = models.CharField(max_length=254)
     razao_social = models.CharField(max_length=254)
     cnpj = models.BigIntegerField()
-    ddd_telefone = models.CharField(max_length=2)
-    telefone = models.CharField(max_length=9)
+    telefone = models.CharField()
     email = models.EmailField(max_length=254)
     presidente = models.CharField(max_length=254)
     # rede_sociais = models.ForeignKey(RedesSociais, on_delete=models.DO_NOTHING)
