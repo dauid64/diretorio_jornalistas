@@ -17,6 +17,10 @@ body {
     background-color: #f4f4f4 ;
 }
 
+.form-group {
+    margin-bottom: 1rem;
+  }
+
 .nav-link {
     color: #212529;
     position: relative;

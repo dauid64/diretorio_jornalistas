@@ -7,6 +7,7 @@ from opcoes.forms import RedesSociaisForm
 from opcoes.models import RedesSociais
 from django.contrib import messages
 from obras.models import Livro, Publicao, ObraJornalistica
+from revisores.models import Revisor
 from obras.forms import LivroForm, PublicacaoForm
 from django.forms import modelformset_factory
 
@@ -19,12 +20,14 @@ class HomeView(View):
         name = GET.get('name')
         jornalistas = None
         if inicial:
-            jornalistas = Jornalista.objects.filter(
+            jornalistas_aprovados = Jornalista.objects.aprovados()
+            jornalistas = jornalistas_aprovados.filter(
                 nome_de_guerra__istartswith=inicial,
                 # aprovado=True
             )
         if name:
-            jornalistas = Jornalista.objects.filter(
+            jornalistas_aprovados = Jornalista.objects.aprovados()
+            jornalistas = jornalistas_aprovados.filter(
                 nome_de_guerra__icontains=name,
                 # aprovado=True
             )
@@ -200,6 +203,13 @@ class CadastroJornalistaView(View):
                 #         )
                 #     )
                 # jornalista.obras_jornalisticas.add(*obras_jornalisticas_publicacoes_list)
+                is_revisor = POST.get('is_revisor')
+                print(is_revisor)
+                if is_revisor == 'Sim':
+                    Revisor.objects.create(
+                        usuario=request.user,
+                        associacao=jornalista_form.cleaned_data['associacao']
+                    )
                 del (request.session['register_jornalist_data'])
                 return redirect(
                     reverse("jornalistas:home")

@@ -95,13 +95,33 @@
           <div class="butoes">
             <button class="cancel">Cancelar</button>
   
-            <button class="prox" type="submit">
+            <button class="prox" type="button" data-bs-toggle="modal" data-bs-target="#revisor-modal">
               Salvar
             </button>
           </div>
 
         </div>
 
+        </div>
+      </div>
+      <!-- Modal -->
+      <div class="modal fade" id="revisor-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Olá jornalista! seu cadastro já está quase finalizado. 
+              Gostariamos de saber se você tem interesse em se tornar um revisor do DPJB para 
+              ajudar na analise de informações cadastradas no site, caso for aprovado.
+            </div>
+            <div class="modal-footer justify-content-around">
+              <input type="hidden" id='is_revisor' name='is_revisor'>
+              <button id="btnNo" type="submit" class="btn btn-secondary">Não</button>
+              <button id="btnYes" type="submit" class="btn btn-primary">Sim</button> 
+            </div>
+          </div>
         </div>
       </div>
     </form>
@@ -168,6 +188,18 @@
       }
     });
   });
+</script>
+<script>
+  btnYes = document.getElementById('btnYes');
+  btnNo = document.getElementById('btnNo');
+  inputIsRevisor = document.getElementById('is_revisor');
+
+  btnYes.addEventListener("click", function () {
+    inputIsRevisor.value = 'Sim';
+  })
+  btnNo.addEventListener("click", function () {
+    inputIsRevisor.value = 'Não';
+  })
 </script>
 {% endblock scripts %}
 
