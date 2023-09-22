@@ -6,6 +6,12 @@ from associacoes.models import Associacao
 class JornalistaForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(JornalistaForm, self).__init__(*args, **kwargs)
+        self.fields['estado'].widget.attrs = {
+            'class': 'form-control estado-select2'
+        }
+        self.fields['cidade'].widget.attrs = {
+            'class': 'form-control cidade-select2'
+        }
 
     class Meta:
         model = Jornalista
@@ -16,6 +22,8 @@ class JornalistaForm(forms.ModelForm):
             'sobrenome',
             'cpf',
             'telefone',
+            'estado',
+            'cidade',
             'data_de_nascimento',
             'genero',
             'estado_civil',

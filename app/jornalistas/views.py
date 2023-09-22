@@ -1,45 +1,67 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
+from django.forms import modelformset_factory
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.db.models import Prefetch
 from django.views.generic import View
 from .models import HistoricoProfissional, Jornalista
 from .forms import HistoricoForm, JornalistaForm
 from opcoes.forms import RedesSociaisForm
 from opcoes.models import RedesSociais
 from django.contrib import messages
-from obras.models import Livro, Publicao, ObraJornalistica
+from django.core.paginator import Paginator
+from obras.models import Livro, Publicao
 from revisores.models import Revisor
 from obras.forms import LivroForm, PublicacaoForm
-from django.forms import modelformset_factory
 
 
 class HomeView(View):
     def get(self, request):
         GET = request.GET
         inicial = GET.get('inicial')
-
-        name = GET.get('name')
-        jornalistas = None
+        nome = GET.get('nome')
+        additional_url_query = ''
+        jornalistas = Jornalista.objects.none()
         if inicial:
-            jornalistas_aprovados = Jornalista.objects.aprovados()
-            jornalistas = jornalistas_aprovados.filter(
-                nome_de_guerra__istartswith=inicial,
-                # aprovado=True
+            jornalistas_aprovados = Jornalista.objects.aprovados().select_related('associacao', 'estado', 'cidade').prefetch_related(
+                Prefetch(
+                    'historico_profissional',
+                    HistoricoProfissional.objects.filter(data_de_termino=None)
+                )
             )
-        if name:
-            jornalistas_aprovados = Jornalista.objects.aprovados()
             jornalistas = jornalistas_aprovados.filter(
-                nome_de_guerra__icontains=name,
-                # aprovado=True
+                nome_de_guerra__istartswith=inicial
             )
+            additional_url_query = f'&inicial={inicial}'
+        if nome:
+            jornalistas_aprovados = Jornalista.objects.aprovados().select_related('associacao', 'estado', 'cidade').prefetch_related(
+                Prefetch(
+                    'historico_profissional',
+                    HistoricoProfissional.objects.filter(data_de_termino=None)
+                )
+            )
+            jornalistas = jornalistas_aprovados.filter(
+                nome_de_guerra__icontains=nome
+            )
+            additional_url_query = f'&nome={nome}'
+        page_obj = Paginator(jornalistas, 5)
+        page_num = request.GET.get('page', 1)
+        jornalistas = page_obj.get_page(page_num)
         return render(
             request,
             'jornalistas/pages/home.html',
             context={
-                'jornalistas': jornalistas
+                'jornalistas': jornalistas,
+                'additional_url_query': additional_url_query
             }
         )
 
 
+@method_decorator(
+    login_required(login_url='autenticacao:login', redirect_field_name='next'),
+    name="dispatch"
+)
 class CadastroJornalistaView(View):
     def get(self, request):
         jornalist_form_data = request.session.get('register_jornalist_data', None)
@@ -204,7 +226,6 @@ class CadastroJornalistaView(View):
                 #     )
                 # jornalista.obras_jornalisticas.add(*obras_jornalisticas_publicacoes_list)
                 is_revisor = POST.get('is_revisor')
-                print(is_revisor)
                 if is_revisor == 'Sim':
                     Revisor.objects.create(
                         usuario=request.user,
@@ -218,3 +239,27 @@ class CadastroJornalistaView(View):
             reverse("jornalistas:cadastrar")
         )
 
+
+class PerfilUserView(View):
+    def get(self, request, id):
+        jornalista = get_object_or_404(
+            Jornalista.objects.select_related(
+                'associacao',
+                'estado',
+                'cidade'
+            ).prefetch_related(
+                'historico_profissional',
+                'obras_jornalisticas'
+            ),
+            id=id
+        )
+        redes_sociais = RedesSociais.objects.filter(jornalista=jornalista).select_related('tipo_de_rede_social')
+
+        return render(
+            request,
+            'jornalistas/pages/perfil.html',
+            context={
+                'jornalista': jornalista,
+                'redes_sociais': redes_sociais
+            }
+        )

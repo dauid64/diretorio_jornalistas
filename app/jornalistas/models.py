@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from associacoes.models import Associacao
 from opcoes.models import Cidades, Estados, Genero, EstadoCivil, VeiculoDeComunicacao
+from smart_selects.db_fields import ChainedForeignKey
 from obras.models import ObraJornalistica
 
 
@@ -33,15 +34,23 @@ class Jornalista(models.Model):
     nome = models.CharField(max_length=255)
     sobrenome = models.CharField(max_length=255)
     associacao = models.ForeignKey(Associacao,on_delete=models.DO_NOTHING)
-    cpf = models.CharField(max_length=11)
+    cpf = models.CharField(max_length=14)
     data_de_nascimento = models.DateField()
     telefone = models.CharField(max_length=50)
-    estado = models.ForeignKey(Estados, on_delete=models.DO_NOTHING,null=True, blank = True)
-    cidade = models.ForeignKey(Cidades, on_delete=models.DO_NOTHING,null=True, blank = True)
-    genero = models.ForeignKey(Genero, on_delete=models.DO_NOTHING, null=True, blank = True)
-    estado_civil = models.ForeignKey(EstadoCivil, on_delete=models.DO_NOTHING,null=True, blank = True)
+    estado = models.ForeignKey(Estados, on_delete=models.DO_NOTHING)
+    cidade = ChainedForeignKey(
+        Cidades,
+        chained_field='estado',
+        chained_model_field='estado',
+        show_all=False,
+        auto_choose=False,
+        sort=False,
+        on_delete=models.DO_NOTHING,
+    )
+    genero = models.ForeignKey(Genero, on_delete=models.DO_NOTHING)
+    estado_civil = models.ForeignKey(EstadoCivil, on_delete=models.DO_NOTHING)
     foto = models.ImageField(null=True, blank=True)
-    registro = models.CharField(max_length=50, null=True, blank=True)
+    registro = models.CharField(max_length=50)
     diploma = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=None)
     criado_em = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateTimeField(auto_now=True)

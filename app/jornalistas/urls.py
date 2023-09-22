@@ -15,5 +15,10 @@ urlpatterns = [
         'cadastro',
         views.CadastroJornalistaView.as_view(),
         name='cadastrar'
+    ),
+    path(
+        'perfil/<int:id>',
+        views.PerfilUserView.as_view(),
+        name='perfil'
     )
 ]

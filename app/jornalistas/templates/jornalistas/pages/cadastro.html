@@ -130,7 +130,6 @@
 {% endblock content %}
 
 {% block scripts %}
-<script src="{% static 'global/js/jquery-3.7.0.min.js' %}"></script>
 <script src="{% static 'global/js/jquery.mask.min.js' %}"></script>
 <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
 <script src="{% static 'jornalistas/js/cadastro_mask.js' %}"></script>
@@ -200,6 +199,19 @@
   btnNo.addEventListener("click", function () {
     inputIsRevisor.value = 'Não';
   })
+</script>
+<script>
+  const selectEstados = document.getElementById("id_estado");
+  const selectCidades = document.getElementById("id_cidade");
+
+  selectEstados.addEventListener("change", function() {
+    if (selectEstados.selectedIndex === 0) {
+      selectCidades.setAttribute("disabled", "disabled");
+    } else {
+      selectCidades.removeAttribute("disabled");
+    }
+  })
+
 </script>
 {% endblock scripts %}
 

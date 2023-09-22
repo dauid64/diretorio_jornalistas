@@ -10,7 +10,7 @@
         </div>
 
         <div class="texto-botoes">
-            <input type="text" class="form-control" name="name" placeholder="Buscar por nome">
+            <input type="text" class="form-control" name="nome" placeholder="Buscar por nome">
 
             <div class="col form-group mb-0">
                 <button type="submit" class="btn btn-primary">Buscar</button>
@@ -53,7 +53,7 @@
     {% if jornalistas %}
     <div class="jornaListas">
         {% for j in jornalistas %}
-            <button style="border: none; display: flex; width: fit-content; background-color: transparent;">
+            <a style="border: none; display: flex; width: fit-content; background-color: transparent;" href="{% url 'jornalistas:perfil' j.id %} ">
                 <div class="image-pessoa" style="border: none;">
                     <img
                         src="{% static 'jornalistas/img/perfil.png' %}"
@@ -64,13 +64,43 @@
                 </div>
                 <div class="card">
                     <h5>{{ j.nome_de_guerra }}</h5>
-                    <span><b >Associação:</b> {{ j.associacao }}</span>
-                    <span><b>Localidade:</b> {{ j.get_cidade_display }}</span>
-                    <span><b>Especialidade/Áreas de Atuação:</b> {{ j.site }}</span>
+                    <span><b >Associação: </b>{{ j.associacao }}</span>
+                    <span><b>Localidade: </b>{{ j.estado.pais.descricao }} - {{ j.estado.descricao }} - {{ j.cidade.descricao}}</span>
+                    <span><b>Especialidade/Áreas de Atuação: </b>
+                        {% for h in j.historico_profissional.all %}
+                            {{ h.cargo }}
+                            {% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                        {{ j.site }}
+                    </span>
                 </div>
-            </button>
+            </a>
         {% endfor %}
     </div>
+    <nav aria-label="Page navigation" class="navigation-jornalistas">
+        <ul class="pagination justify-content-center pagination-jornalista">
+        {% if jornalistas.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="{% url 'jornalistas:home' %}?page={{ jornalistas.previous_page_number }}{{ additional_url_query }}" tabindex="-1">Anterior</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" href="" tabindex="-1">Anterior</a>
+        </li>
+        {% endif %}
+        <li class="page-item"><a class="page-link" href="">{{ jornalistas.start_index }}</a></li>
+        
+        {% if jornalistas.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="{% url 'jornalistas:home' %}?page={{ jornalistas.next_page_number }}{{ additional_url_query }}">Próximo</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" href="#">Próximo</a>
+        </li>
+        {% endif %}
+        </ul>
+      </nav>
     {% endif %}
 
 </main>

@@ -1,7 +1,7 @@
 <div class="row gy-2 gx-3">
     <div class="col-md-4">
       <div class="form-group">
-        <label for="{{jornalista_form.nome_de_guerra.id_for_label }}" class="form-label">{{ jornalista_form.nome_de_guerra.label }}</label>
+        <label for="{{jornalista_form.nome_de_guerra.id_for_label }}" class="form-label">{{ jornalista_form.nome_de_guerra.label }}</label><span class="required"> *</span>
         {{ jornalista_form.nome_de_guerra }}
         {% if jornalista_form.nome_de_guerra.errors %}
           {% for error in jornalista_form.nome_de_guerra.errors %}
@@ -12,7 +12,7 @@
     </div>
     <div class="col-md-4">
       <div class="form-group">
-        <label for="{{ jornalista_form.nome.id_for_label }}" class="form-label">{{ jornalista_form.nome.label }}</label>
+        <label for="{{ jornalista_form.nome.id_for_label }}" class="form-label">{{ jornalista_form.nome.label }}</label><span class="required"> *</span>
         {{ jornalista_form.nome }}
         {% if jornalista_form.nome.errors %}
           {% for error in jornalista_form.nome.errors %}
@@ -23,7 +23,7 @@
     </div>
     <div class="col-md-4">
       <div class="form-group">
-        <label for="{{ jornalista_form.sobrenome.id_for_label }}" class="form-label">{{ jornalista_form.sobrenome.label }}</label>
+        <label for="{{ jornalista_form.sobrenome.id_for_label }}" class="form-label">{{ jornalista_form.sobrenome.label }}</label><span class="required"> *</span>
         {{ jornalista_form.sobrenome }}
         {% if jornalista_form.sobrenome.errors %}
           {% for error in jornalista_form.sobrenome.errors %}
@@ -36,7 +36,7 @@
   <div class="row gy-2 gx-3 align-items-center">
     <div class="col-md-4">
       <div class="form-group">
-        <label for="{{ jornalista_form.data_de_nascimento.id_for_label }}" class="form-label">{{ jornalista_form.data_de_nascimento.label }}</label>
+        <label for="{{ jornalista_form.data_de_nascimento.id_for_label }}" class="form-label">{{ jornalista_form.data_de_nascimento.label }}</label><span class="required"> *</span>
         {{ jornalista_form.data_de_nascimento }}
         {% if jornalista_form.data_de_nascimento.errors %}
           {% for error in jornalista_form.data_de_nascimento.errors %}
@@ -47,7 +47,7 @@
     </div>
     <div class="col-md-4">
       <div class="form-group">
-        <label for="{{ jornalista_form.genero.id_for_label }}" class="form-label">{{ jornalista_form.genero.label }}</label>
+        <label for="{{ jornalista_form.genero.id_for_label }}" class="form-label">{{ jornalista_form.genero.label }}</label><span class="required"> *</span>
         {{ jornalista_form.genero }}
         {% if jornalista_form.genero.errors %}
           {% for error in jornalista_form.genero.errors %}
@@ -58,7 +58,7 @@
     </div>
     <div class="col-md-4">
       <div class="form-group">
-        <label for="{{ jornalista_form.associacao.id_for_label }}" class="form-label">{{ jornalista_form.associacao.label }}</label>
+        <label for="{{ jornalista_form.associacao.id_for_label }}" class="form-label">{{ jornalista_form.associacao.label }}</label><span class="required"> *</span>
         {{ jornalista_form.associacao }}
         {% if jornalista_form.associacao.errors %}
           {% for error in jornalista_form.associacao.errors %}
@@ -69,11 +69,10 @@
     </div>
   </div>
   <div class="row">
-  </div>
-  <div class="row">
     <div class="col-md-4">
       <div class="form-group">
-        <p for="{{ jornalista_form.telefone.id_for_label }}" class="form-label" id="output">{{ jornalista_form.telefone.label }}</p>
+        
+        <p for="{{ jornalista_form.telefone.id_for_label }}" class="form-label" id="output">{{ jornalista_form.telefone.label }}<span class="required"> *</span></p>
         {{ jornalista_form.telefone }}
       </div>
       <div id="valid-msg" class="hide alert alert-success">✓ Valido</div>
@@ -82,7 +81,7 @@
     </div>
     <div class="col-md-4">
       <div class="form-group">
-        <label for="{{ jornalista_form.cpf.id_for_label }}" class="form-label">{{ jornalista_form.cpf.label }}</label>
+        <label for="{{ jornalista_form.cpf.id_for_label }}" class="form-label">{{ jornalista_form.cpf.label }}</label><span class="required"> *</span>
         {{ jornalista_form.cpf }}
         {% if jornalista_form.cpf.errors %}
           {% for error in jornalista_form.cpf.errors %}
@@ -93,7 +92,7 @@
     </div>
     <div class="col-md-4">
       <div class="form-group">
-        <label for="{{ jornalista_form.estado_civil.id_for_label }}" class="form-label">{{ jornalista_form.estado_civil.label }}</label>
+        <label for="{{ jornalista_form.estado_civil.id_for_label }}" class="form-label">{{ jornalista_form.estado_civil.label }}</label><span class="required"> *</span>
         {{ jornalista_form.estado_civil }}
         {% if jornalista_form.estado_civil.errors %}
           {% for error in jornalista_form.estado_civil.errors %}
@@ -102,4 +101,29 @@
         {% endif %}
       </div>
     </div>
+  </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="{{ jornalista_form.estado.id_for_label }}" class="form-label">{{ jornalista_form.estado.label }}</label><span class="required"> *</span>
+          {{ jornalista_form.estado }}
+          {% if jornalista_form.estado.errors %}
+            {% for error in jornalista_form.estado.errors %}
+              <div class="alert alert-danger"> {{ error }}</div>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="{{ jornalista_form.cidade.id_for_label }}" class="form-label">{{ jornalista_form.cidade.label }}</label><span class="required"> *</span>
+          {{ jornalista_form.cidade }}
+          {% if jornalista_form.cidade.errors %}
+            {% for error in jornalista_form.cidade.errors %}
+              <div class="alert alert-danger"> {{ error }}</div>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+      {{ jornalista_form.media.js }}
 </div>

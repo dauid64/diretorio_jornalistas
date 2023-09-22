@@ -1,0 +1,145 @@
+{% extends 'global/base.html' %} 
+{% load static %} 
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'global/css/cadastro.css' %}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
+<style>
+  .iti {
+    width: 100%
+  }
+  .hide {
+    display: none;
+  }
+</style>
+{% endblock styles %}
+{% block content %}
+
+<main>
+  <div>
+    {% if message is not None %}
+    <div class="alert alert-{{ message.type }}">{{ message.text }}</div>
+  {% endif %}
+  </div>
+  <body>
+      <div class="tela-cadastro" id="Primeiro">
+        <div class="subtitulo">
+          <h3>Perfil do Jornalista</h3>
+        </div>
+        
+        <div class="foto-perfil">
+          <img
+            src="{% static 'jornalistas/img/perfil.png' %}"
+            width="128"
+            height="130"
+            alt=""
+            style="margin-left: 2.5vh;"
+          />
+          <img
+            src="{% static 'jornalistas/img/upload.png' %}"
+            width="140"
+            height="39"
+            alt=""
+            style="margin-top: -4vh;"
+          />
+        </div>
+
+        <div class="card card-jornalista w-75">
+          <div class="titulo">
+            <div class="circ-l"> </div>   
+            Dados Pessoais
+          </div>
+        
+          <div class="row">
+            <div class="col-md-6">
+                <p class="perfil-texto"><strong>Nome de guerra: </strong>{{ jornalista.nome_de_guerra }}</p>
+                <p class="perfil-texto"><strong>Associação: </strong>{{ jornalista.associacao.nome_fantasia }}</p>
+                <p class="perfil-texto"><strong>Localização: </strong>{{ jornalista.estado.pais.descricao }} - {{ jornalista.estado.descricao }} - {{ jornalista.cidade.descricao}}</p>
+            </div>
+            <div class="col-md-6">
+                <p class="perfil-texto"><strong>Nome Completo: </strong>{{ jornalista.nome }} {{ jornalista.sobrenome }}</p>
+                <p class="perfil-texto"><strong>CPF: </strong>{{ jornalista.cpf }}</p>
+                <p class="perfil-texto"><strong>Data de nascimento: </strong>{{ jornalista.data_de_nascimento }}</p>
+            </div>
+          </div>
+          
+
+          <h2 class="subtitulo">Redes Sociais</h2>
+          <div class="row">
+            <div class="col-md-6">
+              {% for r in redes_sociais %}
+                {% if forloop.counter == 4 %}
+                </div>
+                  <div class="col-md-6">
+                {% endif %}
+                <p class="perfil-texto"><strong>{{ r.tipo_de_rede_social.descricao }}: </strong>{{ r.link }}</p>
+              {% endfor %}
+            </div>
+          </div>
+          
+          
+          <div class="separador"> </div>
+
+          <div class="titulo">
+            <div class="circ-l"> </div>   
+            Formação
+          </div>
+          <p class="perfil-texto"><strong>Registro: </strong>{{ jornalista.registro }}</p>
+          <div class="text-center">
+            <img src="{{ jornalista.diploma.url }}" alt="Diploma" class="img-fluid" width="300px">
+            </div>
+          
+          <div class="separador"> </div>   
+
+          <div class="titulo">
+            <div class="circ-l"> 
+            
+          </div> 
+            Dados Profissionais
+          </div>
+          
+          <h2 class="subtitulo">Histórico Profissional</h2>
+          {% for h in jornalista.historico_profissional.all %}
+          <div class="card card-jornalista w-75" id="historico-form">
+            <div class="row gy-2 gx-3">
+                <div class="col-md-6">
+                    <p class="perfil-texto"><strong>Veículo de comunicação: </strong>{{ h.veiculo_de_comunicacao.nome }}</p>
+                    <p class="perfil-texto"><strong>Data de início: </strong>{{ h.data_inicio }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p class="perfil-texto"><strong>Cargo: </strong>{{ h.cargo }}</p>
+                    <p class="perfil-texto"><strong>Data de Termino: </strong>
+                      {% if h.data_de_termino %}
+                      {{ h.data_de_termino }}
+                      {% else %}
+                      Cargo Atual
+                      {% endif %}
+                  </p>
+                </div>
+            </div>
+            <div class="row gy-2 gx-3">
+                <div class="col-md-12">
+                    <p class="perfil-texto"><strong>Descrição: </strong>{{ h.descricao }} </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+          
+          <div class="separador"></div> 
+
+          <!-- <div class="titulo">
+            <div class="circ-l"> </div>   
+            Obras
+          </div> -->
+        </div>
+
+        </div>
+      </div>
+  </body>
+</main>
+{% endblock content %}
+
+{% block scripts %}
+
+{% endblock scripts %}
+

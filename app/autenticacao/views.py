@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.views.generic import View
 from .forms import RegisterUserForm, LoginForm
 from django.contrib import messages
@@ -73,6 +75,10 @@ class LoginUserView(View):
         )
 
 
+@method_decorator(
+    login_required(login_url='autenticacao:login', redirect_field_name='next'),
+    name="dispatch"
+)
 class LogoutUserView(View):
     def get(self, request):
         logout(request)

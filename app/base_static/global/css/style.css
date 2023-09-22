@@ -9,12 +9,16 @@
 
 /* geral */
 
+a {
+    text-decoration: none;
+}
+
 nav {
     background-color: #fff;
 }
 
 body {
-    background-color: #f4f4f4 ;
+    background-color: #f4f4f4;
 }
 
 .form-group {
@@ -215,4 +219,22 @@ footer {
     position: absolute;
     bottom: 1rem;
     right: 2.5rem;
-  }
+}
+
+.navigation-jornalistas {
+    background-color: #f4f4f4 ;
+}
+
+.page-link {
+    background-color: var(--primary);
+    color: #ffffff;
+}
+
+.page-link:hover {
+    background-color: #ffffff;
+    color: var(--primary);
+}
+
+.required {
+    color: rgb(255, 0, 0);
+}

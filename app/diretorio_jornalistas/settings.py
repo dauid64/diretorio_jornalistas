@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     'obras',
     'opcoes',
     'revisores',
-    'associacoes'
+    'associacoes',
+    'smart_selects'
 ]
 
 MIDDLEWARE = [
@@ -169,3 +170,5 @@ MESSAGE_TAGS = {
     constants.SUCCESS: 'success',
     constants.WARNING: 'danger',
 }
+
+USE_DJANGO_JQUERY = True
