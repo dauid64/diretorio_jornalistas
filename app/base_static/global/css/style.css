@@ -238,3 +238,58 @@ footer {
 .required {
     color: rgb(255, 0, 0);
 }
+
+.btn-primary {
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    color: #ffffff;
+    border-style: outset;
+    border-image: initial;
+  
+    background-color: #f46026;
+    border: 1px solid #ffffff;
+    border-radius: 9px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.btn-secondary {
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    color: #f46026;
+    background-color: #ffffff; 
+    border: 1px solid #f46026;
+    border-radius: 9px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.btn-help {
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    color: #ffffff;
+    border-style: outset;
+    border-image: initial;
+  
+    background-color: #f46026;
+    border: 1px solid #ffffff;
+    border-radius: 9px;
+    margin: 0 0.2rem;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}

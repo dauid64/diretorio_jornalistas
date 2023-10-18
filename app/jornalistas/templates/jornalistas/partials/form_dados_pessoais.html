@@ -102,28 +102,3 @@
       </div>
     </div>
   </div>
-    <div class="row">
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="{{ jornalista_form.estado.id_for_label }}" class="form-label">{{ jornalista_form.estado.label }}</label><span class="required"> *</span>
-          {{ jornalista_form.estado }}
-          {% if jornalista_form.estado.errors %}
-            {% for error in jornalista_form.estado.errors %}
-              <div class="alert alert-danger"> {{ error }}</div>
-            {% endfor %}
-          {% endif %}
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="{{ jornalista_form.cidade.id_for_label }}" class="form-label">{{ jornalista_form.cidade.label }}</label><span class="required"> *</span>
-          {{ jornalista_form.cidade }}
-          {% if jornalista_form.cidade.errors %}
-            {% for error in jornalista_form.cidade.errors %}
-              <div class="alert alert-danger"> {{ error }}</div>
-            {% endfor %}
-          {% endif %}
-        </div>
-      </div>
-      {{ jornalista_form.media.js }}
-</div>

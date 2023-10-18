@@ -43,6 +43,8 @@
             style="margin-top: -4vh;"
           />
         </div>
+
+        <p class="alert alert-warning">Não serão divulgados dados sensíveis passados neste formulário, conforme a LGPD.</p>
   
         <form method="POST" action="" class="form-cadastro" enctype='multipart/form-data'>
           {% csrf_token %}
@@ -82,20 +84,16 @@
           {% for his_form in historico_forms %}
             {% include "jornalistas/partials/form_historico.html" %}
           {% endfor %}
+          {% include "jornalistas/partials/help_modal_referencias.html" %}
           {{ historico_forms.management_form }}
           
           <div class="separador"> </div> 
-
-          <div class="titulo">
-            <div class="circ-l"> </div>   
-            Obras
-          </div>
         
           
           <div class="butoes">
-            <button class="cancel">Cancelar</button>
+            <button class="btn-secondary btn" type="button">Cancelar</button>
   
-            <button class="prox" type="button" data-bs-toggle="modal" data-bs-target="#revisor-modal">
+            <button class="btn-primary btn" type="button" data-bs-toggle="modal" data-bs-target="#revisor-modal">
               Salvar
             </button>
           </div>
@@ -104,8 +102,8 @@
 
         </div>
       </div>
-      <!-- Modal -->
-      <div class="modal fade" id="revisor-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <!-- Modal Revisor -->
+      <div class="modal fade" id="revisor-modal" tabindex="-1" aria-labelledby="revisor-modal" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -136,13 +134,13 @@
 <script src="{% static 'global/js/jquery.formset.js' %}"></script>
 <script type="text/javascript">
   $(function() {
-      $('#historico-form').formset({
+      $('.historico-form').formset({
         prefix: '{{ historico_forms.prefix }}',
         addCssClass: 'incluir btn-centralizar ',
         addText: 'Incluir Experiência',
         deleteText: 'Excluir',
         deleteContainerClass: 'butoes',
-        deleteCssClass: 'cancel',
+        deleteCssClass: 'btn-secondary btn',
         added: function(row) {
           const numberForms = document.getElementById('id_historico-TOTAL_FORMS').value
           const numberFormActual = numberForms - 1

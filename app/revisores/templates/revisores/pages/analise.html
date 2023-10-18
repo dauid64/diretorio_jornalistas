@@ -1,79 +1,89 @@
 {% extends 'global/base.html' %}
 {% load static %}
 
-{% block styles %}{% endblock styles %}
+{% block styles %}
+<style>
+    .main-content {
+        padding: 2rem;
+    }
+</style>
+{% endblock styles %}
 
 {% block content %}
-{% if jornalistas %}
-<div class="jornaListas">
-    {% for j in jornalistas %}
-    <a style="display: flex;">
-        <div class="image-pessoa" style="border: none;">
-            <img
-                src="{% static 'jornalistas/img/perfil.png' %}"
-                width="130"
-                height="130"
-                alt=""
-            />
-        </div>
-        <div class="card">
-            <h5>{{ j.nome_de_guerra }}</h5>
-            <div class="dados-card">
-                <div class="dados-card-content">
-                    <div class="dados">
+{% if page_obj %}
+<main class="main-content">
+    <div class="jornaListas">
+        {% for j in page_obj %}
+        <a style="display: flex;" href="{% url 'revisores:analise_jornalista_perfil' j.id %}">
+            <div class="image-pessoa" style="border: none;">
+                <img
+                    src="{% static 'jornalistas/img/perfil.png' %}"
+                    width="130"
+                    height="130"
+                    alt=""
+                />
+            </div>
+            <div class="card">
+                <h5>{{ j.nome_de_guerra }}</h5>
+                <div class="dados-card">
+                    <div class="dados-card-content">
+                        <div class="dados">
+                            <div class="circ-p"> </div>
+                            <span>Veículo de Comunicação:</span>
+                        </div>
+                        <div class="dados">
+                            <div class="circ-p"> </div>
+                            <span>Cargo:</span>
+                        </div>
+                        <div class="dados">
+                            <div class="circ-p"> </div>
+                            <span>Registro: {{ j.registro }}</span>
+                        </div>
+                        <div class="dados">
+                            <div class="circ-p"> </div>
+                            <span>Email: {{ j.usuario.email }}</span>
+                        </div>
+                        <h2 class="subtitulo">Nome da Referência</h2>
+                        <div class="dados">
+                            <div class="circ-p"> </div>
+                            <span>Contato:</span>
+                        </div>
+                    </div>
+                    <div class="dados-card-content">
+                        <div class="dados">
                         <div class="circ-p"> </div>
-                        <span>Veículo de Comunicação:</span>
-                    </div>
-                    <div class="dados">
+                            <span>Facebook:</span>
+                        </div>
+                        <div class="dados">
                         <div class="circ-p"> </div>
-                        <span>Cargo:</span>
-                    </div>
-                    <div class="dados">
+                            <span>Twitter:</span>
+                        </div>
+                        <div class="dados">
                         <div class="circ-p"> </div>
-                        <span>Registro: {{ j.registro }}</span>
-                    </div>
-                    <div class="dados">
+                            <span>Linkedin:</span>
+                        </div>
+                        <div class="dados">
                         <div class="circ-p"> </div>
-                        <span>Email: {{ j.usuario.email }}</span>
-                    </div>
-                    <h2 class="subtitulo">Nome da Referência</h2>
-                    <div class="dados">
-                        <div class="circ-p"> </div>
-                        <span>Contato:</span>
-                    </div>
-                </div>
-                <div class="dados-card-content">
-                    <div class="dados">
-                    <div class="circ-p"> </div>
-                        <span>Facebook:</span>
-                    </div>
-                    <div class="dados">
-                    <div class="circ-p"> </div>
-                        <span>Twitter:</span>
-                    </div>
-                    <div class="dados">
-                    <div class="circ-p"> </div>
-                        <span>Linkedin:</span>
-                    </div>
-                    <div class="dados">
-                    <div class="circ-p"> </div>
-                        <span>Telegram:</span>
-                    </div>
-                    <div class="card-butoes" style="display: flex; gap: 2rem;">
-                        <form action="{% url 'revisores:aprovar' j.id %}" method="POST">
-                            {% csrf_token %}
-                            <button class="btn btn-success">Aprovar</button>
-                        </form>
-                        <form action="">
-                            <button class="btn btn-danger">Rejeitar</button>
-                        </form>
+                            <span>Telegram:</span>
+                        </div>
+                        <div class="card-butoes" style="display: flex; gap: 2rem;">
+                            <form action="{% url 'revisores:aprovar' j.id %}" method="POST">
+                                {% csrf_token %}
+                                <button class="btn btn-primary">Aprovar</button>
+                            </form>
+                            <form action="{% url 'revisores:rejeitar' j.id %}" method="POST">
+                                {% csrf_token %}
+                                <button class="btn btn-secondary">Rejeitar</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </a>
-    {% endfor %}
-</div>
+        </a>
+        {% endfor %}
+    </div>
+    {% include "global/partials/pagination.html" %}
+</main>
 {% endif %}
 {% endblock content %}
 

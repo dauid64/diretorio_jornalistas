@@ -27,6 +27,12 @@ class HistoricoForm(forms.ModelForm):
             "descricao": "Descrição",
         }
 
+        help_texts = {
+            'referencia': '''
+            Nos campos de referência e contato você deve informar o nome e algum meio para se comunicar com a pessoa responsável ao cargo, para que possamos confirmar sua participação nesse cargo
+            '''
+        }
+
         widgets = {
             "veiculo_de_comunicacao": forms.Select(
                 attrs={
