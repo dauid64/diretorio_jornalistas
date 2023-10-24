@@ -52,7 +52,6 @@ INSTALLED_APPS = [
     'opcoes',
     'revisores',
     'associacoes',
-    'smart_selects'
 ]
 
 MIDDLEWARE = [

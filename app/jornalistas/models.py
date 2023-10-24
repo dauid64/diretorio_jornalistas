@@ -17,22 +17,10 @@ class Jornalista(models.Model):
     nome_de_guerra = models.CharField(max_length=50)
     nome = models.CharField(max_length=255)
     sobrenome = models.CharField(max_length=255)
-    associacao = models.ForeignKey(Associacao,on_delete=models.DO_NOTHING)
+    associacao = models.ForeignKey(Associacao, on_delete=models.DO_NOTHING)
     cpf = models.CharField(max_length=14)
     data_de_nascimento = models.DateField()
     telefone = models.CharField(max_length=50)
-    estado = models.ForeignKey(Estados, on_delete=models.DO_NOTHING, blank=True, null=True)
-    cidade = ChainedForeignKey(
-        Cidades,
-        chained_field='estado',
-        chained_model_field='estado',
-        show_all=False,
-        auto_choose=False,
-        sort=False,
-        on_delete=models.DO_NOTHING,
-        blank=True,
-        null=True
-    )
     genero = models.ForeignKey(Genero, on_delete=models.DO_NOTHING)
     estado_civil = models.ForeignKey(EstadoCivil, on_delete=models.DO_NOTHING)
     foto = models.ImageField(null=True, blank=True)

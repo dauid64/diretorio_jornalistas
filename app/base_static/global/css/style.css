@@ -225,13 +225,24 @@ footer {
     background-color: #f4f4f4 ;
 }
 
-.page-link {
+.active>.page-link {
+    cursor: pointer;
     background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.page-link {
+    cursor: pointer;
+    background-color: #ffffff;
+    border-color: #ffffff;
+    color: var(--primary);
+}
+
+.active>.page-link:hover {
     color: #ffffff;
 }
 
 .page-link:hover {
-    background-color: #ffffff;
     color: var(--primary);
 }
 

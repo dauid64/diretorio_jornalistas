@@ -1,24 +1,15 @@
 <nav aria-label="Page navigation" class="navigation-jornalistas">
     <ul class="pagination justify-content-center pagination-jornalista">
-    {% if page_obj.has_previous %}
-    <li class="page-item">
-        <a class="page-link" href="{% url 'jornalistas:home' %}?page={{ page_obj.previous_page_number }}{{ additional_url_query }}" tabindex="-1">Anterior</a>
-    </li>
-    {% else %}
-    <li class="page-item disabled">
-        <a class="page-link" href="" tabindex="-1">Anterior</a>
-    </li>
-    {% endif %}
-    <li class="page-item"><a class="page-link" href="">{{ page_obj.start_index }}</a></li>
-    
-    {% if page_obj.has_next %}
-    <li class="page-item">
-        <a class="page-link" href="{% url 'jornalistas:home' %}?page={{ page_obj.next_page_number }}{{ additional_url_query }}">Próximo</a>
-    </li>
-    {% else %}
-    <li class="page-item disabled">
-        <a class="page-link" href="#">Próximo</a>
-    </li>
-    {% endif %}
+        {% for i in pagination_range %}
+            {% if page_obj.number == i %}
+                <li class="page-item active"><a class="page-link">{{ i }}</a></li>
+            {% else %}
+                {% if  i == paginator.ELLIPSIS %}
+                    <li class="page-item"><a class="page-link">{{ i }}</a></li>
+                {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{ i }}{{ additional_url_query }}">{{ i }}</a></li>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
     </ul>
 </nav>

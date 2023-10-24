@@ -50,9 +50,9 @@
     </div>
 
     {% csrf_token %}
-    {% if page_obj %}
+    {% if jornalistas %}
     <div class="jornaListas">
-        {% for j in page_obj %}
+        {% for j in jornalistas %}
             <a style="border: none; display: flex; width: fit-content; background-color: transparent;" href="{% url 'jornalistas:perfil' j.id %} ">
                 <div class="image-pessoa" style="border: none;">
                     <img
@@ -69,7 +69,7 @@
             </a>
         {% endfor %}
     </div>
-    {% include "global/partials/pagination.html" %}
+    {% include "global/partials/pagination.html" with page_obj=jornalistas %}
     {% endif %}
 
 </main>
