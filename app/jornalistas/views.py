@@ -1,9 +1,9 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.forms import inlineformset_factory
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.views.generic import View, ListView
+from django.views.generic import View, ListView, DetailView
 from .models import HistoricoProfissional, Jornalista
 from .forms import HistoricoForm, JornalistaForm
 from opcoes.forms import RedesSociaisForm
@@ -192,23 +192,7 @@ class CadastroJornalistaView(View):
         )
 
 
-class PerfilUserView(View):
-    def get(self, request, id):
-        jornalista = get_object_or_404(
-            Jornalista.objects.select_related(
-                'associacao',
-                'estado',
-                'cidade'
-            ),
-            id=id
-        )
-        redes_sociais = RedesSociais.objects.filter(jornalista=jornalista).select_related('tipo_de_rede_social')
-        if request.user != jornalista.usuario:
-            return render(
-                request,
-                'jornalistas/pages/perfil.html',
-                context={
-                    'jornalista': jornalista,
-                    'redes_sociais': redes_sociais
-                }
-            )
+class PerfilJornalistaView(DetailView):
+    model = Jornalista
+    template_name = 'jornalistas/pages/perfil.html'
+    context_object_name = 'jornalista'

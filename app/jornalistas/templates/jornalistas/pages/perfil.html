@@ -65,12 +65,14 @@
           <h2 class="subtitulo">Redes Sociais</h2>
           <div class="row">
             <div class="col-md-6">
-              {% for r in redes_sociais %}
+              {% for rede_social in jornalista.redessociais_set.all %}
                 {% if forloop.counter == 4 %}
                 </div>
                   <div class="col-md-6">
                 {% endif %}
-                <p class="perfil-texto"><strong>{{ r.tipo_de_rede_social.descricao }}: </strong>{{ r.link }}</p>
+                <p class="perfil-texto"><strong>{{ rede_social.tipo_de_rede_social.descricao }}: </strong>{{ rede_social.link }}</p>
+              {% empty %}
+                <p class="perfil-text"><strong>Nenhuma rede social cadastrada.</strong></p>
               {% endfor %}
             </div>
           </div>
@@ -121,6 +123,8 @@
                 </div>
             </div>
         </div>
+        {% empty %}
+          <p class="perfil-text"><strong>Nenhum Histórico cadastrado</strong></p>
         {% endfor %}
           
           <div class="separador"></div> 

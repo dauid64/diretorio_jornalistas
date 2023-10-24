@@ -17,8 +17,8 @@ urlpatterns = [
         name='cadastrar'
     ),
     path(
-        'perfil/<int:id>',
-        views.PerfilUserView.as_view(),
+        'perfil/<int:pk>',
+        views.PerfilJornalistaView.as_view(),
         name='perfil'
     )
 ]
