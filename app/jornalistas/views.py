@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.forms import inlineformset_factory
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.db.models import Prefetch
 from django.views.generic import View, ListView, DetailView
 from .models import HistoricoProfissional, Jornalista
 from .forms import HistoricoForm, JornalistaForm
@@ -30,8 +31,7 @@ class HomeView(ListView):
         nome = GET.get('nome', None)
 
         if inicial:
-            qs = Jornalista.objects.aprovados().select_related(
-                'associacao').filter(
+            qs = Jornalista.objects.aprovados().filter(
                     nome_de_guerra__istartswith=inicial
                 ).order_by('-id')
         if nome:
@@ -99,6 +99,7 @@ class CadastroJornalistaView(View):
 
     def post(self, request):
         POST = request.POST
+        print(POST)
         request.session['register_jornalist_data'] = POST
         if Jornalista.objects.filter(usuario=request.user).exists():
             messages.warning(request, 'Você já está cadastrado')
@@ -122,6 +123,7 @@ class CadastroJornalistaView(View):
             jornalista = jornalista_form.save(commit=False)
             jornalista.usuario = request.user
             jornalista.save()
+            jornalista_form.save_m2m()
             historico_forms.instance = jornalista
             historico_forms.save()
             redes_sociais_list = []
@@ -178,11 +180,11 @@ class CadastroJornalistaView(View):
                             )
             RedesSociais.objects.bulk_create(redes_sociais_list)
             is_revisor = POST.get('is_revisor')
-            if is_revisor == 'Sim':
-                Revisor.objects.create(
-                    usuario=request.user,
-                    associacao=jornalista_form.cleaned_data['associacao']
+            if is_revisor == 'on':
+                revisor = Revisor.objects.create(
+                    usuario=request.user
                 )
+                revisor.associacoes.add(*jornalista_form.cleaned_data['associacoes'])
             del (request.session['register_jornalist_data'])
             return redirect(
                 reverse("jornalistas:home")

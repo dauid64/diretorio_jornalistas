@@ -46,7 +46,7 @@
 
         <p class="alert alert-warning">Não serão divulgados dados sensíveis passados neste formulário, conforme a LGPD.</p>
   
-        <form method="POST" action="" class="form-cadastro" enctype='multipart/form-data'>
+        <form method="POST" action="" class="form-cadastro" enctype='multipart/form-data' id='form_jornalista'>
           {% csrf_token %}
 
         <div class="card card-jornalista w-75">
@@ -88,12 +88,12 @@
           {{ historico_forms.management_form }}
           
           <div class="separador"> </div> 
-        
+          <input type="hidden" id='is_revisor' name='is_revisor'>
           
           <div class="butoes">
             <button class="btn-secondary btn" type="button">Cancelar</button>
   
-            <button class="btn-primary btn" type="button" data-bs-toggle="modal" data-bs-target="#revisor-modal">
+            <button class="btn-primary btn" type="button" onclick='querSerRevisor()'>
               Salvar
             </button>
           </div>
@@ -102,36 +102,21 @@
 
         </div>
       </div>
-      <!-- Modal Revisor -->
-      <div class="modal fade" id="revisor-modal" tabindex="-1" aria-labelledby="revisor-modal" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Olá jornalista! seu cadastro já está quase finalizado. 
-              Gostariamos de saber se você tem interesse em se tornar um revisor do DPJB para 
-              ajudar na analise de informações cadastradas no site, caso for aprovado.
-            </div>
-            <div class="modal-footer justify-content-around">
-              <input type="hidden" id='is_revisor' name='is_revisor'>
-              <button id="btnNo" type="submit" class="btn btn-secondary">Não</button>
-              <button id="btnYes" type="submit" class="btn btn-primary">Sim</button> 
-            </div>
-          </div>
-        </div>
-      </div>
     </form>
   </body>
 </main>
 {% endblock content %}
 
 {% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="{% static 'global/js/jquery.mask.min.js' %}"></script>
 <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
 <script src="{% static 'jornalistas/js/cadastro_mask.js' %}"></script>
 <script src="{% static 'global/js/jquery.formset.js' %}"></script>
+<script src="{% static 'jornalistas/js/alert_revisor.js' %}"></script>
+<script>
+  $(".select2").select2()
+</script>
 <script type="text/javascript">
   $(function() {
       $('.historico-form').formset({
@@ -185,31 +170,6 @@
       }
     });
   });
-</script>
-<script>
-  btnYes = document.getElementById('btnYes');
-  btnNo = document.getElementById('btnNo');
-  inputIsRevisor = document.getElementById('is_revisor');
-
-  btnYes.addEventListener("click", function () {
-    inputIsRevisor.value = 'Sim';
-  })
-  btnNo.addEventListener("click", function () {
-    inputIsRevisor.value = 'Não';
-  })
-</script>
-<script>
-  const selectEstados = document.getElementById("id_estado");
-  const selectCidades = document.getElementById("id_cidade");
-
-  selectEstados.addEventListener("change", function() {
-    if (selectEstados.selectedIndex === 0) {
-      selectCidades.setAttribute("disabled", "disabled");
-    } else {
-      selectCidades.removeAttribute("disabled");
-    }
-  })
-
 </script>
 {% endblock scripts %}
 

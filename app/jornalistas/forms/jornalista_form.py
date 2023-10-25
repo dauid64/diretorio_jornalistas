@@ -1,6 +1,5 @@
 from django import forms
 from jornalistas.models import Jornalista
-from associacoes.models import Associacao
 
 
 class JornalistaForm(forms.ModelForm):
@@ -10,7 +9,7 @@ class JornalistaForm(forms.ModelForm):
     class Meta:
         model = Jornalista
         fields = [
-            'associacao',
+            'associacoes',
             'nome_de_guerra',
             'nome',
             'sobrenome',
@@ -24,9 +23,9 @@ class JornalistaForm(forms.ModelForm):
         ]
 
         widgets = {
-            'associacao': forms.Select(
+            'associacoes': forms.SelectMultiple(
                 attrs={
-                    'class': 'form-control'
+                    'class': 'select2 form-control'
                 }
             ),
             'nome_de_guerra': forms.TextInput(

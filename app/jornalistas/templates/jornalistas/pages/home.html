@@ -52,8 +52,8 @@
     {% csrf_token %}
     {% if jornalistas %}
     <div class="jornaListas">
-        {% for j in jornalistas %}
-            <a style="border: none; display: flex; width: fit-content; background-color: transparent;" href="{% url 'jornalistas:perfil' j.id %} ">
+        {% for jornalista in jornalistas %}
+            <a style="border: none; display: flex; width: fit-content; background-color: transparent;" href="{% url 'jornalistas:perfil' jornalista.id %} ">
                 <div class="image-pessoa" style="border: none;">
                     <img
                         src="{% static 'jornalistas/img/perfil.png' %}"
@@ -63,8 +63,7 @@
                     />
                 </div>
                 <div class="card">
-                    <h5>{{ j.nome_de_guerra }}</h5>
-                    <span><b >Associação: </b>{{ j.associacao }}</span>
+                    <h5>{{ jornalista.nome_de_guerra }}</h5>
                 </div>
             </a>
         {% endfor %}
