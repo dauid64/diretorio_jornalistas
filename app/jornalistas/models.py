@@ -1,10 +1,7 @@
 from django.db import models
-from django.db import models
 from django.contrib.auth.models import User
 from associacoes.models import Associacao
-from opcoes.models import Cidades, Estados, Genero, EstadoCivil, VeiculoDeComunicacao
-from smart_selects.db_fields import ChainedForeignKey
-from obras.models import ObraJornalistica
+from opcoes.models import Genero, EstadoCivil, VeiculoDeComunicacao
 
 
 class JornalistasManager(models.Manager):
@@ -33,6 +30,7 @@ class Jornalista(models.Model):
 
     objects = JornalistasManager()
 
+    @property
     def is_aprovado(self):
         if self.aprovado is True:
             return True

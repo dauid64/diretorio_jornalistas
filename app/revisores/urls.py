@@ -15,9 +15,9 @@ urlpatterns = [
         name='aprovar'
     ),
     path(
-        'analise/jornalistas/rejeitar/<int:id>',
+        'analise/jornalistas/reprovar/<int:id>',
         views.RevisorReprovarView.as_view(),
-        name='rejeitar'
+        name='reprovar'
     ),
     path(
         'analise/jornalistas/perfil/<int:id>',

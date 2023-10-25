@@ -4,6 +4,9 @@
         <ul class="nav justify-content-end">
             <li class="nav-item line"><a class="nav-link" href="#">Sobre</a></li>
             <li class="nav-item"><a class="nav-link" href="#">Contato</a></li>
+        {% if user.revisor %}
+            <li class="nav-item"><a class="nav-link" href="{% url 'revisores:analise_jornalistas' %}">Revisar</a></li>
+        {% endif %}
         {% if user.is_authenticated %}
             <li class="nav-item"><a class="nav-link" href=""><i class="fa fa-user mr-2"></i>Perfil</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'autenticacao:logout' %}"><i class="fa fa-sign-out mr-2"></i>Sair</a></li>

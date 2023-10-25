@@ -10,11 +10,5 @@ class Revisor(models.Model):
     criado_em = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateTimeField(auto_now=True)
 
-    def aprovado(self):
-        jornalista = Jornalista.objects.filter(usuario=self.usuario).first()
-        if jornalista.aprovado is True:
-            return True
-        return False
-
     def __str__(self):
         return '{} - {}'.format(self.usuario, self.associacao)

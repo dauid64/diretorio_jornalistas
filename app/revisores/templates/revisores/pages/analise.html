@@ -10,11 +10,10 @@
 {% endblock styles %}
 
 {% block content %}
-{% if page_obj %}
 <main class="main-content">
     <div class="jornaListas">
-        {% for j in page_obj %}
-        <a style="display: flex;" href="{% url 'revisores:analise_jornalista_perfil' j.id %}">
+        {% for jornalista in jornalistas %}
+        <div class="d-flex" id='jornalista_{{ jornalista.id }}'>
             <div class="image-pessoa" style="border: none;">
                 <img
                     src="{% static 'jornalistas/img/perfil.png' %}"
@@ -24,7 +23,7 @@
                 />
             </div>
             <div class="card">
-                <h5>{{ j.nome_de_guerra }}</h5>
+                <h5>{{ jornalista.nome_de_guerra }}</h5>
                 <div class="dados-card">
                     <div class="dados-card-content">
                         <div class="dados">
@@ -37,11 +36,11 @@
                         </div>
                         <div class="dados">
                             <div class="circ-p"> </div>
-                            <span>Registro: {{ j.registro }}</span>
+                            <span>Registro: {{ jornalista.registro }}</span>
                         </div>
                         <div class="dados">
                             <div class="circ-p"> </div>
-                            <span>Email: {{ j.usuario.email }}</span>
+                            <span>Email: {{ jornalista.usuario.email }}</span>
                         </div>
                         <h2 class="subtitulo">Nome da Referência</h2>
                         <div class="dados">
@@ -67,24 +66,27 @@
                             <span>Telegram:</span>
                         </div>
                         <div class="card-butoes" style="display: flex; gap: 2rem;">
-                            <form action="{% url 'revisores:aprovar' j.id %}" method="POST">
+                            <form id='form_aprovar'>
                                 {% csrf_token %}
-                                <button class="btn btn-primary">Aprovar</button>
+                                <button class="btn btn-primary" type='button' onclick='aprovarJornalista("{% url "revisores:aprovar" jornalista.id %}")'>Aprovar</button>
                             </form>
-                            <form action="{% url 'revisores:rejeitar' j.id %}" method="POST">
+                            <form id='form_reprovar'>
                                 {% csrf_token %}
-                                <button class="btn btn-secondary">Rejeitar</button>
+                                <button class="btn btn-secondary" type='button' onclick='reprovarJornalista("{% url "revisores:reprovar" jornalista.id %}")'>Reprovar</button>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-        </a>
+        </div>
+        {% empty%}
+            <h3>Nenhum jornalista para analise</h3>
         {% endfor %}
     </div>
-    {% include "global/partials/pagination.html" %}
+    {% include "global/partials/pagination.html" with page_obj=jornalistas %}
 </main>
-{% endif %}
 {% endblock content %}
 
-{% block scripts %}{% endblock scripts %}
+{% block scripts %}
+    <script src="{% static 'revisores/js/operacao_revisores.js' %}"></script>
+{% endblock scripts %}
