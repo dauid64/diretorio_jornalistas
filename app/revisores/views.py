@@ -19,12 +19,14 @@ PER_PAGE = int(os.getenv('PER_PAGE', 5))
     name='dispatch'
 )
 @method_decorator(
-    user_passes_test(revisor_required, login_url='jornalistas:home', redirect_field_name='next'),
+    user_passes_test(revisor_required, login_url='jornalistas:home',
+                     redirect_field_name='next'),
     name='dispatch'
 )
 class RevisorAnaliseView(ListView):
     model = Jornalista
-    queryset = Jornalista.objects.filter(revisor_responsavel=None).select_related('usuario').order_by('-id')
+    queryset = Jornalista.objects.filter(
+        revisor_responsavel=None).select_related('usuario').order_by('-id')
     template_name = 'revisores/pages/analise.html'
     context_object_name = 'jornalistas'
 
@@ -42,68 +44,67 @@ class RevisorAnaliseView(ListView):
         return ctx
 
 
-@method_decorator(login_required, name='dispatch')
+@method_decorator(
+    login_required(login_url='autenticacao:login', redirect_field_name='next'),
+    name='dispatch'
+)
+@method_decorator(
+    user_passes_test(revisor_required, login_url='jornalistas:home',
+                     redirect_field_name='next'),
+    name='dispatch'
+)
 class RevisorAprovarView(View):
     def post(self, *args, **kwargs):
-        msg = ''
-        status = 200
         id = kwargs['id']
-        try:
-            jornalista = Jornalista.objects.get(id=id)
-            revisor_responsavel = Revisor.objects.get(usuario=self.request.user)
-        except Jornalista.DoesNotExist:
-            msg = 'Você não é um jornalista cadastrado.'
-            status = 404
-        except Revisor.DoesNotExist:
-            msg = 'Você não tem autorização para realizar essa ação.'
-            status = 404
-        else:
-            jornalista.aprovado = True
-            jornalista.revisor_responsavel = revisor_responsavel
-            jornalista.save()
-            msg = 'Jornalista aprovado com sucesso!'
+        jornalista = Jornalista.objects.get(id=id)
+        revisor_responsavel = Revisor.objects.get(usuario=self.request.user)
+        jornalista.aprovado = True
+        jornalista.revisor_responsavel = revisor_responsavel
+        jornalista.save()
+        msg = 'Jornalista aprovado com sucesso!'
+
         return JsonResponse(
             data={
                 'id': id,
-                'message': msg,
-                'status': status
+                'message': msg
             }
         )
 
 
-@method_decorator(login_required, name='dispatch')
+@method_decorator(
+    login_required(login_url='autenticacao:login', redirect_field_name='next'),
+    name='dispatch'
+)
+@method_decorator(
+    user_passes_test(revisor_required, login_url='jornalistas:home',
+                     redirect_field_name='next'),
+    name='dispatch'
+)
 class RevisorReprovarView(View):
     def post(self, *args, **kwargs):
-        msg = ''
-        status = 200
         id = kwargs['id']
+        jornalista = Jornalista.objects.get(id=id)
+        revisor_responsavel = Revisor.objects.get(usuario=self.request.user)
+        jornalista.aprovado = False
+        jornalista.revisor_responsavel = revisor_responsavel
+        jornalista.save()
+        msg = 'Jornalista reprovado com sucesso!'
 
-        try:
-            jornalista = Jornalista.objects.get(id=id)
-            revisor_responsavel = Revisor.objects.get(usuario=self.request.user)
-        except Jornalista.DoesNotExist:
-            msg = 'Você não é um jornalista cadastrado.'
-            status = 404
-        except Revisor.DoesNotExist:
-            msg = 'Você não tem autorização para realizar essa ação.'
-            status = 404
-        else:
-            jornalista.aprovado = False
-            jornalista.revisor_responsavel = revisor_responsavel
-            jornalista.save()
-            msg = 'Jornalista reprovado com sucesso!'
         return JsonResponse(
             data={
                 'id': id,
-                'message': msg,
-                'status': status
+                'message': msg
             }
         )
 
 
-@method_decorator(login_required, name='dispatch')
 @method_decorator(
-    user_passes_test(revisor_required, login_url='jornalistas:home', redirect_field_name='next'),
+    login_required(login_url='autenticacao:login', redirect_field_name='next'),
+    name='dispatch'
+)
+@method_decorator(
+    user_passes_test(revisor_required, login_url='jornalistas:home',
+                     redirect_field_name='next'),
     name='dispatch'
 )
 class RevisorAnalisePerfilView(View):
@@ -114,7 +115,8 @@ class RevisorAnalisePerfilView(View):
             ),
             id=id
         )
-        redes_sociais = RedesSociais.objects.filter(jornalista=jornalista).select_related('tipo_de_rede_social')
+        redes_sociais = RedesSociais.objects.filter(
+            jornalista=jornalista).select_related('tipo_de_rede_social')
         return render(
             request,
             'revisores/pages/analise_perfil.html',

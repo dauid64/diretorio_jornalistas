@@ -8,7 +8,6 @@ function aprovarJornalista(url) {
             csrfmiddlewaretoken: token,
         },
         success: function(result) {
-            if (result.status == 200) {
                 divJornalista = document.getElementById('jornalista_' + result.id)
                 divJornalista.className = ''
                 divJornalista.style.display = 'none'
@@ -19,16 +18,6 @@ function aprovarJornalista(url) {
                     showConfirmButton: false,
                     timer: 1500
                 })
-            } else {
-                console.log('error')
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'error',
-                    title: result.message,
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            }
         }
     })
 }
@@ -43,27 +32,16 @@ function reprovarJornalista(url) {
             csrfmiddlewaretoken: token,
         },
         success: function(result) {
-            if (result.status == 200) {
-                divJornalista = document.getElementById('jornalista_' + result.id)
-                divJornalista.className = ''
-                divJornalista.style.display = 'none'
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: result.message,
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            } else {
-                console.log('error')
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'error',
-                    title: result.message,
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            }
+            divJornalista = document.getElementById('jornalista_' + result.id)
+            divJornalista.className = ''
+            divJornalista.style.display = 'none'
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: result.message,
+                showConfirmButton: false,
+                timer: 1500
+            })
         }
     })
 }
