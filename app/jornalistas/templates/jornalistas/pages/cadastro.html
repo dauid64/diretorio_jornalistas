@@ -132,18 +132,18 @@
           const checkbox = document.getElementById(`id_historico-${numberFormActual}-cargo_atual`);
           // Verifica o estado do checkbox imediatamente na carga da página
           if (checkbox.checked) {
-            $(`#id_historico-${numberFormActual}-data_de_termino`).prop("disabled", true);
+            $(`#id_historico-${numberFormActual}-data_termino`).prop("disabled", true);
           } else {
-            $(`#id_historico-${numberFormActual}-data_de_termino`).prop("disabled", false);
+            $(`#id_historico-${numberFormActual}-data_termino`).prop("disabled", false);
           }
           $(`#id_historico-${numberFormActual}-cargo_atual`).change(function() {
             // Verifica se a caixa de seleção está marcada
             if ($(this).is(":checked")) {
                 // Se marcado, desabilite o campo de entrada
-                $(`#id_historico-${numberFormActual}-data_de_termino`).prop("disabled", true);
+                $(`#id_historico-${numberFormActual}-data_termino`).prop("disabled", true);
             } else {
                 // Se não marcado, habilite o campo de entrada
-                $(`#id_historico-${numberFormActual}-data_de_termino`).prop("disabled", false);
+                $(`#id_historico-${numberFormActual}-data_termino`).prop("disabled", false);
             }
         });
         }
@@ -156,17 +156,17 @@
     const checkbox = document.getElementById("id_historico-0-cargo_atual");
     // Verifica o estado do checkbox imediatamente na carga da página
     if (checkbox.checked) {
-      $("#id_historico-0-data_de_termino").prop("disabled", true);
+      $("#id_historico-0-data_termino").prop("disabled", true);
     } else {
-      $("#id_historico-0-data_de_termino").prop("disabled", false);
+      $("#id_historico-0-data_termino").prop("disabled", false);
     }
     $('#id_historico-0-cargo_atual').change(function() {
       if ($(this).is(":checked")) {
         // Se marcado, desabilite o campo de entrada
-        $("#id_historico-0-data_de_termino").prop("disabled", true);
+        $("#id_historico-0-data_termino").prop("disabled", true);
       } else {
         // Se não marcado, habilite o campo de entrada
-        $("#id_historico-0-data_de_termino").prop("disabled", false);
+        $("#id_historico-0-data_termino").prop("disabled", false);
       }
     });
   });

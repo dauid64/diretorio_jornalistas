@@ -99,7 +99,6 @@ class CadastroJornalistaView(View):
 
     def post(self, request):
         POST = request.POST
-        print(POST)
         request.session['register_jornalist_data'] = POST
         if Jornalista.objects.filter(usuario=request.user).exists():
             messages.warning(request, 'Você já está cadastrado')

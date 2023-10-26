@@ -41,10 +41,10 @@
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <label for="{{ his_form.data_de_termino.id_for_label }}" class="form-label">{{ his_form.data_de_termino.label }}</label>
-          {{ his_form.data_de_termino }}
-          {% if his_form.data_de_termino.errors %}
-            {% for error in his_form.data_de_termino.errors %}
+          <label for="{{ his_form.data_termino.id_for_label }}" class="form-label">{{ his_form.data_termino.label }}</label>
+          {{ his_form.data_termino }}
+          {% if his_form.data_termino.errors %}
+            {% for error in his_form.data_termino.errors %}
               <div class="alert alert-danger"> {{ error }}</div>
             {% endfor %}
           {% endif %}

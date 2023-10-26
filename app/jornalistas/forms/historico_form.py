@@ -21,7 +21,7 @@ class HistoricoForm(forms.ModelForm):
             "veiculo_de_comunicacao": "Veículo de comunicação",
             "cargo": "Cargo",
             "data_inicio": "Data de Início",
-            "data_de_termino": "Data de Termino",
+            "data_termino": "Data de Termino",
             "referencia": "Referência",
             "contato_da_referencia": "Contato de Referência",
             "descricao": "Descrição",
@@ -58,7 +58,7 @@ class HistoricoForm(forms.ModelForm):
                 },
                 format='%d/%m/%Y'
             ),
-            "data_de_termino": forms.DateInput(
+            "data_termino": forms.DateInput(
                 attrs={
                     "class": "form-control",
                     "placeholder": "Data de Encerramento",
@@ -84,9 +84,14 @@ class HistoricoForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super().clean()
         cargo_atual = cleaned_data.get('cargo_atual', False)
-        data_de_termino = cleaned_data.get('data_de_termino', None)
-        if cargo_atual is False and data_de_termino is None:
+        data_termino = cleaned_data.get('data_termino', None)
+        data_inicio = cleaned_data.get('data_inicio', None)
+        if cargo_atual is False and data_termino is None:
             raise ValidationError({
-                "data_de_termino": "Marque a opção cargo atual ou insira uma data final do cargo"
+                "data_termino": "Marque a opção cargo atual ou insira uma data final do cargo"
+            })
+        if data_termino is not None and data_inicio > data_termino:
+            raise ValidationError({
+                'data_termino': 'A data final não pode ser menor que a data de inicio'
             })
         return cleaned_data
