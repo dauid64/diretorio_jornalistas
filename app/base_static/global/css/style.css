@@ -274,9 +274,9 @@ footer {
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
-    color: #f46026;
+    color: var(--primary);
     background-color: #ffffff; 
-    border: 1px solid #f46026;
+    border: 1px solid var(--primary);
     border-radius: 9px;
 
     display: flex;
@@ -303,4 +303,18 @@ footer {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+}
+
+.btn:focus-visible {
+    color: var(--bs-btn-hover-color);
+    background-color: var(--primary);
+    border-color: var(--primary);
+    outline: 0;
+    box-shadow: var(--bs-btn-focus-box-shadow);
+}
+
+.btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
+    color: var(--primary);
+    background-color: #ffffff;
+    border-color: var(--primary)
 }

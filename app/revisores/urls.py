@@ -20,7 +20,7 @@ urlpatterns = [
         name='reprovar'
     ),
     path(
-        'analise/jornalistas/perfil/<int:id>',
+        'analise/jornalistas/perfil/<int:pk>',
         views.RevisorAnalisePerfilView.as_view(),
         name='analise_jornalista_perfil'
     )

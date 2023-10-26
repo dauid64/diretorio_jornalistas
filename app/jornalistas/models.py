@@ -35,6 +35,12 @@ class Jornalista(models.Model):
         if self.aprovado is True:
             return True
         return False
+    
+    @property
+    def is_want_revisor(self):
+        if self.usuario.revisor:
+            return True
+        return False
 
     def __str__(self):
         return '{}'.format(self.nome_de_guerra)

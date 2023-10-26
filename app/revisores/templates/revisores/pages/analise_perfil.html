@@ -53,7 +53,7 @@
         <div class="row">
             <div class="col-md-6">
                 <p class="perfil-texto"><strong>Nome de guerra: </strong>{{ jornalista.nome_de_guerra }}</p>
-                <p class="perfil-texto"><strong>Associação: </strong>{{ jornalista.associacao.nome_fantasia }}</p>
+                <p class="perfil-texto"><strong>Associação: </strong>{{ jornalista.associacoes.all|join:", "}}</p>
             </div>
             <div class="col-md-6">
                 <p class="perfil-texto"><strong>Nome Completo: </strong>{{ jornalista.nome }} {{ jornalista.sobrenome }}</p>
@@ -65,12 +65,12 @@
         <h2 class="subtitulo">Redes Sociais</h2>
         <div class="row">
             <div class="col-md-6">
-            {% for r in redes_sociais %}
+            {% for rede_social in jornalista.redessociais_set.all %}
                 {% if forloop.counter == 4 %}
                 </div>
                 <div class="col-md-6">
                 {% endif %}
-                <p class="perfil-texto"><strong>{{ r.tipo_de_rede_social.descricao }}: </strong>{{ r.link }}</p>
+                <p class="perfil-texto"><strong>{{ rede_social.tipo_de_rede_social.descricao }}: </strong>{{ rede_social.link }}</p>
             {% endfor %}
             </div>
         </div>
@@ -112,6 +112,15 @@
                     {% else %}
                     Cargo Atual
                     {% endif %}
+                </p>
+                </div>
+            </div>
+            <div class="row gy-2 gx-3">
+                <div class="col-md-6">
+                    <p class="perfil-texto"><strong>Referência: </strong>{{ h.referencia }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p class="perfil-texto"><strong>Contato de Referência: </strong>{{ h.contato_da_referencia }}</p>
                 </p>
                 </div>
             </div>

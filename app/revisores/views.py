@@ -1,11 +1,13 @@
 from typing import Any
+from django.db import models
 from django.shortcuts import render, get_object_or_404
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required, user_passes_test
 from utils.decorators import revisor_required
-from django.views.generic import View, ListView
-from jornalistas.models import Jornalista
+from django.views.generic import View, ListView, DetailView
+from jornalistas.models import Jornalista, HistoricoProfissional
 from opcoes.models import RedesSociais
+from django.db.models import Prefetch
 from django.core.paginator import Paginator
 from revisores.models import Revisor
 from django.http import JsonResponse
@@ -26,7 +28,8 @@ PER_PAGE = int(os.getenv('PER_PAGE', 5))
 class RevisorAnaliseView(ListView):
     model = Jornalista
     queryset = Jornalista.objects.filter(
-        revisor_responsavel=None).select_related('usuario').order_by('-id')
+        revisor_responsavel=None).select_related(
+        'usuario').prefetch_related('associacoes').order_by('-id')
     template_name = 'revisores/pages/analise.html'
     context_object_name = 'jornalistas'
 
@@ -107,21 +110,24 @@ class RevisorReprovarView(View):
                      redirect_field_name='next'),
     name='dispatch'
 )
-class RevisorAnalisePerfilView(View):
-    def get(self, request, id):
-        jornalista = get_object_or_404(
-            Jornalista.objects.select_related(
-                'associacao',
+class RevisorAnalisePerfilView(DetailView):
+    model = Jornalista
+    context_object_name = 'jornalista'
+    template_name = 'revisores/pages/analise_perfil.html'
+
+    def get_queryset(self):
+        qs = super().get_queryset().prefetch_related(
+            Prefetch(
+                'redessociais_set',
+                queryset=RedesSociais.objects.all().select_related(
+                    'tipo_de_rede_social'
+                )
             ),
-            id=id
+            Prefetch(
+                'historicoprofissional_set',
+                HistoricoProfissional.objects.all().select_related(
+                    'veiculo_de_comunicacao'
+                )
+            )
         )
-        redes_sociais = RedesSociais.objects.filter(
-            jornalista=jornalista).select_related('tipo_de_rede_social')
-        return render(
-            request,
-            'revisores/pages/analise_perfil.html',
-            context={
-                'jornalista': jornalista,
-                'redes_sociais': redes_sociais
-            }
-        )
+        return qs
