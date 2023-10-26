@@ -64,6 +64,11 @@
                 </div>
                 <div class="card">
                     <h5>{{ jornalista.nome_de_guerra }}</h5>
+                    <div class="row">
+                        <div class="col">
+                            <span><strong>Associações: </strong>{{ jornalista.associacoes.all|join:", "}}</span>
+                        </div>
+                    </div>
                 </div>
             </a>
         {% endfor %}

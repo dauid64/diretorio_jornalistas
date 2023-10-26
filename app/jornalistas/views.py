@@ -35,8 +35,7 @@ class HomeView(ListView):
                     nome_de_guerra__istartswith=inicial
                 ).order_by('-id')
         if nome:
-            qs = Jornalista.objects.aprovados().select_related(
-                'associacao').filter(
+            qs = Jornalista.objects.aprovados().filter(
                     nome_de_guerra__icontains=nome
                 ).order_by('-id')
 

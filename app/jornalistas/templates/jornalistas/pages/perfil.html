@@ -53,7 +53,7 @@
           <div class="row">
             <div class="col-md-6">
                 <p class="perfil-texto"><strong>Nome de guerra: </strong>{{ jornalista.nome_de_guerra }}</p>
-                <p class="perfil-texto"><strong>Associação: </strong>{{ jornalista.associacao.nome_fantasia }}</p>
+                <p class="perfil-texto"><strong>Associações: </strong>{{ jornalista.associacoes.all|join:", "}}</p>
             </div>
             <div class="col-md-6">
                 <p class="perfil-texto"><strong>Nome Completo: </strong>{{ jornalista.nome }} {{ jornalista.sobrenome }}</p>
