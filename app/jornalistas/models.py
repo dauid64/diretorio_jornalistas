@@ -22,7 +22,7 @@ class Jornalista(models.Model):
     estado_civil = models.ForeignKey(EstadoCivil, on_delete=models.PROTECT)
     foto = models.ImageField(null=True, blank=True)
     registro = models.CharField(max_length=50)
-    diploma = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=None)
+    diploma = models.ImageField(upload_to='diplomas/%Y/%m/%d/')
     criado_em = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateTimeField(auto_now=True)
     aprovado = models.BooleanField(default=False)

@@ -59,7 +59,13 @@
     <div class="col-md-4">
       <div class="form-group">
         <p for="{{ jornalista_form.telefone.id_for_label }}" class="form-label" id="output">{{ jornalista_form.telefone.label }}<span class="required"> *</span></p>
+        <input type="tel" class="mask-phone-international form-control" id='telephone-base'>
         {{ jornalista_form.telefone }}
+        {% if jornalista_form.telefone.errors %}
+          {% for error in jornalista_form.telefone.errors %}
+            <div class="alert alert-danger"> {{ error }}</div>
+          {% endfor %}
+        {% endif %}
       </div>
       <div id="valid-msg" class="hide alert alert-success">✓ Valido</div>
       <div id="error-msg" class="hide alert alert-danger"></div>

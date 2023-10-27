@@ -1,6 +1,8 @@
 function querSerRevisor() {
     const form = document.getElementById('form_jornalista')
     const inputIsRevisor = document.getElementById('is_revisor')
+    const inputTelephone = document.getElementById('id_telefone')
+    inputTelephone.value = iti.getNumber()
 
     Swal.fire({
         title: 'Você gostaria de se tornar um revisor?',

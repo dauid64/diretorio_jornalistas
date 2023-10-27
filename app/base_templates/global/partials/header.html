@@ -8,7 +8,11 @@
             <li class="nav-item"><a class="nav-link" href="{% url 'revisores:analise_jornalistas' %}">Revisar</a></li>
         {% endif %}
         {% if user.is_authenticated %}
-            <li class="nav-item"><a class="nav-link" href=""><i class="fa fa-user mr-2"></i>Perfil</a></li>
+            {% if user.jornalista %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'jornalistas:editar' user.jornalista.id %}"><i class="fa fa-user mr-2"></i>Perfil</a></li>
+            {% else %}
+            <li class="nav-item"><a class="nav-link" href="{% url 'jornalistas:cadastrar' %}"><i class="fa fa-user mr-2"></i>Perfil</a></li>
+            {% endif %}
             <li class="nav-item"><a class="nav-link" href="{% url 'autenticacao:logout' %}"><i class="fa fa-sign-out mr-2"></i>Sair</a></li>
         {% else %}
             <li class="nav-item"><a class="nav-link" href="{% url 'autenticacao:login' %}"><i class="fa fa-sign-in mr-2"></i>Login</a></li>

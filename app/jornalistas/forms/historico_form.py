@@ -56,15 +56,14 @@ class HistoricoForm(forms.ModelForm):
                     "class": "form-control",
                     "type": "date"
                 },
-                format='%d/%m/%Y'
+                format='%Y-%m-%d'
             ),
             "data_termino": forms.DateInput(
                 attrs={
                     "class": "form-control",
-                    "placeholder": "Data de Encerramento",
                     "type": "date"
                 },
-                format='%d/%m/%Y'
+                format='%Y-%m-%d'
             ),
             "referencia": forms.TextInput(
                 attrs={

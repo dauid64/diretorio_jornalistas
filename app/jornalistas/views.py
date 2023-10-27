@@ -1,10 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.forms import inlineformset_factory
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.db.models import Prefetch
-from django.views.generic import View, ListView, DetailView
+from django.views.generic import View, ListView, DetailView, UpdateView
 from .models import HistoricoProfissional, Jornalista
 from .forms import HistoricoForm, JornalistaForm
 from opcoes.forms import RedesSociaisForm
@@ -64,14 +64,19 @@ class HomeView(ListView):
         return ctx
 
 
+class PerfilJornalistaView(DetailView):
+    model = Jornalista
+    template_name = 'jornalistas/pages/perfil.html'
+    context_object_name = 'jornalista'
+
+
 @method_decorator(
     login_required(login_url='autenticacao:login', redirect_field_name='next'),
     name="dispatch"
 )
 class CadastroJornalistaView(View):
     def get(self, request):
-        jornalist_form_data = request.session.get('register_jornalist_data', None)
-        jornalista_form = JornalistaForm(jornalist_form_data)
+        jornalista_form = JornalistaForm()
         historico_formset = inlineformset_factory(
             Jornalista,
             HistoricoProfissional,
@@ -79,13 +84,9 @@ class CadastroJornalistaView(View):
             extra=1
         )
         historico_forms = historico_formset(
-            jornalist_form_data,
             prefix='historico',
         )
-        redes_sociais_form = RedesSociaisForm(
-            jornalist_form_data
-        )
-
+        redes_sociais_form = RedesSociaisForm()
         return render(
             request,
             'jornalistas/pages/cadastro.html',
@@ -98,7 +99,6 @@ class CadastroJornalistaView(View):
 
     def post(self, request):
         POST = request.POST
-        request.session['register_jornalist_data'] = POST
         if Jornalista.objects.filter(usuario=request.user).exists():
             messages.warning(request, 'Você já está cadastrado')
             return redirect(
@@ -183,16 +183,52 @@ class CadastroJornalistaView(View):
                     usuario=request.user
                 )
                 revisor.associacoes.add(*jornalista_form.cleaned_data['associacoes'])
-            del (request.session['register_jornalist_data'])
             return redirect(
                 reverse("jornalistas:home")
             )
-        return redirect(
-            reverse("jornalistas:cadastrar")
+        return render(
+            request,
+            'jornalistas/pages/cadastro.html',
+            context={
+                'jornalista_form': jornalista_form,
+                'historico_forms': historico_forms,
+                'redes_sociais_form': redes_sociais_form
+            }
         )
 
 
-class PerfilJornalistaView(DetailView):
-    model = Jornalista
-    template_name = 'jornalistas/pages/perfil.html'
-    context_object_name = 'jornalista'
+@method_decorator(
+    login_required(login_url='autenticacao:login', redirect_field_name='next'),
+    name="dispatch"
+)
+class EditarJornalistaView(View):
+    def get(self, request, pk):
+        jornalista = get_object_or_404(Jornalista, pk=pk)
+        jornalista_logado = request.user.jornalista
+        if jornalista != jornalista_logado:
+            messages.warning(
+                request,
+                'Você não tem autorização para acessar essa página.'
+            )
+            return redirect(
+                reverse('jornalistas:home')
+            )
+        jornalista_form = JornalistaForm(instance=jornalista)
+        historico_formset = inlineformset_factory(
+            Jornalista,
+            HistoricoProfissional,
+            form=HistoricoForm,
+            extra=1
+        )
+        historico_forms = historico_formset(
+            instance=jornalista,
+            prefix='historico'
+        )
+        return render(
+            request,
+            'jornalistas/pages/editar.html',
+            context={
+                'jornalista_form': jornalista_form,
+                'historico_forms': historico_forms,
+            }
+        )

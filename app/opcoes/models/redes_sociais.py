@@ -15,4 +15,3 @@ class RedesSociais(models.Model):
 
     def __str__(self):
         return '{}'.format(self.tipo_de_rede_social)
-

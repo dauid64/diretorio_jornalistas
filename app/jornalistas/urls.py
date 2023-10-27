@@ -20,5 +20,10 @@ urlpatterns = [
         'perfil/<int:pk>',
         views.PerfilJornalistaView.as_view(),
         name='perfil'
+    ),
+    path(
+        'editar-perfil/<int:pk>',
+        views.EditarJornalistaView.as_view(),
+        name='editar'
     )
 ]

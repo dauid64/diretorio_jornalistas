@@ -53,10 +53,9 @@ class JornalistaForm(forms.ModelForm):
                     'required': 'True'
                 }
             ),
-            'telefone': forms.TextInput(
+            'telefone': forms.HiddenInput(
                 attrs={
-                    'class': 'form-control mask-phone-international',
-                    'type': 'tel',
+                    'class': 'form-control',
                 }
             ),
             'data_de_nascimento': forms.DateInput(
@@ -64,7 +63,7 @@ class JornalistaForm(forms.ModelForm):
                     'class': 'form-control',
                     'type': 'date',
                 },
-                format='%d/%m/%Y'
+                format='%Y-%m-%d'
             ),
             'genero': forms.Select(
                 attrs={
