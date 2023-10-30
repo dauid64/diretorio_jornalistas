@@ -157,7 +157,7 @@ footer {
     justify-content: start;
 }
 
-.jornaListas{
+.card-jornalista {
     width: 70%;
     justify-content: start;
     display: flex;
@@ -262,11 +262,7 @@ footer {
     background-color: #f46026;
     border: 1px solid #ffffff;
     border-radius: 9px;
-  
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+
 }
 
 .btn-secondary {
@@ -278,11 +274,17 @@ footer {
     background-color: #ffffff; 
     border: 1px solid var(--primary);
     border-radius: 9px;
+}
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+.btn-secondary:hover {
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+}
+
+.btn-primary:hover {
+    background-color: #ffffff !important;
+    border-color: var(--primary) !important;
+    color: var(--primary);
 }
 
 .btn-help {

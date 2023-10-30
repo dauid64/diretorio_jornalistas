@@ -2,21 +2,21 @@
     <div class="container">
         <span class="navbar-brand marca"><a a class="nav-link" href="/">Logomarca</a></span>
         <ul class="nav justify-content-end">
-            <li class="nav-item line"><a class="nav-link" href="#">Sobre</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Contato</a></li>
+            <li class="nav-item line"><a class="nav-link" href="{% url 'core:sobre' %}">Sobre</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'core:contato' %}">Contato</a></li>
         {% if user.revisor and user.jornalista.is_aprovado %}
             <li class="nav-item"><a class="nav-link" href="{% url 'revisores:analise_jornalistas' %}">Revisar</a></li>
         {% endif %}
         {% if user.is_authenticated %}
             {% if user.jornalista %}
-                <li class="nav-item"><a class="nav-link" href="{% url 'jornalistas:editar' user.jornalista.id %}"><i class="fa fa-user mr-2"></i>Perfil</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'jornalistas:editar' user.jornalista.id %}">Perfil</a></li>
             {% else %}
-            <li class="nav-item"><a class="nav-link" href="{% url 'jornalistas:cadastrar' %}"><i class="fa fa-user mr-2"></i>Perfil</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'jornalistas:cadastrar' %}">Perfil</a></li>
             {% endif %}
-            <li class="nav-item"><a class="nav-link" href="{% url 'autenticacao:logout' %}"><i class="fa fa-sign-out mr-2"></i>Sair</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'autenticacao:logout' %}">Sair</a></li>
         {% else %}
-            <li class="nav-item"><a class="nav-link" href="{% url 'autenticacao:login' %}"><i class="fa fa-sign-in mr-2"></i>Login</a></li>
-            <li class="nav-item"><a class="nav-link linha" href="{% url 'autenticacao:registrar' %}"><i class="fa fa-edit mr-2"></i>Registrar</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'autenticacao:login' %}">Login</a></li>
+            <li class="nav-item"><a class="nav-link linha" href="{% url 'autenticacao:registrar' %}">Registrar</a></li>
         {% endif %}
         </ul>
     </div>

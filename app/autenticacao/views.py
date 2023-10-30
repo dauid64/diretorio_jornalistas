@@ -63,7 +63,7 @@ class LoginUserView(View):
                 login(request, authenticated_user)
                 messages.success(request, 'Login realizado com sucesso!')
                 return redirect(
-                    reverse('jornalistas:home')
+                    reverse('core:home')
                 )
             else:
                 messages.warning(request, 'Credênciais inválidas')
@@ -84,6 +84,6 @@ class LogoutUserView(View):
         logout(request)
         return redirect(
             reverse(
-                "jornalistas:home"
+                "core:home"
             )
         )

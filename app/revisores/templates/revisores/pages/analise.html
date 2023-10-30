@@ -11,67 +11,68 @@
 
 {% block content %}
 <main class="main-content">
-    <div class="jornaListas">
-        {% for jornalista in jornalistas %}
-        <div class="d-flex" id='jornalista_{{ jornalista.id }}'>
-            <div class="image-pessoa" style="border: none;">
-                <img
-                    src="{% static 'jornalistas/img/perfil.png' %}"
-                    width="130"
-                    height="130"
-                    alt=""
-                />
-            </div>
-            <div class="card">
-                <h5>{{ jornalista.nome_de_guerra }}</h5>
-                <div class="row mb-2">
-                    <div class="col-md-6">
-                        <span><strong>Nome Completo:</strong> {{ jornalista.nome }} {{ jornalista.sobrenome }}</span>
-                    </div>
-                    <div class="col-md-6">
-                        <span><strong>Data de Nascimento:</strong> {{ jornalista.data_de_nascimento }}</span>
-                    </div>
+    <div class="container pt-5">
+        {% if jornalistas %}
+        <div class="card-jornalista">
+            {% for jornalista in jornalistas %}
+            <div class="d-flex" id='jornalista_{{ jornalista.id }}'>
+                <div class="image-pessoa" style="border: none;">
+                    <img
+                        src="{% static 'jornalistas/img/perfil.png' %}"
+                        width="130"
+                        height="130"
+                        alt=""
+                    />
                 </div>
-                <div class="row mb-2">
-                    <div class="col-md-6">
-                        <span><strong>Registro:</strong> {{ jornalista.registro }}</span>
+                <div class="card">
+                    <h5>{{ jornalista.nome_de_guerra }}</h5>
+                    <div class="row mb-2">
+                        <div class="col-md-6">
+                            <span><strong>Nome Completo:</strong> {{ jornalista.nome }} {{ jornalista.sobrenome }}</span>
+                        </div>
+                        <div class="col-md-6">
+                            <span><strong>Data de Nascimento:</strong> {{ jornalista.data_de_nascimento }}</span>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <span><strong>Telefone:</strong> {{ jornalista.telefone }}</span>
+                    <div class="row mb-2">
+                        <div class="col-md-6">
+                            <span><strong>Registro:</strong> {{ jornalista.registro }}</span>
+                        </div>
+                        <div class="col-md-6">
+                            <span><strong>Revisor: </strong>{% if jornalista.is_want_revisor %}Sim {% else %}Não{% endif %}</span>
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-md-12">
-                        <span><strong>Associações:</strong> {{ jornalista.associacoes.all|join:", "}}</span>
+                    <div class="row mb-2">
+                        <div class="col-md-12">
+                            <span><strong>Associações:</strong> {{ jornalista.associacoes.all|join:", "}}</span>
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-md-12">
-                        <span><strong>Revisor: </strong>{% if jornalista.is_want_revisor %}Sim {% else %}Não{% endif %}</span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <a href="{% url 'revisores:analise_jornalista_perfil' jornalista.id %}"><button class="btn btn-primary" type="button">Ver perfil</button></a>
-                    </div>
-                    <div class="col d-flex justify-content-end">
-                        <form id='form_aprovar' style="margin-right: 2rem;">
-                            {% csrf_token %}
-                            <button class="btn btn-primary" type='button' onclick='aprovarJornalista("{% url "revisores:aprovar" jornalista.id %}")'>Aprovar</button>
-                        </form>
-                        <form id='form_reprovar'>
-                            {% csrf_token %}
-                            <button class="btn btn-secondary" type='button' onclick='reprovarJornalista("{% url "revisores:reprovar" jornalista.id %}")'>Reprovar</button>
-                        </form>
+                    <div class="row">
+                        <div class="col">
+                            <a href="{% url 'revisores:analise_jornalista_perfil' jornalista.id %}"><button class="btn btn-primary" type="button">Ver perfil</button></a>
+                        </div>
+                        <div class="col d-flex justify-content-end">
+                            <form id='form_aprovar' style="margin-right: 2rem;">
+                                {% csrf_token %}
+                                <button class="btn btn-primary" type='button' onclick='aprovarJornalista("{% url "revisores:aprovar" jornalista.id %}")'>Aprovar</button>
+                            </form>
+                            <form id='form_reprovar'>
+                                {% csrf_token %}
+                                <button class="btn btn-secondary" type='button' onclick='reprovarJornalista("{% url "revisores:reprovar" jornalista.id %}")'>Reprovar</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
-        {% empty%}
-            <h3>Nenhum jornalista para analise</h3>
-        {% endfor %}
-    </div>
-    {% include "global/partials/pagination.html" with page_obj=jornalistas %}
+        {% include "global/partials/pagination.html" with page_obj=jornalistas %}
+        {% else %}
+            <div class="textoApjor pt-2">
+                <h1>Nenhum jornalista para analise</h1>
+            </div>
+        {% endif %}
+    </div>  
 </main>
 {% endblock content %}
 

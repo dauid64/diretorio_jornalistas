@@ -22,7 +22,7 @@ class CadastroAssociacoesView(View):
         if associacao_form.is_valid():
             associacao_form.save()
             return redirect(
-                reverse('jornalistas:home')
+                reverse('core:home')
             )
 
         return redirect(

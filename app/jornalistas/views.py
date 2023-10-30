@@ -3,8 +3,7 @@ from django.urls import reverse
 from django.forms import inlineformset_factory
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.db.models import Prefetch
-from django.views.generic import View, ListView, DetailView, UpdateView
+from django.views.generic import View, ListView, DetailView
 from .models import HistoricoProfissional, Jornalista
 from .forms import HistoricoForm, JornalistaForm
 from opcoes.forms import RedesSociaisForm
@@ -86,7 +85,15 @@ class CadastroJornalistaView(View):
         historico_forms = historico_formset(
             prefix='historico',
         )
-        redes_sociais_form = RedesSociaisForm()
+        redes_sociais_formset = inlineformset_factory(
+            Jornalista,
+            RedesSociais,
+            form=RedesSociaisForm,
+            extra=1
+        )
+        redes_sociais_form = redes_sociais_formset(
+            prefix='redes_sociais'
+        )
         return render(
             request,
             'jornalistas/pages/cadastro.html',
@@ -102,7 +109,7 @@ class CadastroJornalistaView(View):
         if Jornalista.objects.filter(usuario=request.user).exists():
             messages.warning(request, 'Você já está cadastrado')
             return redirect(
-                'jornalistas:home'
+                'core:home'
             )
         jornalista_form = JornalistaForm(POST, request.FILES)
         historico_formset = inlineformset_factory(
@@ -114,8 +121,14 @@ class CadastroJornalistaView(View):
             POST,
             prefix='historico',
         )
-        redes_sociais_form = RedesSociaisForm(
-            POST
+        redes_sociais_formset = inlineformset_factory(
+            Jornalista,
+            RedesSociais,
+            form=RedesSociaisForm
+        )
+        redes_sociais_form = redes_sociais_formset(
+            POST,
+            prefix='redes_sociais'
         )
         if jornalista_form.is_valid() and historico_forms.is_valid() and redes_sociais_form.is_valid():
             jornalista = jornalista_form.save(commit=False)
@@ -124,59 +137,8 @@ class CadastroJornalistaView(View):
             jornalista_form.save_m2m()
             historico_forms.instance = jornalista
             historico_forms.save()
-            redes_sociais_list = []
-            for field, key in redes_sociais_form.cleaned_data.items():
-                if key is not None:
-                    match field:
-                        case 'link_telegram':
-                            redes_sociais_list.append(
-                                RedesSociais(
-                                    jornalista=jornalista,
-                                    link=key,
-                                    tipo_de_rede_social_id=1
-                                )
-                            )
-                        case 'link_facebook':
-                            redes_sociais_list.append(
-                                RedesSociais(
-                                    jornalista=jornalista,
-                                    link=key,
-                                    tipo_de_rede_social_id=2
-                                )
-                            )
-                        case 'link_podcast':
-                            redes_sociais_list.append(
-                                RedesSociais(
-                                    jornalista=jornalista,
-                                    link=key,
-                                    tipo_de_rede_social_id=3
-                                )
-                            )
-                        case 'link_linkedin':
-                            redes_sociais_list.append(
-                                RedesSociais(
-                                    jornalista=jornalista,
-                                    link=key,
-                                    tipo_de_rede_social_id=4
-                                )
-                            )
-                        case 'link_twitter':
-                            redes_sociais_list.append(
-                                RedesSociais(
-                                    jornalista=jornalista,
-                                    link=key,
-                                    tipo_de_rede_social_id=5
-                                )
-                            )
-                        case 'link_site':
-                            redes_sociais_list.append(
-                                RedesSociais(
-                                    jornalista=jornalista,
-                                    link=key,
-                                    tipo_de_rede_social_id=6
-                                )
-                            )
-            RedesSociais.objects.bulk_create(redes_sociais_list)
+            redes_sociais_form.instance = jornalista
+            redes_sociais_form.save()
             is_revisor = POST.get('is_revisor')
             if is_revisor == 'on':
                 revisor = Revisor.objects.create(
@@ -184,7 +146,7 @@ class CadastroJornalistaView(View):
                 )
                 revisor.associacoes.add(*jornalista_form.cleaned_data['associacoes'])
             return redirect(
-                reverse("jornalistas:home")
+                reverse("core:home")
             )
         return render(
             request,
@@ -211,7 +173,7 @@ class EditarJornalistaView(View):
                 'Você não tem autorização para acessar essa página.'
             )
             return redirect(
-                reverse('jornalistas:home')
+                reverse('core:home')
             )
         jornalista_form = JornalistaForm(instance=jornalista)
         historico_formset = inlineformset_factory(

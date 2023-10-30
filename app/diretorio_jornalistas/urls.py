@@ -23,7 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('__debug__/', include('debug_toolbar.urls')),
     re_path(r'^chaining/', include('smart_selects.urls')),
-    path('', include('jornalistas.urls')),
+    path('', include('core.urls')),
+    path('jornalista/', include('jornalistas.urls')),
     path('autenticacao/', include('autenticacao.urls')),
     path('revisor/', include('revisores.urls')),
     path('associacao/', include('associacoes.urls'))

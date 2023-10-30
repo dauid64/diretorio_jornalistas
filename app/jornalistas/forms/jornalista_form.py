@@ -22,6 +22,10 @@ class JornalistaForm(forms.ModelForm):
             'diploma',
         ]
 
+        labels = {
+            'associacoes': 'Associações'
+        }
+
         widgets = {
             'associacoes': forms.SelectMultiple(
                 attrs={

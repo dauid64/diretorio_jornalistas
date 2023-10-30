@@ -1,0 +1,58 @@
+{% extends 'global/base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'core/css/contato.css' %}">
+{% endblock styles %}
+
+{% block content %}
+<div class="container pt-5">
+    <div class="row">
+        <div class="col">
+            <div class="textoApjor">
+                <h1>Contato</h1>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="card mx-auto" style="width: 30rem;">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="container-contact-items d-flex align-items-center">
+                            <div class="icon-container-contact">
+                                <i class="fa-solid fa-envelope icon-contact" style="color: #ffffff;"></i>
+                            </div>
+                            <div class="container-contact-description" style="margin-left: 1rem">
+                                <div class="contact-title">
+                                    <span>Email</span>
+                                </div>
+                                <div class="contact-description">
+                                    <span>atendimento@apjor.org.br</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="container-contact-items d-flex align-items-center">
+                            <div class="icon-container-contact">
+                                <i class="fa-brands fa-whatsapp icon-contact" style="color: #ffffff;"></i>
+                            </div>
+                            <div class="container-contact-description" style="margin-left: 1rem">
+                                <div class="contact-title">
+                                    <span>Whatsapp</span>
+                                </div>
+                                <div class="contact-description">
+                                    <span>(11) 99916-1297</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block scripts %}{% endblock scripts %}

@@ -40,3 +40,8 @@ if (input.value.trim()) {
 // on keyup / change flag: reset
 input.addEventListener('change', reset);
 input.addEventListener('keyup', reset);
+
+const inputHiddenTel = document.getElementById('id_telefone')
+if (inputHiddenTel.value !== undefined) {
+  iti.setNumber(inputHiddenTel.value)
+}

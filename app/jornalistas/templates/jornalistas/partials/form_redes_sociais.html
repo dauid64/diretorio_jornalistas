@@ -1,70 +1,23 @@
 <div class="row gy-2 gx-3 align-items-center">
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="{{ redes_sociais_form.link_telegram.id_for_label }}"  class="form-label">{{ redes_sociais_form.link_telegram.label }}</label>
-        {{ redes_sociais_form.link_telegram }}
-        {% if redes_sociais_form.link_telegram.errors %}
-          {% for error in redes_sociais_form.link_telegram.errors %}
-            <div class="alert alert-danger"> {{ error }}</div>
-          {% endfor %}
-        {% endif %}
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="{{ redes_sociais_form.link_facebook.id_for_label }}" class="form-label">{{ redes_sociais_form.link_facebook.label }}</label>
-        {{ redes_sociais_form.link_facebook }}
-        {% if redes_sociais_form.link_facebook.errors %}
-          {% for error in redes_sociais_form.link_facebook.errors %}
-            <div class="alert alert-danger"> {{ error }}</div>
-          {% endfor %}
-        {% endif %}
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="{{ redes_sociais_form.link_podcast.id_for_label }}" class="form-label">{{ redes_sociais_form.link_podcast.label }}</label>
-        {{ redes_sociais_form.link_podcast }}
-        {% if redes_sociais_form.link_podcast.errors %}
-          {% for error in redes_sociais_form.link_podcast.errors %}
-            <div class="alert alert-danger"> {{ error }}</div>
-          {% endfor %}
-        {% endif %}
-      </div>
-    </div>
+  <div class="col">
+    <table class="table table-bordered table-borderless table-responsive rounded" id='form_redes_sociais'>
+      <thead>
+        <tr>
+          <th scope="col">Link</th>
+          <th scope="col">Tipo de Rede Social</th>
+          <th scope="col">Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for form in redes_sociais_form %}
+          <tr>
+            <th scope="row">{{ form.link }}</th>
+            <td>{{ form.tipo_de_rede_social }}</td>
+            <div class="del-rede-social-form"><td></td></div>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {{ redes_sociais_form.management_form }}
   </div>
-  <div class="row gy-2 gx-3">
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="{{ redes_sociais_form.link_linkedin.id_for_label }}"  class="form-label">{{ redes_sociais_form.link_linkedin.label }}</label>
-        {{ redes_sociais_form.link_linkedin }}
-        {% if redes_sociais_form.link_linkedin.errors %}
-          {% for error in redes_sociais_form.link_linkedin.errors %}
-            <div class="alert alert-danger"> {{ error }}</div>
-          {% endfor %}
-        {% endif %}
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="{{ redes_sociais_form.link_twitter.id_for_label }}" class="form-label">{{ redes_sociais_form.link_twitter.label }}</label>
-        {{ redes_sociais_form.link_twitter }}
-        {% if redes_sociais_form.link_twitter.errors %}
-          {% for error in redes_sociais_form.link_twitter.errors %}
-            <div class="alert alert-danger"> {{ error }}</div>
-          {% endfor %}
-        {% endif %}
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="{{ redes_sociais_form.link_site.id_for_label }}" class="form-label">{{ redes_sociais_form.link_site.label }}</label>
-        {{ redes_sociais_form.link_site }}
-        {% if redes_sociais_form.link_site.errors %}
-          {% for error in redes_sociais_form.link_site.errors %}
-            <div class="alert alert-danger"> {{ error }}</div>
-          {% endfor %}
-        {% endif %}
-      </div>
-    </div>
 </div>

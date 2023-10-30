@@ -45,7 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     'debug_toolbar',
+    'core',
     'autenticacao',
     'jornalistas',
     'obras',
@@ -171,3 +173,8 @@ MESSAGE_TAGS = {
 }
 
 USE_DJANGO_JQUERY = True
+
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group_models': True,
+}

@@ -21,7 +21,7 @@ PER_PAGE = int(os.getenv('PER_PAGE', 5))
     name='dispatch'
 )
 @method_decorator(
-    user_passes_test(revisor_required, login_url='jornalistas:home',
+    user_passes_test(revisor_required, login_url='core:home',
                      redirect_field_name='next'),
     name='dispatch'
 )
@@ -52,7 +52,7 @@ class RevisorAnaliseView(ListView):
     name='dispatch'
 )
 @method_decorator(
-    user_passes_test(revisor_required, login_url='jornalistas:home',
+    user_passes_test(revisor_required, login_url='core:home',
                      redirect_field_name='next'),
     name='dispatch'
 )
@@ -79,7 +79,7 @@ class RevisorAprovarView(View):
     name='dispatch'
 )
 @method_decorator(
-    user_passes_test(revisor_required, login_url='jornalistas:home',
+    user_passes_test(revisor_required, login_url='core:home',
                      redirect_field_name='next'),
     name='dispatch'
 )
@@ -106,7 +106,7 @@ class RevisorReprovarView(View):
     name='dispatch'
 )
 @method_decorator(
-    user_passes_test(revisor_required, login_url='jornalistas:home',
+    user_passes_test(revisor_required, login_url='core:home',
                      redirect_field_name='next'),
     name='dispatch'
 )

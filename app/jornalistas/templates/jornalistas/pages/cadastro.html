@@ -91,7 +91,7 @@
           <input type="hidden" id='is_revisor' name='is_revisor'>
           
           <div class="butoes">
-            <button class="btn-secondary btn" type="button">Cancelar</button>
+            <button class="btn-secondary btn">Cancelar</button>
   
             <button class="btn-primary btn" type="button" onclick='querSerRevisor()'>
               Salvar
@@ -112,8 +112,8 @@
 <script src="{% static 'global/js/jquery.mask.min.js' %}"></script>
 <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
 <script src="{% static 'jornalistas/js/cadastro_mask.js' %}"></script>
-<script src="{% static 'global/js/jquery.formset.js' %}"></script>
 <script src="{% static 'jornalistas/js/alert_revisor.js' %}"></script>
+<script src="{% static 'global/js/jquery.formset.js' %}"></script>
 <script>
   $(".select2").select2({
     width: '100%'
@@ -151,6 +151,14 @@
         }
       });
   })
+  $('#form_redes_sociais tbody tr').formset({
+    prefix: '{{ redes_sociais_form.prefix }}',
+    addText: 'Adicionar',
+    deleteCssClass: 'btn-secondary btn',
+    deleteText: 'Remover',
+    addCssClass: 'btn-primary btn',
+  })
+
 </script>
 <script>
   $(document).ready(function() {
