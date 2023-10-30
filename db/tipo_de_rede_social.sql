@@ -4,4 +4,5 @@ INSERT INTO opcoes_tipoderedesocial (id, descricao) VALUES
 (3, 'Podcast'),
 (4, 'Linkedin'),
 (5, 'Twitter'),
-(6, 'Site');
+(6, 'Site'),
+(7, 'Outros');
