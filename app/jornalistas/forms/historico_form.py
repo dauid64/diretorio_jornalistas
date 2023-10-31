@@ -14,6 +14,13 @@ class HistoricoForm(forms.ModelForm):
         )
     )
 
+    def __init__(self, *args, **kwargs):
+        super(HistoricoForm, self).__init__(*args, **kwargs)
+        instance = kwargs.get('instance', None)
+        if instance:
+            self.fields['cargo_atual'].initial = True if \
+                instance.data_termino is None else False
+
     class Meta:
         model = HistoricoProfissional
         exclude = ["duracao", "validado", "revisor_responsavel"]

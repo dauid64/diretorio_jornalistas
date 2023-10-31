@@ -1,3 +1,7 @@
+{% if his_form.instance.pk %}{{ form.DELETE }}{% endif %}
+{% for hidden in his_form.hidden_fields %}
+    {{ hidden }}
+{% endfor %}
 <div class="card card-jornalista w-75 historico-form">
     <div class="row gy-2 gx-3">
       <div class="col-md-6">

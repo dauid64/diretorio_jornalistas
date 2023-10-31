@@ -9,9 +9,15 @@
         </tr>
       </thead>
       <tbody>
-        {% for form in redes_sociais_form %}
+        {% for form in redes_sociais_form.forms %}
           <tr>
-            <th scope="row">{{ form.link }}</th>
+            <th scope="row">
+              {% if form.instance.pk %}{{ form.DELETE }}{% endif %}
+              {% for hidden in form.hidden_fields %}
+                  {{ hidden }}
+              {% endfor %}
+              {{ form.link }}
+            </th>
             <td>{{ form.tipo_de_rede_social }}</td>
             <div class="del-rede-social-form"><td></td></div>
           </tr>

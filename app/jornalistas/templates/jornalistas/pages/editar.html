@@ -152,6 +152,13 @@
         }
       });
   })
+  $('#form_redes_sociais tbody tr').formset({
+    prefix: '{{ redes_sociais_form.prefix }}',
+    addText: 'Adicionar',
+    deleteCssClass: 'btn-secondary btn',
+    deleteText: 'Remover',
+    addCssClass: 'btn-primary btn',
+  })
 </script>
 <script>
   $(document).ready(function() {
@@ -173,6 +180,12 @@
       }
     });
   });
+</script>
+<script>
+  $('#form_jornalista').submit(function(event) {
+    inputTelephone = document.getElementById('id_telefone')
+    inputTelephone.value = iti.getNumber()
+  })
 </script>
 {% endblock scripts %}
 

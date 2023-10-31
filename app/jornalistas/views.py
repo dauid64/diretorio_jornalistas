@@ -130,7 +130,8 @@ class CadastroJornalistaView(View):
             POST,
             prefix='redes_sociais'
         )
-        if jornalista_form.is_valid() and historico_forms.is_valid() and redes_sociais_form.is_valid():
+        if jornalista_form.is_valid() and historico_forms.is_valid() \
+                and redes_sociais_form.is_valid():
             jornalista = jornalista_form.save(commit=False)
             jornalista.usuario = request.user
             jornalista.save()
@@ -144,7 +145,8 @@ class CadastroJornalistaView(View):
                 revisor = Revisor.objects.create(
                     usuario=request.user
                 )
-                revisor.associacoes.add(*jornalista_form.cleaned_data['associacoes'])
+                revisor.associacoes.add(
+                    *jornalista_form.cleaned_data['associacoes'])
             return redirect(
                 reverse("core:home")
             )
@@ -186,11 +188,77 @@ class EditarJornalistaView(View):
             instance=jornalista,
             prefix='historico'
         )
+        redes_sociais_formset = inlineformset_factory(
+            Jornalista,
+            RedesSociais,
+            form=RedesSociaisForm,
+            extra=1
+        )
+        redes_sociais_form = redes_sociais_formset(
+            instance=jornalista,
+            prefix='redes_sociais'
+        )
         return render(
             request,
             'jornalistas/pages/editar.html',
             context={
                 'jornalista_form': jornalista_form,
                 'historico_forms': historico_forms,
+                'redes_sociais_form': redes_sociais_form
+            }
+        )
+
+    def post(self, request, pk):
+        POST = request.POST
+        jornalista = get_object_or_404(Jornalista, pk=pk)
+        jornalista_logado = request.user.jornalista
+        if jornalista != jornalista_logado:
+            messages.warning(
+                request,
+                'Você não tem autorização para acessar essa página.'
+            )
+            return redirect(
+                reverse('core:home')
+            )
+        jornalista_form = JornalistaForm(instance=jornalista, data=POST)
+        historico_formset = inlineformset_factory(
+            Jornalista,
+            HistoricoProfissional,
+            form=HistoricoForm,
+            extra=1
+        )
+        historico_forms = historico_formset(
+            instance=jornalista,
+            prefix='historico',
+            data=POST
+        )
+        redes_sociais_formset = inlineformset_factory(
+            Jornalista,
+            RedesSociais,
+            form=RedesSociaisForm,
+            extra=1,
+        )
+        redes_sociais_form = redes_sociais_formset(
+            instance=jornalista,
+            prefix='redes_sociais',
+            data=POST
+        )
+        if redes_sociais_form.is_valid() and historico_forms.is_valid() \
+                and jornalista_form.is_valid():
+            jornalista_form.save()
+            historico_forms.save()
+            redes_sociais_form.save()
+            messages.success(request, 'Usuário atualizado com sucesso!')
+            return redirect(
+                reverse('jornalistas:editar', kwargs={'pk': pk})
+            )
+        messages.warning(request, 'Não foi possível atualizar o perfil')
+        return render(
+            request,
+            'jornalistas/pages/editar.html',
+            context={
+                'jornalista_form': jornalista_form,
+                'historico_forms': historico_forms,
+                'redes_sociais_form': redes_sociais_form
             }
         )
