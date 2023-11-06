@@ -320,3 +320,9 @@ footer {
     background-color: #ffffff;
     border-color: var(--primary)
 }
+
+.link-jornalista {
+    text-decoration: none;
+    color: inherit;
+    font-size: 0.8rem;
+}

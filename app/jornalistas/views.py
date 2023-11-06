@@ -4,13 +4,14 @@ from django.forms import inlineformset_factory
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic import View, ListView, DetailView
-from .models import HistoricoProfissional, Jornalista
-from .forms import HistoricoForm, JornalistaForm
+from .models import HistoricoProfissional, Jornalista, Diploma
+from .forms import HistoricoForm, JornalistaForm, DiplomaForm
 from opcoes.forms import RedesSociaisForm
 from opcoes.models import RedesSociais
 from django.contrib import messages
 from django.core.paginator import Paginator
 from revisores.models import Revisor
+from django.http import HttpResponse
 import os
 
 
@@ -85,6 +86,15 @@ class CadastroJornalistaView(View):
         historico_forms = historico_formset(
             prefix='historico',
         )
+        diploma_formset = inlineformset_factory(
+            Jornalista,
+            Diploma,
+            form=DiplomaForm,
+            extra=1
+        )
+        diploma_forms = diploma_formset(
+            prefix='diploma'
+        )
         redes_sociais_formset = inlineformset_factory(
             Jornalista,
             RedesSociais,
@@ -100,12 +110,14 @@ class CadastroJornalistaView(View):
             context={
                 'jornalista_form': jornalista_form,
                 'historico_forms': historico_forms,
+                'diploma_forms': diploma_forms,
                 'redes_sociais_form': redes_sociais_form
             }
         )
 
     def post(self, request):
         POST = request.POST
+        FILES = request.FILES
         if Jornalista.objects.filter(usuario=request.user).exists():
             messages.warning(request, 'Você já está cadastrado')
             return redirect(
@@ -116,6 +128,16 @@ class CadastroJornalistaView(View):
             Jornalista,
             HistoricoProfissional,
             form=HistoricoForm
+        )
+        diploma_formset = inlineformset_factory(
+            Jornalista,
+            Diploma,
+            form=DiplomaForm,
+        )
+        diploma_forms = diploma_formset(
+            data=POST,
+            files=FILES,
+            prefix='diploma'
         )
         historico_forms = historico_formset(
             POST,
@@ -131,11 +153,13 @@ class CadastroJornalistaView(View):
             prefix='redes_sociais'
         )
         if jornalista_form.is_valid() and historico_forms.is_valid() \
-                and redes_sociais_form.is_valid():
+                and redes_sociais_form.is_valid() and diploma_forms.is_valid():
             jornalista = jornalista_form.save(commit=False)
             jornalista.usuario = request.user
             jornalista.save()
             jornalista_form.save_m2m()
+            diploma_forms.instance = jornalista
+            diploma_forms.save()
             historico_forms.instance = jornalista
             historico_forms.save()
             redes_sociais_form.instance = jornalista
@@ -188,6 +212,16 @@ class EditarJornalistaView(View):
             instance=jornalista,
             prefix='historico'
         )
+        diploma_formset = inlineformset_factory(
+            Jornalista,
+            Diploma,
+            form=DiplomaForm,
+            extra=1
+        )
+        diploma_forms = diploma_formset(
+            instance=jornalista,
+            prefix='diploma'
+        )
         redes_sociais_formset = inlineformset_factory(
             Jornalista,
             RedesSociais,
@@ -203,6 +237,7 @@ class EditarJornalistaView(View):
             'jornalistas/pages/editar.html',
             context={
                 'jornalista_form': jornalista_form,
+                'diploma_forms': diploma_forms,
                 'historico_forms': historico_forms,
                 'redes_sociais_form': redes_sociais_form
             }
@@ -210,6 +245,7 @@ class EditarJornalistaView(View):
 
     def post(self, request, pk):
         POST = request.POST
+        FILES = request.FILES
         jornalista = get_object_or_404(Jornalista, pk=pk)
         jornalista_logado = request.user.jornalista
         if jornalista != jornalista_logado:
@@ -232,11 +268,21 @@ class EditarJornalistaView(View):
             prefix='historico',
             data=POST
         )
+        diploma_formset = inlineformset_factory(
+            Jornalista,
+            Diploma,
+            form=DiplomaForm,
+        )
+        diploma_forms = diploma_formset(
+            instance=jornalista,
+            prefix='diploma',
+            data=POST,
+            files=FILES
+        )
         redes_sociais_formset = inlineformset_factory(
             Jornalista,
             RedesSociais,
             form=RedesSociaisForm,
-            extra=1,
         )
         redes_sociais_form = redes_sociais_formset(
             instance=jornalista,
@@ -244,8 +290,9 @@ class EditarJornalistaView(View):
             data=POST
         )
         if redes_sociais_form.is_valid() and historico_forms.is_valid() \
-                and jornalista_form.is_valid():
+                and jornalista_form.is_valid() and diploma_forms.is_valid():
             jornalista_form.save()
+            diploma_forms.save()
             historico_forms.save()
             redes_sociais_form.save()
             messages.success(request, 'Usuário atualizado com sucesso!')
@@ -258,7 +305,25 @@ class EditarJornalistaView(View):
             'jornalistas/pages/editar.html',
             context={
                 'jornalista_form': jornalista_form,
+                'diploma_forms': diploma_forms,
                 'historico_forms': historico_forms,
                 'redes_sociais_form': redes_sociais_form
             }
         )
+
+
+@method_decorator(
+    login_required(login_url='autenticacao:login', redirect_field_name='next'),
+    name="dispatch"
+)
+class DownloadDiploma(View):
+    def get(self, request, pk):
+        diploma = Diploma.objects.get(pk=pk)
+        file_path = diploma.arquivo.path
+        with open(file_path, 'rb') as file:
+            response = HttpResponse(
+                file.read(),
+                content_type='image/jpeg'
+            )
+        response['Content-Disposition'] = 'attachment; filename=Diploma.jpeg'
+        return response

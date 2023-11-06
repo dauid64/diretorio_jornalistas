@@ -1,24 +1,49 @@
-<div class="row gy-2 gx-3">
-    <div class="col-md-6">
-      <div class="form-group">
-        <label for="{{ jornalista_form.registro.id_for_label }}"  class="form-label">{{ jornalista_form.registro.label }}</label><span class="required"> *</span>
-        {{ jornalista_form.registro }}
-        {% if jornalista_form.registro.errors %}
-          {% for error in jornalista_form.registro.errors %}
-            <div class="alert alert-danger"> {{ error }}</div>
+<div class="row gy-2 gx-3 align-items-center">
+    <div class="col">
+      <table class="table table-bordered table-borderless table-responsive rounded" id='form_diploma'>
+        <thead>
+          <tr>
+            <th scope="col">Diploma</th>
+            <th scope="col">Arquivo</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Ação</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for form in diploma_forms.forms %}
+            <tr>
+              <th scope="row">
+                {% if form.instance.pk %}{{ form.DELETE }}{% endif %}
+                {% for hidden in form.hidden_fields %}
+                    {{ hidden }}
+                {% endfor %}
+                {% if form.instance.pk %}
+                  <a href="{% url 'jornalistas:download_diploma' form.instance.pk %}" class="btn btn-primary">Baixar Diploma</a>
+                {% else %}
+                  <button disabled class="btn btn-secondary">Nenhum diploma cadastrado</button>
+                {% endif %}
+              </th>
+              <td>
+                {{ form.arquivo }}
+                {% if form.arquivo.errors %}
+                  {% for error in form.arquivo.errors %}
+                    <div class="alert alert-danger"> {{ error }}</div>
+                  {% endfor %}
+                {% endif %}
+              </td>
+              <td>
+                {{ form.descricao }}
+                {% if form.descricao.errors %}
+                  {% for error in form.descricao.errors %}
+                    <div class="alert alert-danger"> {{ error }}</div>
+                  {% endfor %}
+                {% endif %}
+              </td>
+              <div class="del-formacao-form"><td></td></div>
+            </tr>
           {% endfor %}
-        {% endif %}
-      </div>
+        </tbody>
+      </table>
+      {{ diploma_forms.management_form }}
     </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <label for="{{ jornalista_form.diploma.id_for_label }}" class="form-label">{{ jornalista_form.diploma.label }}</label><span class="required"> *</span>
-        {{ jornalista_form.diploma }}
-        {% if jornalista_form.diploma.errors %}
-          {% for error in jornalista_form.diploma.errors %}
-            <div class="alert alert-danger"> {{ error }}</div>
-          {% endfor %}
-        {% endif %}
-      </div>
-    </div>
-</div>
+  </div>

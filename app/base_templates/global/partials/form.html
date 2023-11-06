@@ -1,0 +1,25 @@
+<div class="form-content-grid">
+    {% if form.instance.pk %}{{ form.DELETE }}{% endif %}
+    {% for field in form %}
+        <div class="form-group">
+            {% if field in form.visible_fields %}
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {% endif %}
+            {% if field.field.required %}<span class="required"> *</span>{% endif %}
+            {% if field.name == 'telefone' %}
+                <input type="tel" class="mask-phone-international form-control" id='telephone-base'>
+            {% endif %}
+            {{ field }}
+            {% if field.help_text %}
+                <small  class="text-muted">
+                    {{ field.help_text }}
+                </small>
+            {% endif %}
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    <div class="alert alert-danger"> {{ error }}</div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>

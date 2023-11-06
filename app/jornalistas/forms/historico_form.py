@@ -23,7 +23,16 @@ class HistoricoForm(forms.ModelForm):
 
     class Meta:
         model = HistoricoProfissional
-        exclude = ["duracao", "validado", "revisor_responsavel"]
+        fields = [
+            'veiculo_de_comunicacao',
+            'cargo',
+            'cargo_atual',
+            'data_inicio',
+            'data_termino',
+            'referencia',
+            'contato_da_referencia',
+            'descricao'
+        ]
         labels = {
             "veiculo_de_comunicacao": "Veículo de comunicação",
             "cargo": "Cargo",
@@ -35,9 +44,8 @@ class HistoricoForm(forms.ModelForm):
         }
 
         help_texts = {
-            'referencia': '''
-            Nos campos de referência e contato você deve informar o nome e algum meio para se comunicar com a pessoa responsável ao cargo, para que possamos confirmar sua participação nesse cargo
-            '''
+            'referencia': 'Digite o nome da refêrencia',
+            'contato_da_referencia': 'Digite a forma de localizar a refêrencia'
         }
 
         widgets = {
@@ -54,7 +62,7 @@ class HistoricoForm(forms.ModelForm):
             ),
             "contato_da_referencia": forms.TextInput(
                 attrs={
-                    "class": "form-control",
+                    "class": "form-control span",
                     "placeholder": "Contato da Referência"
                 }
             ),
