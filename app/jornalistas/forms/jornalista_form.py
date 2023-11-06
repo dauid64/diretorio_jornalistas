@@ -9,21 +9,27 @@ class JornalistaForm(forms.ModelForm):
     class Meta:
         model = Jornalista
         fields = [
-            'associacoes',
             'nome_de_guerra',
             'nome',
             'sobrenome',
-            'cpf',
-            'telefone',
             'data_de_nascimento',
             'genero',
+            'telefone',
+            'cpf',
             'estado_civil',
-            'registro',
-            'diploma',
+            'associacoes',
+            'registro'
         ]
 
         labels = {
+            'registro': 'MTb',
             'associacoes': 'Associações'
+        }
+
+        help_texts = {
+            'registro': '''
+            Insira no campo acima, se obtiver, sua Emissão de Registro Profissional
+            '''
         }
 
         widgets = {
@@ -82,12 +88,6 @@ class JornalistaForm(forms.ModelForm):
             'registro': forms.TextInput(
                 attrs={
                     'class': 'form-control',
-                    'placeholder': 'Registro'
                 }
-            ),
-            'diploma': forms.FileInput(
-                attrs={
-                    'class': 'form-control',
-                }
-            ),
+            )
         }

@@ -84,7 +84,6 @@
           {% for his_form in historico_forms %}
             {% include "jornalistas/partials/form_historico.html" %}
           {% endfor %}
-          {% include "jornalistas/partials/help_modal_referencias.html" %}
           {{ historico_forms.management_form }}
           
           <div class="separador"> </div> 
@@ -153,6 +152,13 @@
   })
   $('#form_redes_sociais tbody tr').formset({
     prefix: '{{ redes_sociais_form.prefix }}',
+    addText: 'Adicionar',
+    deleteCssClass: 'btn-secondary btn',
+    deleteText: 'Remover',
+    addCssClass: 'btn-primary btn',
+  })
+  $('#form_diploma tbody tr').formset({
+    prefix: '{{ diploma_forms.prefix }}',
     addText: 'Adicionar',
     deleteCssClass: 'btn-secondary btn',
     deleteText: 'Remover',

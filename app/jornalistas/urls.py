@@ -20,5 +20,10 @@ urlpatterns = [
         'editar-perfil/<int:pk>',
         views.EditarJornalistaView.as_view(),
         name='editar'
+    ),
+    path(
+        'diploma/<int:pk>',
+        views.DownloadDiploma.as_view(),
+        name='download_diploma'
     )
 ]

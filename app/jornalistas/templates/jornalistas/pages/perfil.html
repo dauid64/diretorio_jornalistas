@@ -54,6 +54,7 @@
             <div class="col-md-6">
                 <p class="perfil-texto"><strong>Nome de guerra: </strong>{{ jornalista.nome_de_guerra }}</p>
                 <p class="perfil-texto"><strong>Associações: </strong>{{ jornalista.associacoes.all|join:", "}}</p>
+                <p class="perfil-texto"><strong>MTb: </strong>{{ jornalista.registro }}</p>
             </div>
             <div class="col-md-6">
                 <p class="perfil-texto"><strong>Nome Completo: </strong>{{ jornalista.nome }} {{ jornalista.sobrenome }}</p>
@@ -70,7 +71,7 @@
                 </div>
                   <div class="col-md-6">
                 {% endif %}
-                <p class="perfil-texto"><strong>{{ rede_social.tipo_de_rede_social.descricao }}: </strong>{{ rede_social.link }}</p>
+                <p class="perfil-texto"><strong>{{ rede_social.tipo_de_rede_social.descricao }}: </strong><a href="{{ rede_social.link }}" class="link-jornalista">{{ rede_social.link }}</a></p>
               {% empty %}
                 <p class="perfil-text"><strong>Nenhuma rede social cadastrada.</strong></p>
               {% endfor %}
@@ -84,10 +85,21 @@
             <div class="circ-l"> </div>   
             Formação
           </div>
-          <p class="perfil-texto"><strong>Registro: </strong>{{ jornalista.registro }}</p>
-          <div class="text-center">
-            <img src="{{ jornalista.diploma.url }}" alt="Diploma" class="img-fluid" width="300px">
+
+          {% for d in jornalista.diploma_set.all %}
+          <div class="card card-jornalista w-75" id="diploma-form">
+            <div class="row">
+              <div class="container text-center">
+                <a href="{% url 'jornalistas:download_diploma' d.id %}" class="btn-primary btn">Baixar Diploma</a>
+              </div>
+            </div>
+            <div class="row">
+              <p class="perfil-text text-center">{{ d.descricao }}</p>
+            </div>
           </div>
+          {% empty %}
+            <p class="perfil-text"><strong>Nenhum Diploma cadastrado</strong></p>
+          {% endfor %}
           
           <div class="separador"> </div>   
 
@@ -122,10 +134,10 @@
                     <p class="perfil-texto"><strong>Descrição: </strong>{{ h.descricao }} </p>
                 </div>
             </div>
-        </div>
-        {% empty %}
-          <p class="perfil-text"><strong>Nenhum Histórico cadastrado</strong></p>
-        {% endfor %}
+          </div>
+          {% empty %}
+            <p class="perfil-text"><strong>Nenhum Histórico cadastrado</strong></p>
+          {% endfor %}
           
           <div class="separador"></div> 
 

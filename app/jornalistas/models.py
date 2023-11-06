@@ -21,8 +21,7 @@ class Jornalista(models.Model):
     genero = models.ForeignKey(Genero, on_delete=models.PROTECT)
     estado_civil = models.ForeignKey(EstadoCivil, on_delete=models.PROTECT)
     foto = models.ImageField(null=True, blank=True)
-    registro = models.CharField(max_length=50)
-    diploma = models.ImageField(upload_to='diplomas/%Y/%m/%d/')
+    registro = models.CharField(max_length=50, blank=True, null=True)
     criado_em = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateTimeField(auto_now=True)
     aprovado = models.BooleanField(default=False)
@@ -61,3 +60,9 @@ class HistoricoProfissional(models.Model):
                                         self.cargo, 
                                         self.data_inicio, 
                                         self.data_termino)
+
+
+class Diploma(models.Model):
+    jornalista = models.ForeignKey(Jornalista, on_delete=models.CASCADE)
+    descricao = models.CharField(max_length=255)
+    arquivo = models.ImageField(upload_to='diplomas/%Y/%m/%d/')
