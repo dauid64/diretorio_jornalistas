@@ -34,7 +34,7 @@ class Jornalista(models.Model):
         if self.aprovado is True:
             return True
         return False
-    
+
     @property
     def is_want_revisor(self):
         if self.usuario.revisor:
@@ -47,7 +47,7 @@ class Jornalista(models.Model):
 
 class HistoricoProfissional(models.Model):
     jornalista = models.ForeignKey(Jornalista, on_delete=models.CASCADE)
-    veiculo_de_comunicacao = models.ForeignKey(VeiculoDeComunicacao ,on_delete=models.PROTECT)
+    veiculo_de_comunicacao = models.ForeignKey(VeiculoDeComunicacao, on_delete=models.PROTECT)
     descricao = models.CharField(max_length=254)
     cargo = models.CharField(max_length=254)
     data_inicio = models.DateField()
@@ -56,7 +56,7 @@ class HistoricoProfissional(models.Model):
     contato_da_referencia = models.CharField(max_length=254)
 
     def __str__(self):
-        return '{} - {} - {}/{}'.format(self.veiculo_de_comunicacao, 
+        return '{} - {} - {}/{}'.format(self.veiculo_de_comunicacao,
                                         self.cargo, 
                                         self.data_inicio, 
                                         self.data_termino)
