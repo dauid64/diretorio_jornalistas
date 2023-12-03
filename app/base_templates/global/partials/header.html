@@ -8,15 +8,11 @@
             <li class="nav-item"><a class="nav-link" href="{% url 'revisores:analise_jornalistas' %}">Revisar</a></li>
         {% endif %}
         {% if user.is_authenticated %}
-            {% if user.jornalista %}
-                <li class="nav-item"><a class="nav-link" href="{% url 'jornalistas:editar' user.jornalista.id %}">Perfil</a></li>
-            {% else %}
-                <li class="nav-item"><a class="nav-link" href="{% url 'jornalistas:cadastrar' %}">Perfil</a></li>
-            {% endif %}
+            <li class="nav-item"><a class="nav-link" href="{% url 'jornalistas:editar' user.jornalista.id %}">Perfil</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'autenticacao:logout' %}">Sair</a></li>
         {% else %}
             <li class="nav-item"><a class="nav-link" href="{% url 'autenticacao:login' %}">Login</a></li>
-            <li class="nav-item"><a class="nav-link linha" href="{% url 'autenticacao:registrar' %}">Registrar</a></li>
+            <li class="nav-item"><a class="nav-link linha" href="{% url 'jornalistas:cadastrar' %}">Registrar</a></li>
         {% endif %}
         </ul>
     </div>

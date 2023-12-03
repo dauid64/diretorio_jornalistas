@@ -47,13 +47,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'debug_toolbar',
-    'core',
-    'autenticacao',
-    'jornalistas',
-    'obras',
-    'opcoes',
-    'revisores',
-    'associacoes',
+    'apps.core',
+    'apps.autenticacao',
+    'apps.jornalistas',
+    'apps.obras',
+    'apps.opcoes',
+    'apps.revisores',
+    'apps.associacoes',
+    'apps.historico_profissional'
 ]
 
 MIDDLEWARE = [

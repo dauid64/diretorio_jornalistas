@@ -1,0 +1,75 @@
+<!-- ROW 1 -->
+<div class="row gy-2 gx-3">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="{{usuario_form.username.id_for_label }}" class="form-label">{{ usuario_form.username.label }}</label>
+            {% if usuario_form.username.field.required %}<span class="required"> *</span>{% endif %}
+            {{ usuario_form.username }}
+            {% if usuario_form.username.help_text %}
+              <small  class="text-muted">
+                  {{  usuario_form.username.help_text }}
+              </small>
+            {% endif %}
+            {% if usuario_form.username.errors %}
+              {% for error in usuario_form.username.errors %}
+                <div class="alert alert-danger"> {{ error }}</div>
+              {% endfor %}
+            {% endif %}
+          </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="{{usuario_form.password.id_for_label }}" class="form-label">{{ usuario_form.password.label }}</label>
+            {% if usuario_form.password.field.required %}<span class="required"> *</span>{% endif %}
+            {{ usuario_form.password }}
+            {% if usuario_form.password.help_text %}
+              <small  class="text-muted">
+                  {{  usuario_form.password.help_text }}
+              </small>
+            {% endif %}
+            {% if usuario_form.password.errors %}
+              {% for error in usuario_form.password.errors %}
+                <div class="alert alert-danger"> {{ error }}</div>
+              {% endfor %}
+            {% endif %}
+          </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="{{usuario_form.confirm_password.id_for_label }}" class="form-label">{{ usuario_form.confirm_password.label }}</label>
+            {% if usuario_form.confirm_password.field.required %}<span class="required"> *</span>{% endif %}
+            {{ usuario_form.confirm_password }}
+            {% if usuario_form.confirm_password.help_text %}
+              <small  class="text-muted">
+                  {{  usuario_form.confirm_password.help_text }}
+              </small>
+            {% endif %}
+            {% if usuario_form.confirm_password.errors %}
+              {% for error in usuario_form.confirm_password.errors %}
+                <div class="alert alert-danger"> {{ error }}</div>
+              {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+<!-- END ROW 1 -->
+
+<div class="row gy-2 gx-3">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="{{usuario_form.email.id_for_label }}" class="form-label">{{ usuario_form.email.label }}</label>
+            {% if usuario_form.email.field.required %}<span class="required"> *</span>{% endif %}
+            {{ usuario_form.email }}
+            {% if usuario_form.email.help_text %}
+              <small  class="text-muted">
+                  {{  usuario_form.email.help_text }}
+              </small>
+            {% endif %}
+            {% if usuario_form.email.errors %}
+              {% for error in usuario_form.email.errors %}
+                <div class="alert alert-danger"> {{ error }}</div>
+              {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>

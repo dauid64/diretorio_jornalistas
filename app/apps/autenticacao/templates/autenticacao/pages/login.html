@@ -1,0 +1,55 @@
+{% extends 'global/base.html' %}
+{% load static %}
+{% block content %}
+
+<main>
+  <div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 p-0">
+      <div class="position-relative figure">
+        <div class="filter-orange">
+          <img src="{% static 'img/jornalismo-1.png' %}" class="img-fluid imagem-login" alt="Imagem com maquina de escrever">
+        </div>
+        <div class="position-absolute top-50 start-0 translate-middle-y">
+          <h1 class="titulo-pag mx-2 text-center fw-bold">Diretório Piloto de Jornalistas no Brasil</h1>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 p-0 row justify-content-center" style="height: 100vh;">
+      <div class="align-self-start">
+        <p class ="text-center mt-4">APJOR-Associação dos Jornalistas</p> 
+      </div>
+      <div class="col-6">
+        <form class="text-center" method="POST" action="">
+          {% csrf_token %}
+          <div class="small">
+            <p>Não é um membro? <a class="fw-bold link" href="{% url 'jornalistas:cadastrar' %}">Registre agora</a></p>
+          </div>
+          <div class="pb-2">
+            {{ form.username }}
+              {% if form.username.errors %}
+                {% for error in form.username.errors %}
+                  <div class="alert alert-danger"> {{ error }}</div>
+                {% endfor %}
+              {% endif %}
+          </div>
+          <div class="pb-2">
+              {{ form.password }}
+              {% if form.password.errors %}
+                {% for error in form.password.errors %}
+                  <div class="alert alert-danger"> {{ error }}</div>
+                {% endfor %}
+              {% endif %}
+          </div>
+          <div class="pb-2">
+            <button type="submit" class="btn btn-primary btn-block" style="width: 100%">Entrar</button>
+          </div>
+          {% comment %} <div class="small">
+            <p class="">Esqueceu sua senha? <a class="fw-bold link" href="#">Clique aqui</a></p>
+          </div> {% endcomment %}
+      </form>
+    </div>
+  </div>
+</main>
+
+{% endblock content %}

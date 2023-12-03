@@ -1,0 +1,163 @@
+<!-- MODAL -->
+<div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Incluir Experiência</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="{% url 'experiencia:cadastro' %}" method="POST" id="form_experiencia">
+        {% csrf_token %}
+        <div class="modal-body">
+            <div class="container-fuild">
+                <!-- ROW 1 -->
+                <div class="row gy-2 gx-3">
+                    <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="{{ historico_form.veiculo_de_comunicacao.id_for_label }}" class="form-label">{{ historico_form.veiculo_de_comunicacao.label }}</label>
+                        {{ historico_form.veiculo_de_comunicacao }}
+                        {% if  historico_form.cargo.veiculo_de_comunicacao %}
+                        <small  class="text-muted">
+                            {{   historico_form.cargo.veiculo_de_comunicacao }}
+                        </small>
+                        {% endif %}
+                        {% if historico_form.veiculo_de_comunicacao.errors %}
+                            {% for error in historico_form.veiculo_de_comunicacao.errors %}
+                                <div class="alert alert-danger"> {{ error }}</div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    </div>
+            
+                    <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="{{ historico_form.cargo.id_for_label }}" class="form-label">{{ historico_form.cargo.label }}</label>
+                        {{ historico_form.cargo }}
+                        {% if  historico_form.cargo.help_text %}
+                        <small  class="text-muted">
+                            {{   historico_form.cargo.help_text }}
+                        </small>
+                        {% endif %}
+                        {% if historico_form.cargo.errors %}
+                        {% for error in historico_form.cargo.errors %}
+                            <div class="alert alert-danger"> {{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    </div>
+                </div>
+                <!-- END ROW 1 -->
+            
+                <!-- ROW 2 -->
+                <div class="row gy-2 gx-3">
+                    <div class="col-md-12">
+                    <div class="form-group">
+                        {{ historico_form.cargo_atual }}
+                        <label for="{{ historico_form.cargo_atual.id_for_label }}" class="form-label">{{ historico_form.cargo_atual.label }}</label>
+                    </div>
+                    </div>
+                </div>
+                <!-- END ROW 2 -->
+            
+                <!-- ROW 3 -->
+                <div class="row gy-2 gx-3">
+                    <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="{{ historico_form.data_inicio.id_for_label }}" class="form-label">{{ historico_form.data_inicio.label }}</label>
+                        {{ historico_form.data_inicio }}
+                        {% if  historico_form.data_inicio.help_text %}
+                            <small  class="text-muted">
+                                {{   historico_form.data_inicio.help_text }}
+                            </small>
+                        {% endif %}
+                        {% if historico_form.data_inicio.errors %}
+                            {% for error in historico_form.data_inicio.errors %}
+                                <div class="alert alert-danger"> {{ error }}</div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    </div>
+            
+                    <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="{{ historico_form.data_termino.id_for_label }}" class="form-label">{{ historico_form.data_termino.label }}</label>
+                        {{ historico_form.data_termino }}
+                        {% if  historico_form.data_termino.help_text %}
+                            <small  class="text-muted">
+                                {{   historico_form.data_termino.help_text }}
+                            </small>
+                        {% endif %}
+                        {% if historico_form.data_termino.errors %}
+                            {% for error in historico_form.data_termino.errors %}
+                                <div class="alert alert-danger"> {{ error }}</div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    </div>
+                </div>
+                <!-- END ROW 3 -->
+            
+                <!-- ROW 4 -->
+                <div class="row gy-2 gx-3">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="{{ historico_form.descricao.id_for_label }}" class="form-label">{{ historico_form.descricao.label }}</label>
+                            {{ historico_form.descricao }}
+                            {% if  historico_form.descricao.help_text %}
+                            <small  class="text-muted">
+                                {{   historico_form.descricao.help_text }}
+                            </small>
+                            {% endif %}
+                            {% if historico_form.descricao.errors %}
+                            {% for error in historico_form.descricao.errors %}
+                                <div class="alert alert-danger"> {{ error }}</div>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <!-- END ROW 4 -->
+
+                <!-- ROW 5 -->
+                <h2 class="subtitulo">Contatos de Refêrencia</h2>
+                {% for referencia_form in referencia_forms %}
+                <div class="row gy-2 gx-3 referencia-form">
+                    <div class="col-md-12">
+                        <table class="table table-bordered table-borderless table-responsive rounded" id='form_referencias'>
+                            <thead>
+                            <tr>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Contato</th>
+                                <th scope="col">Ação</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for form in referencia_forms.forms %}
+                                <tr>
+                                <th scope="row">
+                                    {% if form.instance.pk %}{{ form.DELETE }}{% endif %}
+                                    {% for hidden in form.hidden_fields %}
+                                        {{ hidden }}
+                                    {% endfor %}
+                                    {{ form.nome }}
+                                </th>
+                                <td>{{ form.contato }}</td>
+                                <div class="del-referencia-form"><td></td></div>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        {{ referencia_forms.management_form }}
+                    </div>
+                </div>
+                {% endfor %}
+                <!-- END ROW 5 -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="submit" class="btn btn-primary">Incluir</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- END MODAL -->

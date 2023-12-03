@@ -1,4 +1,4 @@
-from revisores.models import Revisor
+from apps.revisores.models import Revisor
 
 
 def revisor_required(user):

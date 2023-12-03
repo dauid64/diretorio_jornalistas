@@ -1,0 +1,129 @@
+{% extends 'global/base.html' %} 
+{% load static %} 
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'global/css/cadastro.css' %}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
+<style>
+  .iti {
+    width: 100%
+  }
+  .hide {
+    display: none;
+  }
+</style>
+{% endblock styles %}
+{% block content %}
+
+<main>
+  <div>
+    {% if message is not None %}
+    <div class="alert alert-{{ message.type }}">{{ message.text }}</div>
+  {% endif %}
+  </div>
+  <body>
+      <div class="tela-cadastro" id="Primeiro">
+        <div class="subtitulo">
+          <h3>Crie uma nova conta</h3>
+        </div>
+        
+        <div class="foto-perfil">
+          <img
+            src="{% static 'jornalistas/img/perfil.png' %}"
+            width="128"
+            height="130"
+            alt=""
+            style="margin-left: 2.5vh;"
+          />
+          <img
+            src="{% static 'jornalistas/img/upload.png' %}"
+            width="140"
+            height="39"
+            alt=""
+            style="margin-top: -4vh;"
+          />
+        </div>
+
+        <p class="alert alert-warning">Não serão divulgados dados sensíveis passados neste formulário, conforme a LGPD.</p>
+  
+        <form method="POST" action="" class="form-cadastro" enctype='multipart/form-data' id='form_jornalista'>
+          {% csrf_token %}
+
+        <div class="card card-jornalista w-75">
+          <div class="titulo">
+            <div class="circ-l"> </div>   
+            Dados de Login
+          </div>
+
+          {% include "jornalistas/partials/form_usuario.html" %}
+
+          <div class="titulo">
+            <div class="circ-l"> </div>   
+            Dados Pessoais
+          </div>
+        
+          {% include "jornalistas/partials/form_dados_pessoais.html" %}
+
+          <h2 class="subtitulo">Redes Sociais</h2>
+
+          {% include "jornalistas/partials/form_redes_sociais.html" %}
+      
+
+          <div class="titulo">
+            <div class="circ-l"> </div>   
+            Formação
+          </div>
+          
+          {% include "jornalistas/partials/form_formacao.html" %}
+          
+          <div class="separador"> </div> 
+          <input type="hidden" id='is_revisor' name='is_revisor'>
+          
+          <div class="butoes">
+            <button class="btn-secondary btn">Cancelar</button>
+  
+            <button class="btn-primary btn" type="button" onclick='querSerRevisor()'>
+              Salvar
+            </button>
+          </div>
+
+        </div>
+
+        </div>
+      </div>
+    </form>
+  </body>
+</main>
+{% endblock content %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="{% static 'global/js/jquery.mask.min.js' %}"></script>
+<script src="{% static 'jornalistas/js/cadastro_mask.js' %}"></script>
+<script src="{% static 'jornalistas/js/alert_revisor.js' %}"></script>
+<script src="{% static 'global/js/jquery.formset.js' %}"></script>
+<script>
+  $(".select2").select2({
+    width: '100%'
+  })
+</script>
+<script type="text/javascript">
+  $(function() {
+    $('#form_redes_sociais tbody tr').formset({
+      prefix: '{{ redes_sociais_form.prefix }}',
+      addText: 'Adicionar',
+      deleteCssClass: 'btn-secondary btn',
+      deleteText: 'Remover',
+      addCssClass: 'btn-primary btn',
+    })
+    $('#form_diploma tbody tr').formset({
+      prefix: '{{ diploma_forms.prefix }}',
+      addText: 'Adicionar',
+      deleteCssClass: 'btn-secondary btn',
+      deleteText: 'Remover',
+      addCssClass: 'btn-primary btn',
+    })
+  })
+</script>
+{% endblock scripts %}
+
