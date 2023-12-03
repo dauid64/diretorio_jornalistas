@@ -1,0 +1,252 @@
+{% extends 'global/base.html' %} 
+{% load static %} 
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'global/css/cadastro.css' %}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
+<style>
+  .iti {
+    width: 100%
+  }
+  .hide {
+    display: none;
+  }
+</style>
+{% endblock styles %}
+{% block content %}
+
+<main>
+  <div>
+    {% if message is not None %}
+    <div class="alert alert-{{ message.type }}">{{ message.text }}</div>
+  {% endif %}
+  </div>
+  <body>
+      <div class="tela-cadastro" id="Primeiro">
+        <div class="subtitulo">
+          <h3>Crie uma nova conta</h3>
+        </div>
+        
+        <div class="foto-perfil">
+          <img
+            src="{% static 'jornalistas/img/perfil.png' %}"
+            width="128"
+            height="130"
+            alt=""
+            style="margin-left: 2.5vh;"
+          />
+          <img
+            src="{% static 'jornalistas/img/upload.png' %}"
+            width="140"
+            height="39"
+            alt=""
+            style="margin-top: -4vh;"
+          />
+        </div>
+
+        <p class="alert alert-warning">Não serão divulgados dados sensíveis passados neste formulário, conforme a LGPD.</p>
+  
+        <form method="POST" action="" class="form-cadastro" enctype='multipart/form-data' id='form_jornalista'>
+          {% csrf_token %}
+
+        <div class="card card-jornalista w-75">
+          <div class="titulo">
+            <div class="circ-l"> </div>   
+            Dados Pessoais
+          </div>
+
+          <div class="row gy-2 gx-3">
+                <div class="col-md-6">
+                <div class="form-group">
+                    <label for="{{ historico_form.veiculo_de_comunicacao.id_for_label }}" class="form-label">{{ historico_form.veiculo_de_comunicacao.label }}</label>
+                    {{ historico_form.veiculo_de_comunicacao }}
+                    {% if  historico_form.cargo.veiculo_de_comunicacao %}
+                    <small  class="text-muted">
+                        {{   historico_form.cargo.veiculo_de_comunicacao }}
+                    </small>
+                    {% endif %}
+                    {% if historico_form.veiculo_de_comunicacao.errors %}
+                        {% for error in historico_form.veiculo_de_comunicacao.errors %}
+                            <div class="alert alert-danger"> {{ error }}</div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                </div>
+        
+                <div class="col-md-6">
+                <div class="form-group">
+                    <label for="{{ historico_form.cargo.id_for_label }}" class="form-label">{{ historico_form.cargo.label }}</label>
+                    {{ historico_form.cargo }}
+                    {% if  historico_form.cargo.help_text %}
+                    <small  class="text-muted">
+                        {{   historico_form.cargo.help_text }}
+                    </small>
+                    {% endif %}
+                    {% if historico_form.cargo.errors %}
+                    {% for error in historico_form.cargo.errors %}
+                        <div class="alert alert-danger"> {{ error }}</div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+                </div>
+            </div>
+            <!-- END ROW 1 -->
+        
+            <!-- ROW 2 -->
+            <div class="row gy-2 gx-3">
+                <div class="col-md-12">
+                <div class="form-group">
+                    {{ historico_form.cargo_atual }}
+                    <label for="{{ historico_form.cargo_atual.id_for_label }}" class="form-label">{{ historico_form.cargo_atual.label }}</label>
+                </div>
+                </div>
+            </div>
+            <!-- END ROW 2 -->
+        
+            <!-- ROW 3 -->
+            <div class="row gy-2 gx-3">
+                <div class="col-md-6">
+                <div class="form-group">
+                    <label for="{{ historico_form.data_inicio.id_for_label }}" class="form-label">{{ historico_form.data_inicio.label }}</label>
+                    {{ historico_form.data_inicio }}
+                    {% if  historico_form.data_inicio.help_text %}
+                        <small  class="text-muted">
+                            {{   historico_form.data_inicio.help_text }}
+                        </small>
+                    {% endif %}
+                    {% if historico_form.data_inicio.errors %}
+                        {% for error in historico_form.data_inicio.errors %}
+                            <div class="alert alert-danger"> {{ error }}</div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                </div>
+        
+                <div class="col-md-6">
+                <div class="form-group">
+                    <label for="{{ historico_form.data_termino.id_for_label }}" class="form-label">{{ historico_form.data_termino.label }}</label>
+                    {{ historico_form.data_termino }}
+                    {% if  historico_form.data_termino.help_text %}
+                        <small  class="text-muted">
+                            {{   historico_form.data_termino.help_text }}
+                        </small>
+                    {% endif %}
+                    {% if historico_form.data_termino.errors %}
+                        {% for error in historico_form.data_termino.errors %}
+                            <div class="alert alert-danger"> {{ error }}</div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                </div>
+            </div>
+            <!-- END ROW 3 -->
+        
+            <!-- ROW 4 -->
+            <div class="row gy-2 gx-3">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="{{ historico_form.descricao.id_for_label }}" class="form-label">{{ historico_form.descricao.label }}</label>
+                        {{ historico_form.descricao }}
+                        {% if  historico_form.descricao.help_text %}
+                        <small  class="text-muted">
+                            {{   historico_form.descricao.help_text }}
+                        </small>
+                        {% endif %}
+                        {% if historico_form.descricao.errors %}
+                        {% for error in historico_form.descricao.errors %}
+                            <div class="alert alert-danger"> {{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <!-- END ROW 4 -->
+
+            <!-- ROW 5 -->
+            <h2 class="subtitulo">Contatos de Refêrencia</h2>
+
+            <div class="row gy-2 gx-3 referencia-form">
+                <div class="col-md-12">
+                    <table class="table table-bordered table-borderless table-responsive rounded" id='form_referencias'>
+                        <thead>
+                        <tr>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Contato</th>
+                            <th scope="col">Ação</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for form in referencia_forms.forms %}
+                            <tr>
+                            <th scope="row">
+                                {% if form.instance.pk %}{{ form.DELETE }}{% endif %}
+                                {% for hidden in form.hidden_fields %}
+                                    {{ hidden }}
+                                {% endfor %}
+                                {{ form.nome }}
+                            </th>
+                            <td>{{ form.contato }}</td>
+                            <div class="del-referencia-form"><td></td></div>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {{ referencia_forms.management_form }}
+                </div>
+            <!-- END ROW 5 -->
+        </div>
+
+        <div class="separador"> </div> 
+          
+        <div class="butoes">
+            <button class="btn-secondary btn">Cancelar</button>
+  
+            <button class="btn-primary btn">
+              Salvar
+            </button>
+        </div>
+
+        </div>
+
+        </div>
+      </div>
+    </form>
+  </body>
+</main>
+{% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'global/js/jquery.formset.js' %}"></script>
+<script type="text/javascript">
+  $(function() {
+    $('#form_referencias tbody tr').formset({
+        prefix: '{{ referencia_forms.prefix }}',
+        addText: 'Adicionar',
+        addCssClass: 'btn-primary btn',
+        deleteCssClass: 'btn-secondary btn me-2',
+        deleteText: 'Remover',
+    })
+  })
+</script>
+<script>
+  $(document).ready(function() {
+    const checkbox2 = document.getElementById("id_cargo_atual");
+    // Verifica o estado do checkbox imediatamente na carga da página
+    if (checkbox2.checked) {
+      $("#id_data_termino").prop("disabled", true);
+    } else {
+      $("#id_data_termino").prop("disabled", false);
+    }
+    $('#id_cargo_atual').change(function() {
+      if ($(this).is(":checked")) {
+        // Se marcado, desabilite o campo de entrada
+        $("#id_data_termino").prop("disabled", true);
+      } else {
+        // Se não marcado, habilite o campo de entrada
+        $("#id_data_termino").prop("disabled", false);
+      }
+    });
+  });
+</script>
+{% endblock scripts %}
+

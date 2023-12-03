@@ -68,6 +68,8 @@
           
           {% include "jornalistas/partials/form_formacao.html" %}
 
+        </form>
+
           <div class="titulo">
             <div class="circ-l"> 
             
@@ -101,8 +103,12 @@
                   </div>
               </div>
               <div class="butoes">
-                <button class="btn-secondary btn">Remover</button>
-                <button class="btn-primary btn">Editar</button>
+                <form action="{% url 'experiencia:deletar' %}" method="POST">
+                  {% csrf_token %}
+                  <input type="hidden" name='pk' value={{ h.id}}>
+                  <button class="btn-secondary btn" type="submit" >Remover</button>
+                </form>
+                <a class="btn-primary btn" href="{% url 'experiencia:editar' h.id %}">Editar</a>
               </div>
             </div>
           {% endfor %}
@@ -123,7 +129,6 @@
 
         </div>
       </div>
-    </form>
     <div class="modal fade" id="historico_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       {% include "jornalistas/partials/modal_historico.html" %}
     </div>
@@ -133,8 +138,6 @@
 
 {% block scripts %}
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script src="{% static 'global/js/jquery.mask.min.js' %}"></script>
-<script src="{% static 'jornalistas/js/cadastro_mask.js' %}"></script>
 <script src="{% static 'global/js/jquery.formset.js' %}"></script>
 <script>
   $(".select2").select2({

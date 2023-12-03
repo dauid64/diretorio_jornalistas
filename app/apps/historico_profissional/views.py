@@ -51,8 +51,89 @@ class EditarHistoricoView(View):
             HistoricoProfissional,
             pk=pk
         )
-        if historico.jornalista = jornalista:
+        if not historico.jornalista == jornalista:
+            messages.warning(request, 'Você não tem permissão para acessar essa página')
             return redirect(
-                
+                reverse('jornalistas:editar', kwargs={'pk': jornalista.id})
             )
-        
+        historico_form = HistoricoForm(instance=historico)
+        referencia_formset = inlineformset_factory(
+            HistoricoProfissional,
+            Referencia,
+            ReferenciaForm,
+            extra=1
+        )
+        referencia_forms = referencia_formset(
+            instance=historico
+        )
+        return render(
+            request,
+            'historico_profissional/pages/edit.html',
+            context={
+                'historico_form': historico_form,
+                'referencia_forms': referencia_forms
+            }
+        )
+
+    def post(self, request, pk):
+        POST = request.POST
+        jornalista = request.user.jornalista
+        historico = get_object_or_404(
+            HistoricoProfissional,
+            pk=pk
+        )
+        if not historico.jornalista == jornalista:
+            messages.warning(request, 'Você não tem permissão para acessar essa página')
+            return redirect(
+                reverse('jornalistas:editar', kwargs={'pk': jornalista.id})
+            )
+        historico_form = HistoricoForm(
+            instance=historico,
+            data=POST
+        )
+        referencia_formset = inlineformset_factory(
+            HistoricoProfissional,
+            Referencia,
+            ReferenciaForm,
+            extra=1
+        )
+        referencia_forms = referencia_formset(
+            instance=historico,
+            data=POST
+        )
+        if historico_form.is_valid() and referencia_forms.is_valid():
+            historico_form.save()
+            referencia_forms.save()
+            messages.success(request, 'Experiência editada com sucesso!')
+            return redirect(
+                reverse('jornalistas:editar', kwargs={'pk': jornalista.id})
+            )
+        messages.success(request, 'Não foi possível editar a experiência.')
+        return render(
+            request,
+            'historico_profissional/pages/edit.html',
+            context={
+                'historico_form': historico_form,
+                'referencia_forms': referencia_forms
+            }
+        )
+
+
+class DeletarExperienciaView(View):
+    def post(self, request):
+        historico_pk = request.POST.get('pk', None)
+        jornalista = request.user.jornalista
+        historico = get_object_or_404(
+            HistoricoProfissional,
+            pk=historico_pk
+        )
+        if not historico.jornalista == jornalista:
+            messages.warning(request, 'Você não tem permissão para acessar essa página')
+            return redirect(
+                reverse('jornalistas:editar', kwargs={'pk': jornalista.id})
+            )
+        historico.delete()
+        messages.success(request, 'Experiência deletada com sucesso')
+        return redirect(
+            reverse('jornalistas:editar', kwargs={'pk': jornalista.id})
+        )
