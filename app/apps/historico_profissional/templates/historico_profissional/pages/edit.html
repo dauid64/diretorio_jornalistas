@@ -24,27 +24,8 @@
   <body>
       <div class="tela-cadastro" id="Primeiro">
         <div class="subtitulo">
-          <h3>Crie uma nova conta</h3>
+          <h3>Editar experiência</h3>
         </div>
-        
-        <div class="foto-perfil">
-          <img
-            src="{% static 'jornalistas/img/perfil.png' %}"
-            width="128"
-            height="130"
-            alt=""
-            style="margin-left: 2.5vh;"
-          />
-          <img
-            src="{% static 'jornalistas/img/upload.png' %}"
-            width="140"
-            height="39"
-            alt=""
-            style="margin-top: -4vh;"
-          />
-        </div>
-
-        <p class="alert alert-warning">Não serão divulgados dados sensíveis passados neste formulário, conforme a LGPD.</p>
   
         <form method="POST" action="" class="form-cadastro" enctype='multipart/form-data' id='form_jornalista'>
           {% csrf_token %}
@@ -52,7 +33,7 @@
         <div class="card card-jornalista w-75">
           <div class="titulo">
             <div class="circ-l"> </div>   
-            Dados Pessoais
+            Dados Profissionais
           </div>
 
           <div class="row gy-2 gx-3">
