@@ -148,7 +148,7 @@ class CadastroJornalistaView(View):
             is_revisor = POST.get('is_revisor')
             if is_revisor == 'on':
                 revisor = Revisor.objects.create(
-                    usuario=request.user
+                    usuario=user
                 )
                 revisor.associacoes.add(
                     *jornalista_form.cleaned_data['associacoes'])

@@ -1,5 +1,6 @@
 function querSerRevisor() {
     const form = document.getElementById('form_jornalista')
+    const inputIsRevisor = document.getElementById('is_revisor')
 
     Swal.fire({
         title: 'Você gostaria de se tornar um revisor?',
@@ -13,7 +14,6 @@ function querSerRevisor() {
       }).then((result) => {
         if (result.isConfirmed) {
           inputIsRevisor.value = 'on'
-          e.preventDefault()
           form.submit()
         } else if (
             result.dismiss === Swal.DismissReason.cancel

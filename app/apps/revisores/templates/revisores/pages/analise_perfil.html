@@ -82,10 +82,21 @@
             <div class="circ-l"> </div>   
             Formação
         </div>
-        <p class="perfil-texto"><strong>Registro: </strong>{{ jornalista.registro }}</p>
-        <div class="text-center">
-            <img src="{{ jornalista.diploma.url }}" alt="Diploma" class="img-fluid" width="300px">
+        
+        {% for d in jornalista.diploma_set.all %}
+          <div class="card card-jornalista w-75" id="diploma-form">
+            <div class="row">
+              <div class="container text-center">
+                <a href="{% url 'jornalistas:download_diploma' d.id %}" class="btn-primary btn">Baixar Diploma</a>
+              </div>
             </div>
+            <div class="row">
+              <p class="perfil-text text-center">{{ d.descricao }}</p>
+            </div>
+          </div>
+          {% empty %}
+            <p class="perfil-text"><strong>Nenhum Diploma cadastrado</strong></p>
+          {% endfor %}
         
         <div class="separador"> </div>   
 
