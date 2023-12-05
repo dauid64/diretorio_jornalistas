@@ -29,28 +29,28 @@ informações sobre os jornalistas, assim como as interfaces necessárias a sua 
 
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
-- Você instalou a versão mais recente de < Python >
-- Você tem uma máquina <Windows / Linux / Mac>
+- Você instalou a versão mais recente de `< Python >`
+- Você tem uma máquina `< Windows / Linux / Mac >`
 
 ## 🚀 Instalando DPJB
 
 Para rodar o DPJB é necessário instalar dependências de bibliotecas, siga então as seguintes etapas:
 
 Linux e macOS:
-
+```
 python -m venv venv
 . venv/bin/activate
 cd app
 pip install -r requirements.txt
-
+```
 Windows:
-
+```
 python -m venv venv
 cd venv/Scripts
 activate
 cd app
 pip install -r requirements.txt
-
+```
 
 ## ☕ Usando DPJB
 
@@ -58,9 +58,9 @@ Para usar o DPJB, siga estas etapas:
 
 * Primeiro você terá que entrar na pastar "dotenv_files" copiar o arquvio ".env-examples" para a mesma pasta com o nome ".env" e configurar como o exemplo suas variáveis de ambiente.
 
-* Entre na pasta "app" e execute o comando com o ambiente virtual ligado python manage.py migrate para criar as tabelas em seu banco.
+* Entre na pasta "app" e execute o comando com o ambiente virtual ligado `python manage.py migrate` para criar as tabelas em seu banco.
 
-* Após essas etapas você está pronto para começar a utilizar o DPJB, basta executar o comando na pasta app python manage.py runserver.
+* Após essas etapas você está pronto para começar a utilizar o DPJB, basta executar o comando na pasta app `python manage.py runserver`.
 
 ## 👨‍🏫 Orientador
 
