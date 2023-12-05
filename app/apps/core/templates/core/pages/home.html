@@ -66,7 +66,12 @@
                     <h5>{{ jornalista.nome_de_guerra }}</h5>
                     <div class="row">
                         <div class="col">
-                            <span><strong>Associações: </strong>{{ jornalista.associacoes.all|join:", "}}</span>
+                            <span><strong>Associações: </strong>
+                                {% if jornalista.show_associacoes %}
+                                    {{ jornalista.associacoes.all|join:", "}}
+                                {% else %}
+                                    Não informado
+                                {% endif %}</span>
                         </div>
                     </div>
                 </div>

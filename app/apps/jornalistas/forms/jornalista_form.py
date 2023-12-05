@@ -20,7 +20,18 @@ class JornalistaForm(forms.ModelForm):
             'cpf',
             'estado_civil',
             'associacoes',
-            'registro'
+            'registro',
+            'show_nome_de_guerra',
+            'show_nome',
+            'show_sobrenome',
+            'show_associacoes',
+            'show_cpf',
+            'show_data_de_nascimento',
+            'show_ddi',
+            'show_telefone',
+            'show_genero',
+            'show_estado_civil',
+            'show_registro'
         ]
 
         labels = {
@@ -96,7 +107,62 @@ class JornalistaForm(forms.ModelForm):
                 attrs={
                     'class': 'form-control',
                 }
-            )
+            ),
+            'show_nome_de_guerra': forms.CheckboxInput(
+                attrs={
+                    'class': 'form-check-input'
+                }
+            ),
+            'show_nome': forms.CheckboxInput(
+                attrs={
+                    'class': 'form-check-input'
+                }
+            ),
+            'show_sobrenome': forms.CheckboxInput(
+                attrs={
+                    'class': 'form-check-input'
+                }
+            ),
+            'show_associacoes': forms.CheckboxInput(
+                attrs={
+                    'class': 'form-check-input'
+                }
+            ),
+            'show_cpf': forms.CheckboxInput(
+                attrs={
+                    'class': 'form-check-input'
+                }
+            ),
+            'show_data_de_nascimento': forms.CheckboxInput(
+                attrs={
+                    'class': 'form-check-input'
+                }
+            ),
+            'show_ddi': forms.CheckboxInput(
+                attrs={
+                    'class': 'form-check-input'
+                }
+            ),
+            'show_telefone': forms.CheckboxInput(
+                attrs={
+                    'class': 'form-check-input'
+                }
+            ),
+            'show_genero': forms.CheckboxInput(
+                attrs={
+                    'class': 'form-check-input'
+                }
+            ),
+            'show_estado_civil': forms.CheckboxInput(
+                attrs={
+                    'class': 'form-check-input'
+                }
+            ),
+            'show_registro': forms.CheckboxInput(
+                attrs={
+                    'class': 'form-check-input'
+                }
+            ),
         }
 
     def clean_telefone(self):

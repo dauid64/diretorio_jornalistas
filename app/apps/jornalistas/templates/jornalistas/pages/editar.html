@@ -44,7 +44,9 @@
           />
         </div>
 
-        <p class="alert alert-warning">Não serão divulgados dados sensíveis passados neste formulário, conforme a LGPD.</p>
+        <div class="container">
+          <p class="alert alert-warning">Em Dados Pessoais, marque a caixinha ao lado de cada item para selecionar os dados que deseja exibir para a comunidade do DPJB. Caso contrário, eles serão ocultados no seu perfil.</p>
+        </div>
   
         <form method="POST" action="" class="form-cadastro" enctype='multipart/form-data' id='form_jornalista'>
           {% csrf_token %}

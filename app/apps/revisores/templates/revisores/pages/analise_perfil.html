@@ -85,16 +85,17 @@
         
         {% for d in jornalista.diploma_set.all %}
           <div class="card card-jornalista w-75" id="diploma-form">
-            <div class="row">
-              <div class="container text-center">
-                <a href="{% url 'jornalistas:download_diploma' d.id %}" class="btn-primary btn">Baixar Diploma</a>
+            <div class="row align-items-center justify-content-center">
+              <div class="col-md-6 d-flex justify-content-end">
+                <img src="{{ d.arquivo.url }}" alt="Imagem do diploma" width='300' height='300'>
+              </div>
+              <div class="col-md-6">
+                <a href="{% url 'jornalistas:download_diploma' d.pk %}" class="btn btn-primary mb-2">Baixar Diploma</a>
+                <p class="h6" class="perfil-text text-center"><strong>Descrição:</strong> {{ d.descricao }}</p>
               </div>
             </div>
-            <div class="row">
-              <p class="perfil-text text-center">{{ d.descricao }}</p>
-            </div>
           </div>
-          {% empty %}
+        {% empty %}
             <p class="perfil-text"><strong>Nenhum Diploma cadastrado</strong></p>
           {% endfor %}
         
@@ -150,11 +151,14 @@
             Obras
         </div> -->
         <div class="butoes">
-            <button class="btn-secondary btn">Rejeitar</button>
-  
-            <button class="btn-primary btn" type="button" data-bs-toggle="modal" data-bs-target="#revisor-modal">
-              Aprovar
-            </button>
+        <form id='form_reprovar'>
+            {% csrf_token %}
+            <button class="btn btn-secondary" type='button' onclick='reprovarJornalistaRedirect("{% url "revisores:reprovar" jornalista.id %}")'>Reprovar</button>
+        </form>
+        <form id='form_aprovar' style="margin-right: 2rem;">
+          {% csrf_token %}
+          <button class="btn btn-primary" type='button' onclick='aprovarJornalistaRedirect("{% url "revisores:aprovar" jornalista.id %}")'>Aprovar</button>
+        </form>
         </div>
 
         </div>
@@ -165,6 +169,6 @@
 {% endblock content %}
 
 {% block scripts %}
-
+  <script src="{% static 'revisores/js/operacao_revisores.js' %}"></script>
 {% endblock scripts %}
 

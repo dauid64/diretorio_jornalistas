@@ -52,13 +52,43 @@
         
           <div class="row">
             <div class="col-md-6">
-                <p class="perfil-texto"><strong>Nome de guerra: </strong>{{ jornalista.nome_de_guerra }}</p>
-                <p class="perfil-texto"><strong>Associações: </strong>{{ jornalista.associacoes.all|join:", "}}</p>
-                <p class="perfil-texto"><strong>MTb: </strong>{{ jornalista.registro }}</p>
+                <p class="perfil-texto"><strong>Nome de guerra: </strong>
+                  {% if jornalista.show_nome_de_guerra %}
+                    {{ jornalista.nome_de_guerra }}
+                  {% else %}
+                    Não informado
+                  {% endif %}
+                </p>
+                <p class="perfil-texto"><strong>Associações: </strong>
+                  {% if jornalista.show_associacoes %}
+                    {{ jornalista.associacoes.all|join:", "}}
+                  {% else %}
+                    Não informado
+                  {% endif %}
+                  </p>
+                <p class="perfil-texto"><strong>MTb: </strong>
+                  {% if jornalista.show_registro %}
+                    {{ jornalista.registro }}
+                  {% else %}
+                    Não informado
+                  {% endif %}
+                </p>
             </div>
             <div class="col-md-6">
-                <p class="perfil-texto"><strong>Nome Completo: </strong>{{ jornalista.nome }} {{ jornalista.sobrenome }}</p>
-                <p class="perfil-texto"><strong>Data de nascimento: </strong>{{ jornalista.data_de_nascimento }}</p>
+                <p class="perfil-texto"><strong>Nome Completo: </strong>
+                  {% if jornalista.show_nome and jornalista.show_sobrenome  %}
+                    {{ jornalista.nome }} {{ jornalista.sobrenome }}
+                  {% else %}
+                    Não informado
+                  {% endif %}
+                  </p>
+                <p class="perfil-texto"><strong>Data de nascimento: </strong>
+                  {% if jornalista.show_data_de_nascimento %}
+                    {{ jornalista.data_de_nascimento }}
+                  {% else %}
+                    Não informado
+                  {% endif %}
+                </p>
             </div>
           </div>
           
@@ -88,13 +118,14 @@
 
           {% for d in jornalista.diploma_set.all %}
           <div class="card card-jornalista w-75" id="diploma-form">
-            <div class="row">
-              <div class="container text-center">
-                <a href="{% url 'jornalistas:download_diploma' d.id %}" class="btn-primary btn">Baixar Diploma</a>
+            <div class="row align-items-center justify-content-center">
+              <div class="col-md-6 d-flex justify-content-end">
+                <img src="{{ d.arquivo.url }}" alt="Imagem do diploma" width='300' height='300'>
               </div>
-            </div>
-            <div class="row">
-              <p class="perfil-text text-center">{{ d.descricao }}</p>
+              <div class="col-md-6">
+                <a href="{% url 'jornalistas:download_diploma' d.pk %}" class="btn btn-primary mb-2">Baixar Diploma</a>
+                <p class="h6" class="perfil-text text-center"><strong>Descrição:</strong> {{ d.descricao }}</p>
+              </div>
             </div>
           </div>
           {% empty %}
