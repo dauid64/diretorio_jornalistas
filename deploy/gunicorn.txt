@@ -1,0 +1,75 @@
+###############################################################################
+# Replace
+# diretorio_jornalistas to the name of the gunicorn file you want
+# user to your user name
+# app_repo to the folder name of your project
+# diretorio_jornalistas to the folder name where you find a file called wsgi.py
+#
+###############################################################################
+# Criando o arquivo diretorio_jornalistas.socket
+sudo nano /etc/systemd/system/diretorio_jornalistas.socket
+
+###############################################################################
+# Conteúdo do arquivo
+[Unit]
+Description=gunicorn blog socket
+
+[Socket]
+ListenStream=/run/diretorio_jornalistas.socket
+
+[Install]
+WantedBy=sockets.target
+
+###############################################################################
+# Criando o arquivo diretorio_jornalistas.service
+sudo nano /etc/systemd/system/diretorio_jornalistas.service
+
+###############################################################################
+# Conteúdo do arquivo
+[Unit]
+Description=Gunicorn daemon (You can change if you want)
+Requires=diretorio_jornalistas.socket
+After=network.target
+
+[Service]
+User=user
+Group=www-data
+Restart=on-failure
+EnvironmentFile=/home/user/app_repo/dotenv_files/.env
+WorkingDirectory=/home/user/app_repo/app
+# --error-logfile --enable-stdio-inheritance --log-level and --capture-output
+# are all for debugging purposes.
+ExecStart=/home/user/app_repo/venv/bin/gunicorn \
+          --error-logfile /home/user/app_repo/gunicorn-error-log \
+          --enable-stdio-inheritance \
+          --log-level "debug" \
+          --capture-output \
+          --access-logfile - \
+          --workers 6 \
+          --bind unix:/run/diretorio_jornalistas.socket \
+          diretorio_jornalistas.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
+
+###############################################################################
+# Ativando
+sudo systemctl start diretorio_jornalistas.socket
+sudo systemctl enable diretorio_jornalistas.socket
+
+# Checando
+sudo systemctl status diretorio_jornalistas.socket
+curl --unix-socket /run/diretorio_jornalistas.socket localhost
+sudo systemctl status diretorio_jornalistas
+
+# Restarting
+sudo systemctl restart diretorio_jornalistas.service
+sudo systemctl restart diretorio_jornalistas.socket
+sudo systemctl restart diretorio_jornalistas
+
+# After changing something
+sudo systemctl daemon-reload
+
+# Debugging
+sudo journalctl -u diretorio_jornalistas.service
+sudo journalctl -u diretorio_jornalistas.socket
