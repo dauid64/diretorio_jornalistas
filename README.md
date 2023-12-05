@@ -23,8 +23,7 @@ informações sobre os jornalistas, assim como as interfaces necessárias a sua 
 - [x] Verificar e aprovar o cadastro de jornalista
 - [ ] Cadastrar Obra Jornalistica
 - [ ] Cadastrar Associação Jornalistica
-- [ ] Verificar e aprovar cadastro associação
-- [ ] Clientes devem ser capazes de tocar a música em um cliente remoto
+- [ ] Verificar e aprovar cadastro da associação
 
 ## 💻 Pré-requisitos
 
