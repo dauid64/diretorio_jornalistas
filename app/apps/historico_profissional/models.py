@@ -1,12 +1,11 @@
 from django.db import models
 from apps.jornalistas.models import Jornalista
-from apps.opcoes.models import VeiculoDeComunicacao
 
 
 class HistoricoProfissional(models.Model):
     jornalista = models.ForeignKey(Jornalista, on_delete=models.CASCADE)
-    veiculo_de_comunicacao = models.ForeignKey(VeiculoDeComunicacao,
-                                               on_delete=models.PROTECT)
+    veiculo_de_comunicacao = models.CharField(max_length=55)
+    tipo_de_veiculo = models.CharField(max_length=55)
     descricao = models.CharField(max_length=254)
     cargo = models.CharField(max_length=254)
     data_inicio = models.DateField()

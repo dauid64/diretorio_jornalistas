@@ -55,6 +55,27 @@
                 </div>
         
                 <div class="col-md-6">
+                  <div class="form-group">
+                      <label for="{{ historico_form.tipo_de_veiculo.id_for_label }}" class="form-label">{{ historico_form.tipo_de_veiculo.label }}</label>
+                      {{ historico_form.tipo_de_veiculo }}
+                      {% if  historico_form.tipo_de_veiculo.help_text %}
+                      <small  class="text-muted">
+                          {{   historico_form.tipo_de_veiculo.help_text }}
+                      </small>
+                      {% endif %}
+                      {% if historico_form.tipo_de_veiculo.errors %}
+                      {% for error in historico_form.tipo_de_veiculo.errors %}
+                          <div class="alert alert-danger"> {{ error }}</div>
+                      {% endfor %}
+                      {% endif %}
+                  </div>
+                </div>
+            </div>
+            <!-- END ROW 1 -->
+
+            <!-- ROW 2 -->
+            <div class="row gy-2 gx-3">
+              <div class="col-md-12">
                 <div class="form-group">
                     <label for="{{ historico_form.cargo.id_for_label }}" class="form-label">{{ historico_form.cargo.label }}</label>
                     {{ historico_form.cargo }}
@@ -69,11 +90,11 @@
                     {% endfor %}
                     {% endif %}
                 </div>
-                </div>
+              </div>
             </div>
-            <!-- END ROW 1 -->
-        
-            <!-- ROW 2 -->
+            <!-- END ROW 2 -->
+
+            <!-- ROW 3 -->
             <div class="row gy-2 gx-3">
                 <div class="col-md-12">
                 <div class="form-group">
@@ -82,9 +103,9 @@
                 </div>
                 </div>
             </div>
-            <!-- END ROW 2 -->
+            <!-- END ROW 3 -->
         
-            <!-- ROW 3 -->
+            <!-- ROW 4 -->
             <div class="row gy-2 gx-3">
                 <div class="col-md-6">
                 <div class="form-group">
@@ -120,9 +141,9 @@
                 </div>
                 </div>
             </div>
-            <!-- END ROW 3 -->
+            <!-- END ROW 4 -->
         
-            <!-- ROW 4 -->
+            <!-- ROW 5 -->
             <div class="row gy-2 gx-3">
                 <div class="col-md-12">
                     <div class="form-group">
@@ -141,9 +162,9 @@
                     </div>
                 </div>
             </div>
-            <!-- END ROW 4 -->
+            <!-- END ROW 5 -->
 
-            <!-- ROW 5 -->
+            <!-- ROW 6 -->
             <h2 class="subtitulo">Contatos de Refêrencia</h2>
 
             <div class="row gy-2 gx-3 referencia-form">
@@ -174,7 +195,7 @@
                     </table>
                     {{ referencia_forms.management_form }}
                 </div>
-            <!-- END ROW 5 -->
+            <!-- END ROW 6 -->
         </div>
 
         <div class="separador"> </div> 

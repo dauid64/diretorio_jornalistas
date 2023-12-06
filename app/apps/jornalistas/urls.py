@@ -25,5 +25,10 @@ urlpatterns = [
         'diploma/<int:pk>',
         views.DownloadDiploma.as_view(),
         name='download_diploma'
+    ),
+    path(
+        'curriculo/<int:pk>',
+        views.DownloadCurriculo.as_view(),
+        name='download_curriculo'
     )
 ]

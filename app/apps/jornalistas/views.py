@@ -153,9 +153,15 @@ class CadastroJornalistaView(View):
                 revisor.associacoes.add(
                     *jornalista_form.cleaned_data['associacoes'])
             login(request, user)
+            messages.success(
+                request,
+                'Seu cadastro foi encaminhado para análise. Por favor, aguarde a aprovação por parte de um revisor.'
+                )
             return redirect(
                 reverse("core:home")
             )
+        messages.warning(request,
+                         'Não foi possível realizar o cadastro. Por favor, verifique os dados cadastrados.')
         return render(
             request,
             'jornalistas/pages/cadastro.html',
@@ -246,7 +252,7 @@ class EditarJornalistaView(View):
             return redirect(
                 reverse('core:home')
             )
-        jornalista_form = JornalistaForm(instance=jornalista, data=POST)
+        jornalista_form = JornalistaForm(instance=jornalista, data=POST, files=FILES)
         diploma_formset = inlineformset_factory(
             Jornalista,
             Diploma,
@@ -291,7 +297,10 @@ class EditarJornalistaView(View):
 )
 class DownloadDiploma(View):
     def get(self, request, pk):
-        diploma = Diploma.objects.get(pk=pk)
+        diploma = get_object_or_404(
+            Diploma,
+            pk=pk
+        )
         file_path = diploma.arquivo.path
         with open(file_path, 'rb') as file:
             response = HttpResponse(
@@ -299,4 +308,24 @@ class DownloadDiploma(View):
                 content_type='image/jpeg'
             )
         response['Content-Disposition'] = 'attachment; filename=Diploma.jpeg'
+        return response
+
+
+@method_decorator(
+    login_required(login_url='autenticacao:login', redirect_field_name='next'),
+    name="dispatch"
+)
+class DownloadCurriculo(View):
+    def get(self, request, pk):
+        jornalista = get_object_or_404(
+            Jornalista,
+            pk=pk
+        )
+        file_path = jornalista.curriculo.path
+        with open(file_path, 'rb') as file:
+            response = HttpResponse(
+                file.read(),
+                content_type='application/pdf'
+            )
+        response['Content-Disposition'] = 'attachment; filename=Curriculo.pdf'
         return response

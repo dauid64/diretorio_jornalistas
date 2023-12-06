@@ -27,6 +27,13 @@ class RegisterUserForm(forms.ModelForm):
             'password': 'Senha'
         }
 
+        help_texts = {
+            'username':
+            '''
+                Apenas letras, números e @/./+/-/_ são permitidos no campo, com até 150 caracteres.
+            '''
+        }
+
         widgets = {
             'username': forms.TextInput(
                 attrs={

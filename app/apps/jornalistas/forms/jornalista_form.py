@@ -21,6 +21,7 @@ class JornalistaForm(forms.ModelForm):
             'estado_civil',
             'associacoes',
             'registro',
+            'curriculo',
             'show_nome_de_guerra',
             'show_nome',
             'show_sobrenome',
@@ -35,14 +36,20 @@ class JornalistaForm(forms.ModelForm):
         ]
 
         labels = {
+            'cpf': 'CPF',
+            'genero': 'Gênero',
             'registro': 'MTb',
             'associacoes': 'Associações',
             'ddi': 'DDI',
+            'curriculo': 'Currículo'
         }
 
         help_texts = {
             'registro': '''
             Se tem o registro profissional, insira aqui
+            ''',
+            'curriculo': '''
+                Faça o upload de um arquivo no formato PDF.
             '''
         }
 
@@ -55,19 +62,16 @@ class JornalistaForm(forms.ModelForm):
             'nome_de_guerra': forms.TextInput(
                 attrs={
                     'class': 'form-control',
-                    'placeholder': 'Carlos Neto'
                 }
             ),
             'nome': forms.TextInput(
                 attrs={
                     'class': 'form-control',
-                    'placeholder': 'Carlos David'
                 }
             ),
             'sobrenome': forms.TextInput(
                 attrs={
                     'class': 'form-control',
-                    'placeholder': 'Castro de Souza Neto'
                 }
             ),
             'cpf': forms.TextInput(
@@ -106,6 +110,11 @@ class JornalistaForm(forms.ModelForm):
             'registro': forms.TextInput(
                 attrs={
                     'class': 'form-control',
+                }
+            ),
+            'curriculo': forms.FileInput(
+                attrs={
+                    'class': 'form-control'
                 }
             ),
             'show_nome_de_guerra': forms.CheckboxInput(

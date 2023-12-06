@@ -25,6 +25,7 @@ class HistoricoForm(forms.ModelForm):
         model = HistoricoProfissional
         fields = [
             'veiculo_de_comunicacao',
+            'tipo_de_veiculo',
             'cargo',
             'cargo_atual',
             'data_inicio',
@@ -33,6 +34,7 @@ class HistoricoForm(forms.ModelForm):
         ]
         labels = {
             "veiculo_de_comunicacao": "Veículo de comunicação",
+            "tipo_de_veiculo": 'Tipo de veículo',
             "cargo": "Cargo",
             "data_inicio": "Data de Início",
             "data_termino": "Data de Termino",
@@ -40,7 +42,12 @@ class HistoricoForm(forms.ModelForm):
         }
 
         widgets = {
-            "veiculo_de_comunicacao": forms.Select(
+            "veiculo_de_comunicacao": forms.TextInput(
+                attrs={
+                    "class": "form-control"
+                }
+            ),
+            "tipo_de_veiculo": forms.TextInput(
                 attrs={
                     "class": "form-control"
                 }
@@ -48,7 +55,6 @@ class HistoricoForm(forms.ModelForm):
             "cargo": forms.TextInput(
                 attrs={
                     "class": "form-control",
-                    "placeholder": "Cargo"
                 }
             ),
             "data_inicio": forms.DateInput(

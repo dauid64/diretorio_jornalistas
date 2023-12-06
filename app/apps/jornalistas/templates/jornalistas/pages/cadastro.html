@@ -75,6 +75,25 @@
           </div>
           
           {% include "jornalistas/partials/form_formacao.html" %}
+
+          <div class="titulo">
+            <div class="circ-l"> </div>   
+            Currículo
+          </div>
+          
+          <div class="container text-center">
+            {{ jornalista_form.curriculo }}
+            {% if jornalista_form.curriculo.errors %}
+              {% for error in jornalista_form.curriculo.errors %}
+                <div class="alert alert-danger"> {{ error }}</div>
+              {% endfor %}
+            {% endif %}
+            {% if jornalista_form.curriculo.help_text %}
+              <small  class="text-muted">
+                  {{  jornalista_form.curriculo.help_text }}
+              </small>
+            {% endif %}
+          </div>
           
           <div class="separador"> </div> 
           <input type="hidden" id='is_revisor' name='is_revisor'>

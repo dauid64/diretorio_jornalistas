@@ -40,6 +40,7 @@ class Jornalista(models.Model):
     atualizado_em = models.DateTimeField(auto_now=True)
     aprovado = models.BooleanField(default=False)
     revisor_responsavel = models.ForeignKey(Revisor, on_delete=models.PROTECT, null=True, blank=True)
+    curriculo = models.FileField(upload_to='curriculos/%Y/%m/%d/', blank=True, null=True)
 
     objects = JornalistasManager()
 

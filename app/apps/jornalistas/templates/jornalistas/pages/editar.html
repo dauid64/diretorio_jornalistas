@@ -85,11 +85,12 @@
             <div class="card card-jornalista w-75" id="historico-form">
               <div class="row gy-2 gx-3">
                   <div class="col-md-6">
-                      <p class="perfil-texto"><strong>Veículo de comunicação: </strong>{{ h.veiculo_de_comunicacao.nome }}</p>
+                      <p class="perfil-texto"><strong>Veículo de comunicação: </strong>{{ h.veiculo_de_comunicacao }}</p>
                       <p class="perfil-texto"><strong>Data de início: </strong>{{ h.data_inicio }}</p>
+                      <p class="perfil-texto"><strong>Cargo: </strong>{{ h.cargo }}</p>
                   </div>
                   <div class="col-md-6">
-                      <p class="perfil-texto"><strong>Cargo: </strong>{{ h.cargo }}</p>
+                      <p class="perfil-texto"><strong>Tipo de Veículo: </strong>{{ h.tipo_de_veiculo }}</p>
                       <p class="perfil-texto"><strong>Data de Termino: </strong>
                         {% if h.data_termino %}
                         {{ h.data_termino }}
@@ -116,6 +117,28 @@
           {% endfor %}
           <button type="button" class="incluir btn-centralizar" data-bs-toggle="modal" data-bs-target="#historico_modal">Incluir Experiência</button>
           
+          <div class="titulo">
+            <div class="circ-l"> </div>   
+            Currículo
+          </div>
+          
+          <div class="container text-center">
+            {% if jornalista_form.instance.curriculo %}
+              <a href="{% url 'jornalistas:download_curriculo' jornalista_form.instance.pk %}" class="btn btn-primary mb-2">Baixar Currículo Atual</a>
+            {% endif %}
+            {{ jornalista_form.curriculo }}
+            {% if jornalista_form.curriculo.errors %}
+              {% for error in jornalista_form.curriculo.errors %}
+                <div class="alert alert-danger"> {{ error }}</div>
+              {% endfor %}
+            {% endif %}
+            {% if jornalista_form.curriculo.help_text %}
+              <small  class="text-muted">
+                  {{  jornalista_form.curriculo.help_text }}
+              </small>
+            {% endif %}
+          </div>
+
           <div class="separador"> </div> 
           <input type="hidden" id='is_revisor' name='is_revisor'>
           
