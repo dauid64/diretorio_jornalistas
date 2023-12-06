@@ -170,13 +170,23 @@
           {% empty %}
             <p class="perfil-text"><strong>Nenhum Histórico cadastrado</strong></p>
           {% endfor %}
+
+          <div class="titulo">
+            <div class="circ-l"> </div>   
+            Currículo
+          </div>
+          
+          <div class="container text-center">
+            {% if jornalista.curriculo %}
+              <a href="{% url 'jornalistas:download_curriculo' jornalista_form.instance.pk %}" class="btn btn-primary mb-2">Baixar Currículo Atual</a>
+            {% else %}
+              <p class="perfil-text"><strong>Nenhum currículo cadastrado</strong></p>
+            {% endif %}
+            {{ jornalista.curriculo }}
+          </div>
           
           <div class="separador"></div> 
 
-          <!-- <div class="titulo">
-            <div class="circ-l"> </div>   
-            Obras
-          </div> -->
         </div>
 
         </div>
