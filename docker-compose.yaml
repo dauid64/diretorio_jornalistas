@@ -1,15 +1,30 @@
 version: '3.9'
 
 services:
+  db:
+    container_name: db
+    image: postgres:latest
+    volumes:
+      - ./data/postgres/data:/data/postgres/data
+    env_file:
+      - ./dotenv_files/.env
+    restart: always
   app:
     container_name: app
     build:
       context: .
+    command: sh -c "
+      python manage.py makemigrations
+      && python manage.py migrate
+      && python manage.py collectstatic
+      && python manage.py runserver 0.0.0.0:80"
     ports:
-      - 8000:8000
+      - "8000:80"
     volumes:
       - ./app:/app
       - ./data/web/static:/data/web/static/
       - ./data/web/media:/data/web/media/
     env_file:
       - ./dotenv_files/.env
+    depends_on:
+      - db
