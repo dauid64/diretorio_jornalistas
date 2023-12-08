@@ -5,7 +5,7 @@
 # /home/user/app_repo/app = Replace with the path to the folder for the project
 # /home/user/app_repo/data/web/static = Replace with the path to the folder for static files
 # /home/user/app_repo/data/web/media = Replace with the path to the folder for media files
-# diretorio_jornalistas = Replace with your unix socket name
+# diretorio.socket = Replace with your unix socket name
 # 
 # Set timezone
 # List - timedatectl list-timezones
@@ -32,9 +32,9 @@ server {
     alias /home/user/app_repo/data/web/media;
   }
 
-  # ATTENTION: diretorio_jornalistas
+  # ATTENTION: diretorio.socket
   location / {
-    proxy_pass http://unix:/run/diretorio_jornalistas;
+    proxy_pass http://unix:/run/diretorio.socket;
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection 'upgrade';

@@ -1,13 +1,13 @@
 ###############################################################################
 # Replace
-# diretorio_jornalistas to the name of the gunicorn file you want
+# diretorio to the name of the gunicorn file you want
 # user to your user name
 # app_repo to the folder name of your project
-# diretorio_jornalistas to the folder name where you find a file called wsgi.py
+# diretorio to the folder name where you find a file called wsgi.py
 #
 ###############################################################################
-# Criando o arquivo diretorio_jornalistas.socket
-sudo nano /etc/systemd/system/diretorio_jornalistas.socket
+# Criando o arquivo diretorio.socket
+sudo nano /etc/systemd/system/diretorio.socket
 
 ###############################################################################
 # Conteúdo do arquivo
@@ -15,20 +15,20 @@ sudo nano /etc/systemd/system/diretorio_jornalistas.socket
 Description=gunicorn blog socket
 
 [Socket]
-ListenStream=/run/diretorio_jornalistas.socket
+ListenStream=/run/diretorio.socket
 
 [Install]
 WantedBy=sockets.target
 
 ###############################################################################
-# Criando o arquivo diretorio_jornalistas.service
-sudo nano /etc/systemd/system/diretorio_jornalistas.service
+# Criando o arquivo diretorio.service
+sudo nano /etc/systemd/system/diretorio.service
 
 ###############################################################################
 # Conteúdo do arquivo
 [Unit]
 Description=Gunicorn daemon (You can change if you want)
-Requires=diretorio_jornalistas.socket
+Requires=diretorio.socket
 After=network.target
 
 [Service]
@@ -46,30 +46,30 @@ ExecStart=/home/user/app_repo/venv/bin/gunicorn \
           --capture-output \
           --access-logfile - \
           --workers 6 \
-          --bind unix:/run/diretorio_jornalistas.socket \
-          diretorio_jornalistas.wsgi:application
+          --bind unix:/run/diretorio.socket \
+          diretorio.wsgi:application
 
 [Install]
 WantedBy=multi-user.target
 
 ###############################################################################
 # Ativando
-sudo systemctl start diretorio_jornalistas.socket
-sudo systemctl enable diretorio_jornalistas.socket
+sudo systemctl start diretorio.socket
+sudo systemctl enable diretorio.socket
 
 # Checando
-sudo systemctl status diretorio_jornalistas.socket
-curl --unix-socket /run/diretorio_jornalistas.socket localhost
-sudo systemctl status diretorio_jornalistas
+sudo systemctl status diretorio.socket
+curl --unix-socket /run/diretorio.socket localhost
+sudo systemctl status diretorio
 
 # Restarting
-sudo systemctl restart diretorio_jornalistas.service
-sudo systemctl restart diretorio_jornalistas.socket
-sudo systemctl restart diretorio_jornalistas
+sudo systemctl restart diretorio.service
+sudo systemctl restart diretorio.socket
+sudo systemctl restart diretorio
 
 # After changing something
 sudo systemctl daemon-reload
 
 # Debugging
-sudo journalctl -u diretorio_jornalistas.service
-sudo journalctl -u diretorio_jornalistas.socket
+sudo journalctl -u diretorio.service
+sudo journalctl -u diretorio.socket
