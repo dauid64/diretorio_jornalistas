@@ -178,3 +178,8 @@ GRAPH_MODELS = {
   'all_applications': True,
   'group_models': True,
 }
+
+CSRF_TRUSTED_ORIGINS = [
+    h.strip() for h in os.getenv('CSRF_TRUSTED_ORIGINS').split(',')
+    if h.strip()
+]
