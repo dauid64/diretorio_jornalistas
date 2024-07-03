@@ -2,22 +2,31 @@
 {% load static %}
 {% block content %}
 
-<main>
-    <form action={% url 'core:home' %} method="GET" class="pt-5">
-        <div class="textoApjor">
-            <h1>Diretório Piloto de<br>Jornalistas no Brasil</h1>
-            <h2>Busque um jornalista</h2>
-        </div>
+<main class="home_page">
+    <form action={% url 'core:home' %} method="GET" class="pt-5 ">
+        <div class="textoApjor container col-md-8 ">
+            <div class="home_page_itens">
+                <h3 class="home_page_text">Diretório Piloto de Jornalistas no Brasil</h3>
+                <h3 class="home_page_text">Associação Profissão Jornalista - APJor</h3>
+                <h6 class="home_page_text">Protótipo</h6>
+            </div>
 
         <div class="texto-botoes">
-            <input type="text" class="form-control" name="nome" placeholder="Buscar por nome">
+            <div class="home_page_buttons ">
+                <input type="text" class="form-control" name="nome" placeholder="Pesquise o nome do/a jornalista">
 
-            <div class="col form-group mb-0">
-                <button type="submit" class="btn btn-primary">Buscar</button>
+                <div class="col form-group mb-0">
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                </div>
             </div>
         </div>
+
+        </div>
+
+
     </form>
 
+    <!--
     <div class="alfabeto">
         <form action={% url 'core:home' %} method="GET" id="alfabeto">
             <button type="submit" name="inicial" value="A">A</button>
@@ -48,6 +57,7 @@
             <button type="submit" name="inicial" value="Z">Z</button>
         </form>
     </div>
+    -->
 
     {% csrf_token %}
     {% if jornalistas %}

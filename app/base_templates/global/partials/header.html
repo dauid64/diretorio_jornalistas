@@ -1,19 +1,30 @@
+{% load static %}
+
 <nav class="navbar">
     <div class="container">
-        <span class="navbar-brand marca"><a a class="nav-link" href="/">Logomarca</a></span>
+        <span class="navbar-brand marca"><a a class="nav-link" href="/">
+            <img src = "{% static 'img/logo_djbr.png' %}" >
+        </a></span>
         <ul class="nav justify-content-end">
-            <li class="nav-item line"><a class="nav-link" href="{% url 'core:sobre' %}">Sobre</a></li>
+            <li class="nav-item line"><a class="nav-link" href="{% url 'core:home' %}">Busca</a></li>
+
+            <li class="nav-item"><a class="nav-link linha" href="{% url 'jornalistas:cadastrar' %}">Cadastro</a></li>
+
+            {% if user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'jornalistas:editar' user.jornalista.id %}">Perfil</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'autenticacao:logout' %}">Sair</a></li>
+            {% else %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'autenticacao:login' %}">Login</a></li>
+                
+            {% endif %}
+
+            <li class="nav-item line"><a class="nav-link" href="{% url 'core:sobre' %}">Quem Somos</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'core:contato' %}">Contato</a></li>
-        {% if user.revisor and user.jornalista.is_aprovado %}
-            <li class="nav-item"><a class="nav-link" href="{% url 'revisores:analise_jornalistas' %}">Revisar</a></li>
-        {% endif %}
-        {% if user.is_authenticated %}
-            <li class="nav-item"><a class="nav-link" href="{% url 'jornalistas:editar' user.jornalista.id %}">Perfil</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'autenticacao:logout' %}">Sair</a></li>
-        {% else %}
-            <li class="nav-item"><a class="nav-link" href="{% url 'autenticacao:login' %}">Login</a></li>
-            <li class="nav-item"><a class="nav-link linha" href="{% url 'jornalistas:cadastrar' %}">Registrar</a></li>
-        {% endif %}
+            
+            {% if user.revisor and user.jornalista.is_aprovado %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'revisores:analise_jornalistas' %}">Revisar</a></li>
+            {% endif %}
+       
         </ul>
     </div>
 </nav>
