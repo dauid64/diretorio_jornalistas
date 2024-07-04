@@ -38,6 +38,17 @@ body {
 .home_page {
     background-color: #014369;
     height: 100%;
+   /*  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    */
+
+}
+
+.home_page_form {
+
+  
 }
 
 .form-group {
@@ -53,6 +64,7 @@ body {
     color: #212529;
 }
 
+/*
 .nav-item a:before {
     content: "";
     position: absolute;
@@ -68,6 +80,7 @@ body {
     transition: all 0.5s ease-in-out 0s;
     transform-origin: 0;
 }
+*/
 
 .nav-item a:hover:before {
     visibility: visible;
@@ -82,6 +95,11 @@ body {
 
 .navbar .container ul {
     background-color: #FFFFFF;
+    margin-left: auto;
+}
+
+.navbar_now {
+    color: green;
 }
 
 .btn-primary {
@@ -208,6 +226,11 @@ footer {
     /*box-shadow: 4px 4px 4px 4px rgb(0 0 0 / 25%); */
     margin-bottom: 6vh;
     transition-timing-function: ease;
+    /*background-color: #F2F2F2; */
+}
+
+.quem_somos {
+    background-color: #F2F2F2;
 }
 
 .my-card{
@@ -403,4 +426,8 @@ h6.home_page_text {
 .home_page input {
     border-color: #F97A05;
     border-radius: 0;
+}
+
+table th, table td{
+    background-color: #F2F2F2;
 }

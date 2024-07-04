@@ -16,16 +16,20 @@
 {% block content %}
 
 <main>
-  <div>
+  <div class="col-md-10">
     {% if message is not None %}
-    <div class="alert alert-{{ message.type }}">{{ message.text }}</div>
-  {% endif %}
+    <div class="alert alert-{{ message.type }}
+        col-md-10">
+      {{ message.text }}</div>
+     {% endif %}
   </div>
   <body>
       <div class="tela-cadastro" id="Primeiro">
-        <div class="subtitulo">
-          <h3>Crie uma nova conta</h3>
-        </div>
+        <!--
+          <div class="subtitulo">
+            <h3>Crie uma nova conta</h3>
+          </div>
+        -->
         
         <div class="foto-perfil">
           <!--
@@ -49,58 +53,66 @@
         <div class="container">
           <p class="alert alert-warning">Em Dados Pessoais, marque a caixinha ao lado de cada item para selecionar os dados que deseja exibir para a comunidade do DPJB. Caso contrário, eles serão ocultados no seu perfil.</p>
         </div>
-        <form method="POST" action="" class="form-cadastro" enctype='multipart/form-data' id='form_jornalista'>
+
+        <form method="POST" action="" class="form-cadastro col-md-10" enctype='multipart/form-data' id='form_jornalista'>
           {% csrf_token %}
 
-            <div class="my-card card-jornalista w-75">
-              <div class="titulo">
-                <div class="circ-l"> </div>   
-                Dados de Login
-              </div>
+          <div class="row">
+            <div class="col-md-10">
 
-              {% include "jornalistas/partials/form_usuario.html" %}
+                <div class="my-card card-jornalista w-75">
+                  <div class="titulo">
+                    <div class="circ-l"> </div>   
+                    Dados de Login
+                  </div>
 
-              <div class="titulo">
-                <div class="circ-l"> </div>   
-                Dados Pessoais
-              </div>
-            
-              {% include "jornalistas/partials/form_dados_pessoais.html" %}
+                  {% include "jornalistas/partials/form_usuario.html" %}
 
-              <h2 class="subtitulo">Redes Sociais</h2>
+                  <div class="titulo">
+                    <div class="circ-l"> </div>   
+                    Dados Pessoais
+                  </div>
+                
+                  {% include "jornalistas/partials/form_dados_pessoais.html" %}
 
-              {% include "jornalistas/partials/form_redes_sociais.html" %}
-          
+                  <h2 class="subtitulo">Redes Sociais</h2>
 
-              <div class="titulo">
-                <div class="circ-l"> </div>   
-                Formação
-              </div>
+                  {% include "jornalistas/partials/form_redes_sociais.html" %}
               
-              {% include "jornalistas/partials/form_formacao.html" %}
 
-              <div class="titulo">
-                <div class="circ-l"> </div>   
-                Currículo
-              </div>
-              
-              <div class="container text-center">
-                {{ jornalista_form.curriculo }}
-                {% if jornalista_form.curriculo.errors %}
-                  {% for error in jornalista_form.curriculo.errors %}
-                    <div class="alert alert-danger"> {{ error }}</div>
-                  {% endfor %}
-                {% endif %}
-                {% if jornalista_form.curriculo.help_text %}
-                  <small  class="text-muted">
-                      {{  jornalista_form.curriculo.help_text }}
-                  </small>
-                {% endif %}
-              </div>
-              
-              <div class="separador"> </div> 
-              <input type="hidden" id='is_revisor' name='is_revisor'>
-              
+                  <div class="titulo">
+                    <div class="circ-l"> </div>   
+                    Formação
+                  </div>
+                  
+                  {% include "jornalistas/partials/form_formacao.html" %}
+
+                  <div class="titulo">
+                    <div class="circ-l"> </div>   
+                    Currículo
+                  </div>
+                  
+                  <div class="container text-center">
+                    {{ jornalista_form.curriculo }}
+                    {% if jornalista_form.curriculo.errors %}
+                      {% for error in jornalista_form.curriculo.errors %}
+                        <div class="alert alert-danger"> {{ error }}</div>
+                      {% endfor %}
+                    {% endif %}
+                    {% if jornalista_form.curriculo.help_text %}
+                      <small  class="text-muted">
+                          {{  jornalista_form.curriculo.help_text }}
+                      </small>
+                    {% endif %}
+                  </div>
+                  
+                  <div class="separador"> </div> 
+                  <input type="hidden" id='is_revisor' name='is_revisor'>
+                
+                </div>
+            </div>
+
+            <div class="col-md-2 d-flex align-self-end">
               <div class="butoes">
                 <button class="btn-outline-info btn " style="color: #000; font-weight: bold;">Limpar</button>
       
@@ -108,12 +120,10 @@
                   Confirmar
                 </button>
               </div>
-
             </div>
+          </div>
 
-        </div>
-      </div>
-    </form>
+        </form>
   </body>
 </main>
 {% endblock content %}
