@@ -1,3 +1,6 @@
+/* Option 2: Import via CSS */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css");
+
 * {
     font-family: 'Poppins', sans-serif;
 }
@@ -19,6 +22,20 @@ nav {
     font-weight: bold;
     /*margin-left: 5%; */
     /*margin-right: 5%; */
+
+}
+
+.navbar {
+    width: 100%;
+    margin: 0;
+}
+
+.navbar .container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    justify-content: end;
+    clear: both;
 
 }
 
@@ -164,19 +181,20 @@ body {
 }
 
 .texto-botoes{
-    padding: 3% 30%;
-    width: 100%;
+    /* width: 100%; */
     display: flex;
     flex-direction: row;
     gap: 1vh;
     align-items: center;
     justify-content: center;
+}
+
+.home_page_itens {
     margin-left: auto;
+    margin-right: auto;
 }
 
 .home_page_buttons {
-    margin-left: 0%;
-    margin-right: 0%;
     width: 100%;
     display: flex;
     align-items: start;
@@ -404,10 +422,6 @@ h6.home_page_text {
     margin-top: 5%;
 }
 
-.home_page_itens {
-    margin-left: auto;
-    margin-right: auto;
-}
 
 .home_page .form-control {
     background-color: #678EA4;
@@ -431,3 +445,24 @@ h6.home_page_text {
 table th, table td{
     background-color: #F2F2F2;
 }
+
+.bi-search {
+    color: #fff;
+    border-right: 1px solid #fff;
+}
+
+.bi-search:hover {
+    color: #D9A372;
+    cursor: pointer;
+
+}
+
+.bi-x-lg {
+    color: #fff;
+}
+
+.bi-x-lg:hover {
+    color: #D9A372;
+    cursor: pointer;
+}
+

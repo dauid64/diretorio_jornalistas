@@ -1,13 +1,13 @@
 {% load static %}
 
 <nav class="navbar">
-    <div class="container ">
+    <div class="container col-md-12 align-items-end ">
 
         <span class="navbar-brand marca"><a a class="nav-link" href="/">
-            <img src = "{% static 'img/logo_djbr.png' %}" >
+            <img src = "{% static 'core/img/logo_djbr.png' %}" >
         </a></span>
 
-        <ul class="nav justify-content-end">
+        <ul class="nav d-flex justify-content-end">
             <li class="nav-item line">
                 <a class="nav-link" href="{% url 'core:home' %}"
                    {% if "cadastro" not in request.path %}
@@ -59,6 +59,26 @@
             {% endif %}
             -->
 
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'autenticacao:login' %}"
+                 {% if "login" in request.path %} 
+                    style="color: #929293" 
+                 {% endif %}>
+
+                    Login
+                </a>
+            </li>
+
+            <li class="nav-item line">
+                <a class="nav-link" href="{% url 'core:sobre' %}"
+                {% if "sobre" in request.path %} 
+                        style="color: #929293" 
+                {% endif %}
+                > 
+                    Quem Somos
+                </a>
+            </li>
+
             {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'jornalistas:editar' user.jornalista.id %}"
@@ -83,26 +103,8 @@
                 
 
             {% endif %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'autenticacao:login' %}"
-                 {% if "login" in request.path %} 
-                    style="color: #929293" 
-                 {% endif %}>
 
-                    Login
-                </a>
-            </li>
-                
 
-            <li class="nav-item line">
-                <a class="nav-link" href="{% url 'core:sobre' %}"
-                {% if "sobre" in request.path %} 
-                        style="color: #929293" 
-                {% endif %}
-                > 
-                    Quem Somos
-                </a>
-            </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'core:contato' %}"
