@@ -30,36 +30,46 @@
             <h3>Crie uma nova conta</h3>
           </div>
         -->
-        
-        <div class="foto-perfil">
-          <!--
-          <img
-            src="{% static 'jornalistas/img/perfil.png' %}"
-            width="128"
-            height="130"
-            alt=""
-            style="margin-left: 2.5vh;"
-          />
-
-          <img
-            src="{% static 'jornalistas/img/upload.png' %}"
-            width="140"
-            height="39"
-            alt=""
-            style="margin-top: -4vh;"
-            />
-          -->
-        </div>
 
         <form method="POST" action="" class="form-cadastro col-md-10" enctype='multipart/form-data' id='form_jornalista'>
           {% csrf_token %}
 
+          <div class="row" id = "row_perfil_picture" style="height: 100px;">
+            <div class="col-md-10">
+               <div class="foto-perfil">
+                  <!--
+                  <img
+                    src="{% static 'jornalistas/img/perfil.png' %}"
+                    width="128"
+                    height="130"
+                    alt=""
+                    style="margin-left: 2.5vh;"
+                  />
+
+                  <img
+                    src="{% static 'jornalistas/img/upload.png' %}"
+                    width="140"
+                    height="39"
+                    alt=""
+                    style="margin-top: -4vh;"
+                    />
+                  -->
+
+                  <div class="profile_picture">
+                    <!--<i class="bi bi-camera"></i> -->
+                    <img src="{% static 'jornalistas/img/camera.png' %} ">
+                  </div>
+                </div>
+            </div>
+          </div>
+
           <div class="row">
             <div class="col-md-10">
 
-                <div class="container  col-md-6">
-                  <p class="alert alert-warning fs-6
-                    ">Em Dados Pessoais, marque a caixinha ao lado de cada item para selecionar os dados que deseja exibir para a comunidade do DPJB. Caso contrário, eles serão ocultados no seu perfil.</p>
+                <div class="container  col-md-8 mx-auto">
+                  <p class="alert alert-warning
+                    " 
+                    id ="alert_cadastro">Em Dados Pessoais, marque a caixinha ao lado de cada item para selecionar os dados que deseja exibir para a comunidade do DPJB. Caso contrário, eles serão ocultados no seu perfil.</p>
                 </div>
 
                 <div class="my-card card-jornalista w-75">

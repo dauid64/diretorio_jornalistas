@@ -466,3 +466,6 @@ table th, table td{
     cursor: pointer;
 }
 
+#alert_cadastro {
+    font-size: 0.9em;
+}
