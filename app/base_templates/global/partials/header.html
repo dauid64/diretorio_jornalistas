@@ -91,8 +91,8 @@
                 </li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'autenticacao:logout' %}">Sair</a></li>
             {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'core:home' %}"
+                <li class="nav-item" id="perfil_not_authenticated">
+                    <a class="nav-link" href="{% url 'autenticacao:login' %}"
                     {% if "perfil" in request.path %} 
                         style="color: #929293" 
                     {% endif %}
@@ -101,7 +101,12 @@
                     </a>
                 </li>
                 
-
+                <script>
+                    let perfil_li = document.getElementById("perfil_not_authenticated");
+                    perfil_li.addEventListener("click",()=>{
+                        alert("Faça o login antes de acessar a pagina de perfil!")
+                    })
+                </script>
             {% endif %}
 
 

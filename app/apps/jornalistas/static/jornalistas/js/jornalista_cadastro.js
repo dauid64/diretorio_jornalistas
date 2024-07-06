@@ -24,7 +24,16 @@ function filling_personal_data() {
 
 }
 
+function click_input_file() {
+  let input_file = document.getElementById("input_profile_photo");
+  input_file.click();
+}
+
 let login_data = document.getElementById("login_data");
 let personal_data_= document.getElementById("personal_data");
 
 personal_data.addEventListener("click", filling_personal_data);
+
+let profile_picture_circle = document.getElementsByClassName("profile_picture")[0];
+
+profile_picture_circle.addEventListener("click", click_input_file);
