@@ -268,56 +268,8 @@ a:hover {
   padding-bottom: 2vh;
 }
 
-.foto-perfil {
-  display: flex;
-  flex-direction: column;
-  border: none;
-  background-color: transparent;
-  justify-content: center;
-  align-items: center;
-}
 
-.bi-camera {
-  color: #0000ff;
-
-}
-
-.profile_picture {
-  box-sizing: border-box;
-  background: #CCE6F5;
-  border-color: #CED9DD;
-  border-style: solid;
-  border-width: 5px;
-  border-radius: 100%;
-  z-index: 2;
-  position: static;
-  width: 10%;
-  height: 25%;
-
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
-
-}
-
-.profile_picture img {
-  box-sizing: border-box;
-  width: 40%;
-  height: 40%;
-  padding-top: 30%;
-  padding-bottom: 30%;
-
-}
-
-#row_perfil_picture {
-  height: 10%;
-  position: relative;
-  top: 50px;
-  margin-top: 3%vh;
-}
-
-
-input[type="file"] {
+.profile_picture input[type="file"] {
   display: none;
 }
 

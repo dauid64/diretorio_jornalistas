@@ -14,7 +14,11 @@
                        {% if "login" not in request.path %}
                             {% if "sobre" not in request.path %}
                                 {% if "contato" not in request.path %}
-                                     style="color: #929293" 
+                                    {% if "perfil" not in request.path %}
+                                        {% if "revisor" not in request.path %}
+                                            style="color: #929293" 
+                                        {% endif %}
+                                    {% endif %}
                                 {% endif %}
                             {% endif %}
                        {% endif %}
@@ -24,6 +28,8 @@
                 </a>
             </li>
 
+
+            <!--
             <li class="nav-item">
                 <a class="nav-link linha" href="{% url 'jornalistas:cadastrar' %}"
                     {% if "cadastro" in request.path %} 
@@ -32,6 +38,8 @@
                     Cadastro
                 </a>
             </li>
+
+             -->
 
             <!--
             {% if user.is_authenticated %}
@@ -86,18 +94,19 @@
                         style="color: #929293" 
                     {% endif %}
                     >
-                        Perfil
+                        Atualizar
                     </a>
                 </li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'autenticacao:logout' %}">Sair</a></li>
             {% else %}
+               <!--
                 <li class="nav-item" id="perfil_not_authenticated">
                     <a class="nav-link" href="{% url 'autenticacao:login' %}"
                     {% if "perfil" in request.path %} 
                         style="color: #929293" 
                     {% endif %}
                     >
-                        Perfil
+                        Atualizar
                     </a>
                 </li>
                 
@@ -107,6 +116,8 @@
                         alert("Faça o login antes de acessar a pagina de perfil!")
                     })
                 </script>
+
+                 -->
             {% endif %}
 
 
@@ -122,7 +133,11 @@
             </li>
 
             {% if user.revisor and user.jornalista.is_aprovado %}
-                <li class="nav-item"><a class="nav-link" href="{% url 'revisores:analise_jornalistas' %}">Revisar</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'revisores:analise_jornalistas' %}"
+                    {% if "revisor" in request.path %}
+                        style="color: #929293"
+                    {% endif %}
+                    >Revisar</a></li>
             {% endif %}
        
         </ul>

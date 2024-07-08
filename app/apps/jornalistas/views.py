@@ -78,24 +78,29 @@ class CadastroJornalistaView(View):
     def get(self, request):
         jornalista_form = JornalistaForm()
         usuario_form = RegisterUserForm()
+
         diploma_formset = inlineformset_factory(
             Jornalista,
             Diploma,
             form=DiplomaForm,
             extra=1
         )
+
         diploma_forms = diploma_formset(
             prefix='diploma'
         )
+
         redes_sociais_formset = inlineformset_factory(
             Jornalista,
             RedesSociais,
             form=RedesSociaisForm,
             extra=1
         )
+
         redes_sociais_form = redes_sociais_formset(
             prefix='redes_sociais'
         )
+        
         return render(
             request,
             'jornalistas/pages/cadastro.html',

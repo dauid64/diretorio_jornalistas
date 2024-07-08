@@ -230,6 +230,7 @@ footer {
     justify-content: start;
 }
 
+/*
 .card-jornalista {
     width: 70%;
     justify-content: start;
@@ -239,12 +240,21 @@ footer {
     padding: 6vh;
     margin-left: auto;
     margin-right: auto;
-    /* background-color: #f4f4f4; */
     border-radius: 12px;
-    /*box-shadow: 4px 4px 4px 4px rgb(0 0 0 / 25%); */
     margin-bottom: 6vh;
     transition-timing-function: ease;
-    /*background-color: #F2F2F2; */
+}
+*/
+
+.card-jornalista {
+  margin: 0 auto;
+  padding-top: 2vh;
+  padding-left: 4vh;
+  padding-right: 4vh;
+  margin-bottom: 4vh;
+  background: #F2F2F2;
+  /*box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.25); */
+  border-radius: 25px;
 }
 
 .quem_somos {
@@ -468,4 +478,136 @@ table th, table td{
 
 #alert_cadastro {
     font-size: 0.9em;
+}
+
+
+
+.jornalista_perfil_texto {
+    color: #000;
+}
+
+.jornalistas_perfil_busca {
+    background-color: #fff;
+}
+
+
+.card_jornalista_busca {
+    width: 25%;
+    justify-content: start;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    padding: 6vh;
+    margin-left: auto;
+    margin-right: auto;
+    /* background-color: #f4f4f4; */
+    border-radius: 12px;
+    /*box-shadow: 4px 4px 4px 4px rgb(0 0 0 / 25%); */
+    margin-bottom: 6vh;
+    transition-timing-function: ease;
+    /*background-color: #F2F2F2; */
+}
+
+.foto_perfil_busca {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  background-color: transparent;
+  justify-content: center;
+  align-items: center;
+  height: 70%;
+
+}
+
+.profile_picture_search {
+  box-sizing: border-box;
+  background: #CCE6F5;
+  border-color: #CED9DD;
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 100%;
+  z-index: 2;
+  position: static;
+  width: 100%;
+  height: 60%;
+
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+
+}
+
+.profile_picture_search img {
+  box-sizing: border-box;
+  width: 50%;
+  height: 50%;
+  padding-top: 30%;
+  padding-bottom: 30%;
+
+}
+
+#row_perfil_picture_search {
+  height: 10%;
+  position: relative;
+  top: 50px;
+  margin-top: 3%vh;
+}
+
+
+.foto-perfil {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  background-color: transparent;
+  justify-content: center;
+  align-items: center;
+}
+
+.bi-camera {
+  color: #0000ff;
+
+}
+
+.profile_picture {
+  box-sizing: border-box;
+  background: #CCE6F5;
+  border-color: #CED9DD;
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 100%;
+  z-index: 2;
+  position: static;
+  width: 10%;
+  height: 25%;
+
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+
+}
+
+.profile_picture img {
+  box-sizing: border-box;
+  width: 40%;
+  height: 40%;
+  padding-top: 30%;
+  padding-bottom: 30%;
+
+}
+
+#row_perfil_picture {
+  height: 10%;
+  position: relative;
+  top: 50px;
+  margin-top: 3%vh;
+}
+
+.partial_messages_alert {
+
+}
+
+.partial_messages {
+    background-color: #014369;
+    margin-left: auto;
+    maring-right: auto;
 }

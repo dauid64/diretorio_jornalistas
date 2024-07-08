@@ -1,7 +1,17 @@
+
 {% if messages %}
     {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}" role="alert">
-            {{ message }}
+        <div class="d-flex partial_messages">
+            <div class="container alert alert-{{ message.tags }} partial_messages_alert alert-dismissable w-25 d-flex justify-content-between" role="alert">
+
+                <div class="">
+                    {{ message }}
+                </div>
+
+                <div class="">
+                    <button type="button" class="btn btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            </div>
         </div>
     {% endfor %}
 {% endif %}

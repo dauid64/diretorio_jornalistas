@@ -40,11 +40,10 @@
                <div class="foto-perfil">
                   <div class="profile_picture" >
                     <img src="{% static 'jornalistas/img/camera.png' %} "/>
+                    <input type="file" name="profile_photo" id="input_profile_photo"/>
                   </div>
                 </div> 
-            </div>
-
-            <input type="file" name="profile_photo" id="input_profile_photo"/>
+            </div>  
           </div>
 
           <div class="row">
@@ -79,13 +78,14 @@
 
                 {% include "jornalistas/partials/form_redes_sociais.html" %}
             
-
+                <!-- formacao field -->
                 <div class="titulo">
                     <div class="circ-l"> </div>   
                     Formação
                 </div>
                 
                 {% include "jornalistas/partials/form_formacao.html" %}
+                <!-- end of field formacao -->
 
                 <div class="titulo">
                   <div class="circ-l"> </div>   

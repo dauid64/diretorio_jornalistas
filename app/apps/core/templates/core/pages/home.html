@@ -1,8 +1,7 @@
 {% extends 'global/base.html' %}
 {% load static %}
+
 {% block content %}
-
-
 
 <main class="home_page">
     <form action={% url 'core:home' %} method="GET" 
@@ -80,35 +79,60 @@
 
     {% csrf_token %}
     {% if jornalistas %}
-    <div class="card-jornalista">
+    <div class="card_jornalista_busca" >
         {% for jornalista in jornalistas %}
-            <a style="border: none; display: flex; width: fit-content; background-color: transparent;" href="{% url 'jornalistas:perfil' jornalista.id %} ">
-                <div class="image-pessoa" style="border: none;">
-                    <img
-                        src="{% static 'jornalistas/img/perfil.png' %}"
-                        width="130"
-                        height="130"
-                        alt=""
-                    />
-                </div>
-                <div class="card">
-                    <h5>{{ jornalista.nome_de_guerra }}</h5>
-                    <div class="row">
-                        <div class="col">
-                            <span><strong>Associações: </strong>
-                                {% if jornalista.show_associacoes %}
-                                    {{ jornalista.associacoes.all|join:", "}}
-                                {% else %}
-                                    Não informado
-                                {% endif %}</span>
+
+            <a href="{% url 'jornalistas:perfil' jornalista.id %} " style="display: block" class="">
+            <div class="row jornalistas_perfil_busca">
+
+                        <!--
+                        <div class="image-pessoa" style="border: none;">
+                            <img
+                                src="{% static 'jornalistas/img/perfil.png' %}"
+                                width="130"
+                                height="130"
+                                alt=""
+                            />
                         </div>
-                    </div>
-                </div>
+                         -->
+
+                        <!-- profile picture -->
+                        <div class="foto_perfil_busca col-md-4 pt-1">
+                            <div class="profile_picture_search" >
+                                <img src="{% static 'jornalistas/img/camera.png' %} "/>
+                    
+                            </div>
+                        </div> 
+            
+                         <!-- end of profile picture -->
+
+                        <!-- <div class="card"> -->
+                        <div class="jornalista_perfil_texto col-md-8" >
+                            <h5>{{ jornalista.nome_de_guerra }}</h5>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span><strong>Associações: </strong>
+                                        {% if jornalista.show_associacoes %}
+                                            {{ jornalista.associacoes.all|join:", "}}
+                                        {% else %}
+                                            Não informado
+                                        {% endif %}</span>
+                                </div>
+                            </div>
+                        </div>
+            </div>
             </a>
         {% endfor %}
+
     </div>
+
+
+    <!-- pagination number -->
+    <!--
     {% include "global/partials/pagination.html" with page_obj=jornalistas %}
     {% endif %}
+    -->
+    <!-- end of pagination number -->
 
 </main>
 
