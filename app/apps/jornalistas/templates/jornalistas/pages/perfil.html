@@ -47,7 +47,7 @@
         </div>
         !-->
 
-        <div class="row" id = "row_perfil_picture" >
+        <div class="row container" id = "row_perfil_picture" >
             <div class="col-md-10">
 
                <div class="foto-perfil">
@@ -193,7 +193,7 @@
           
           <div class="container text-center">
             {% if jornalista.curriculo %}
-              <a href="{% url 'jornalistas:download_curriculo' jornalista_form.instance.pk %}" class="btn btn-primary mb-2">Baixar Currículo Atual</a>
+              <a href="{% url 'jornalistas:download_curriculo' jornalista.pk %}" class="btn btn-primary mb-2">Baixar Currículo Atual</a> 
             {% else %}
               <p class="perfil-text"><strong>Nenhum currículo cadastrado</strong></p>
             {% endif %}
