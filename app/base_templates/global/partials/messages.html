@@ -1,8 +1,13 @@
 
 {% if messages %}
     {% for message in messages %}
-        <div class="d-flex partial_messages">
-            <div class="container alert alert-{{ message.tags }} partial_messages_alert alert-dismissable w-25 d-flex justify-content-between" role="alert">
+
+        {% if 'login' in request.path or 'cadastro' in request.path %}
+            <div class="d-flex pt-1">
+        {% else %} 
+            <div class="d-flex partial_messages pt-1">
+        {% endif %}
+            <div class="container alert alert-{{ message.tags }} alert-dismissable w-50 d-flex justify-content-between" role="alert">
 
                 <div class="">
                     {{ message }}
