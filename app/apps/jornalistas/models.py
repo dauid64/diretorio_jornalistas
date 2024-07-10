@@ -62,5 +62,5 @@ class Jornalista(models.Model):
 
 class Diploma(models.Model):
     jornalista = models.ForeignKey(Jornalista, on_delete=models.CASCADE)
-    descricao = models.CharField(max_length=255)
-    arquivo = models.ImageField(upload_to='diplomas/%Y/%m/%d/')
+    descricao = models.CharField(max_length=255, null=True, blank=True)
+    arquivo = models.ImageField(upload_to='diplomas/%Y/%m/%d/', null=True, blank=True)
