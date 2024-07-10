@@ -79,7 +79,7 @@
 
     {% csrf_token %}
     {% if jornalistas %}
-    <div class="card_jornalista_busca container d-flex w-50" >
+    <div class="card_jornalista_busca container d-flex w-25" >
         {% for jornalista in jornalistas %}
 
             <a href="{% url 'jornalistas:perfil' jornalista.id %}" style="width:100%; height:25%" class="">
