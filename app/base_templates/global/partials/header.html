@@ -1,19 +1,145 @@
+{% load static %}
+
 <nav class="navbar">
-    <div class="container">
-        <span class="navbar-brand marca"><a a class="nav-link" href="/">Logomarca</a></span>
-        <ul class="nav justify-content-end">
-            <li class="nav-item line"><a class="nav-link" href="{% url 'core:sobre' %}">Sobre</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'core:contato' %}">Contato</a></li>
-        {% if user.revisor and user.jornalista.is_aprovado %}
-            <li class="nav-item"><a class="nav-link" href="{% url 'revisores:analise_jornalistas' %}">Revisar</a></li>
-        {% endif %}
-        {% if user.is_authenticated %}
-            <li class="nav-item"><a class="nav-link" href="{% url 'jornalistas:editar' user.jornalista.id %}">Perfil</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'autenticacao:logout' %}">Sair</a></li>
-        {% else %}
-            <li class="nav-item"><a class="nav-link" href="{% url 'autenticacao:login' %}">Login</a></li>
-            <li class="nav-item"><a class="nav-link linha" href="{% url 'jornalistas:cadastrar' %}">Registrar</a></li>
-        {% endif %}
+    <div class="container col-md-12 align-items-end ">
+
+        <span class="navbar-brand marca"><a a class="nav-link" href="/">
+            <img src = "{% static 'core/img/logo_djbr.png' %}" >
+        </a></span>
+
+        <ul class="nav d-flex justify-content-end">
+            <li class="nav-item line">
+                <a class="nav-link" href="{% url 'core:home' %}"
+                   {% if "cadastro" not in request.path %}
+                       {% if "login" not in request.path %}
+                            {% if "sobre" not in request.path %}
+                                {% if "contato" not in request.path %}
+                                    {% if "perfil" not in request.path %}
+                                        {% if "revisor" not in request.path %}
+                                            style="color: #929293" 
+                                        {% endif %}
+                                    {% endif %}
+                                {% endif %}
+                            {% endif %}
+                       {% endif %}
+                    {% endif %}
+                >
+                    Busca
+                </a>
+            </li>
+
+
+            <!--
+            <li class="nav-item">
+                <a class="nav-link linha" href="{% url 'jornalistas:cadastrar' %}"
+                    {% if "cadastro" in request.path %} 
+                        style="color: #929293" 
+                    {% endif %}>
+                    Cadastro
+                </a>
+            </li>
+
+             -->
+
+            <!--
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'jornalistas:editar' user.jornalista.id %}"
+                    {% if "perfil" in request.path %} 
+                        style="color: #929293" 
+                    {% endif %}
+                    >
+                        Perfil
+                    </a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'autenticacao:logout' %}">Sair</a></li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'autenticacao:login' %}"
+                     {% if "login" in request.path %} 
+                        style="color: #929293" 
+                     {% endif %}>
+
+                        Login
+                    </a>
+                </li>
+                
+            {% endif %}
+            -->
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'autenticacao:login' %}"
+                 {% if "login" in request.path %} 
+                    style="color: #929293" 
+                 {% endif %}>
+
+                    Login
+                </a>
+            </li>
+
+            <li class="nav-item line">
+                <a class="nav-link" href="{% url 'core:sobre' %}"
+                {% if "sobre" in request.path %} 
+                        style="color: #929293" 
+                {% endif %}
+                > 
+                    Quem Somos
+                </a>
+            </li>
+
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'jornalistas:editar' user.jornalista.id %}"
+                    {% if "editar-perfil" in request.path %} 
+                        style="color: #929293" 
+                    {% endif %}
+                    >
+                        Atualizar
+                    </a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'autenticacao:logout' %}">Sair</a></li>
+            {% else %}
+               <!--
+                <li class="nav-item" id="perfil_not_authenticated">
+                    <a class="nav-link" href="{% url 'autenticacao:login' %}"
+                    {% if "perfil" in request.path %} 
+                        style="color: #929293" 
+                    {% endif %}
+                    >
+                        Atualizar
+                    </a>
+                </li>
+                
+                <script>
+                    let perfil_li = document.getElementById("perfil_not_authenticated");
+                    perfil_li.addEventListener("click",()=>{
+                        alert("Faça o login antes de acessar a pagina de perfil!")
+                    })
+                </script>
+
+                 -->
+            {% endif %}
+
+
+            {% if user.revisor and user.jornalista.is_aprovado %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'revisores:analise_jornalistas' %}"
+                    {% if "revisor" in request.path %}
+                        style="color: #929293"
+                    {% endif %}
+                    >Revisar</a></li>
+            {% endif %}
+
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'core:contato' %}"
+                {% if "contato" in request.path %} 
+                        style="color: #929293" 
+                {% endif %}
+                >
+                    Contato
+                </a>
+            </li>
+       
         </ul>
     </div>
 </nav>

@@ -1,7 +1,22 @@
+
 {% if messages %}
     {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}" role="alert">
-            {{ message }}
+
+        {% if 'login' in request.path or 'cadastro' in request.path %}
+            <div class="d-flex pt-1">
+        {% else %} 
+            <div class="d-flex partial_messages pt-1">
+        {% endif %}
+            <div class="container alert alert-{{ message.tags }} alert-dismissable w-50 d-flex justify-content-between" role="alert">
+
+                <div class="">
+                    {{ message }}
+                </div>
+
+                <div class="">
+                    <button type="button" class="btn btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            </div>
         </div>
     {% endfor %}
 {% endif %}

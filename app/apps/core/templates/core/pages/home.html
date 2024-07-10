@@ -1,23 +1,50 @@
 {% extends 'global/base.html' %}
 {% load static %}
+
 {% block content %}
 
-<main>
-    <form action={% url 'core:home' %} method="GET" class="pt-5">
-        <div class="textoApjor">
-            <h1>Diretório Piloto de<br>Jornalistas no Brasil</h1>
-            <h2>Busque um jornalista</h2>
-        </div>
+<main class="home_page">
+    <form action={% url 'core:home' %} method="GET" 
+        class="pt-5 home_page_form" id="form_search_jornalista">
 
-        <div class="texto-botoes">
-            <input type="text" class="form-control" name="nome" placeholder="Buscar por nome">
 
-            <div class="col form-group mb-0">
-                <button type="submit" class="btn btn-primary">Buscar</button>
+        <div class="textoApjor container col-md-8 ">
+            <div class="home_page_itens">
+                <h3 class="home_page_text my-4">Diretório Piloto de Jornalistas no Brasil</h3>
+                <!--<h3 class="home_page_text my-4">Associação Profissão Jornalista - APJor</h3>
+                -->
+                <h6 class="home_page_text my-4">Protótipo</h6>
+           
+
+                <div class="texto-botoes">
+                    <div class="home_page_buttons ">
+                        <input type="text" class="form-control" name="nome" id="input_nome" placeholder="Pesquise o nome do/a jornalista">
+
+                        <!--
+                        <div class="col form-group mb-0">
+                            <button type="submit" class="btn btn-primary">Buscar</button>
+                        </div>
+                        -->
+
+                        <div class='ms-2 my-auto row '>
+    
+                            <i class="bi bi-search pe-3 col-sm-6 pb-1"
+                              id="icon_search" ></i>
+
+                          
+                            <i class="bi bi-x-lg col-sm-6  ps-2 pb-1" id="icon_close"></i>
+
+
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
+
     </form>
 
+    <!--
     <div class="alfabeto">
         <form action={% url 'core:home' %} method="GET" id="alfabeto">
             <button type="submit" name="inicial" value="A">A</button>
@@ -48,39 +75,65 @@
             <button type="submit" name="inicial" value="Z">Z</button>
         </form>
     </div>
+    -->
 
     {% csrf_token %}
     {% if jornalistas %}
-    <div class="card-jornalista">
+    <div class="card_jornalista_busca container d-flex w-50" >
         {% for jornalista in jornalistas %}
-            <a style="border: none; display: flex; width: fit-content; background-color: transparent;" href="{% url 'jornalistas:perfil' jornalista.id %} ">
-                <div class="image-pessoa" style="border: none;">
-                    <img
-                        src="{% static 'jornalistas/img/perfil.png' %}"
-                        width="130"
-                        height="130"
-                        alt=""
-                    />
-                </div>
-                <div class="card">
-                    <h5>{{ jornalista.nome_de_guerra }}</h5>
-                    <div class="row">
-                        <div class="col">
-                            <span><strong>Associações: </strong>
-                                {% if jornalista.show_associacoes %}
-                                    {{ jornalista.associacoes.all|join:", "}}
-                                {% else %}
-                                    Não informado
-                                {% endif %}</span>
+
+            <a href="{% url 'jornalistas:perfil' jornalista.id %}" style="width:100%; height:25%" class="">
+            <div class="row jornalistas_perfil_busca w-100">
+
+                        <!--
+                        <div class="image-pessoa" style="border: none;">
+                            <img
+                                src="{% static 'jornalistas/img/perfil.png' %}"
+                                width="130"
+                                height="130"
+                                alt=""
+                            />
                         </div>
-                    </div>
-                </div>
+                         -->
+
+                        <!-- profile picture -->
+                        <div class="foto_perfil_busca col-md-4 pt-1">
+                            <div class="profile_picture_search" >
+                                <img src="{% static 'jornalistas/img/camera.png' %} "/>
+                    
+                            </div>
+                        </div> 
+            
+                         <!-- end of profile picture -->
+
+                        <!-- <div class="card"> -->
+                        <div class="jornalista_perfil_texto col-md-8" >
+                            <h5>{{ jornalista.nome_de_guerra }}</h5>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div><strong>Associações: </strong>
+                                        {% if jornalista.show_associacoes %}
+                                            {{ jornalista.associacoes.all|join:", "}}
+                                        {% else %}
+                                            Não informado
+                                        {% endif %}</div>
+                                </div>
+                            </div>
+                        </div>
+            </div>
             </a>
         {% endfor %}
     </div>
+
+
+    <!-- pagination number -->
+    <!--
     {% include "global/partials/pagination.html" with page_obj=jornalistas %}
     {% endif %}
+    -->
+    <!-- end of pagination number -->
 
 </main>
 
 {% endblock content %}
+

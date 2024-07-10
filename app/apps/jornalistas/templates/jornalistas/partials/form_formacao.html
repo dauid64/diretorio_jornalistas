@@ -18,7 +18,7 @@
                     {{ hidden }}
                 {% endfor %}
                 {% if form.instance.pk %}
-                  <a href="{% url 'jornalistas:download_diploma' form.instance.pk %}" class="btn btn-primary">Baixar Diploma</a>
+                  <a href="{% url 'jornalistas:download_diploma' form.instance.pk %}" class="btn btn-primary" style="background: #0882BA; ">Baixar Diploma</a>
                 {% else %}
                   <button disabled class="btn btn-secondary">Nenhum diploma cadastrado</button>
                 {% endif %}

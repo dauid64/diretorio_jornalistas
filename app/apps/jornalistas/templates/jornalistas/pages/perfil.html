@@ -18,180 +18,346 @@
 <main>
   <div>
     {% if message is not None %}
-    <div class="alert alert-{{ message.type }}">{{ message.text }}</div>
-  {% endif %}
+      <div class="alert alert-{{ message.type }}">{{ message.text }}</div>
+    {% endif %}
   </div>
-  <body>
-      <div class="tela-cadastro" id="Primeiro">
-        <div class="subtitulo">
-          <h3>Perfil do Jornalista</h3>
-        </div>
-        
-        <div class="foto-perfil">
-          <img
-            src="{% static 'jornalistas/img/perfil.png' %}"
-            width="128"
-            height="130"
-            alt=""
-            style="margin-left: 2.5vh;"
-          />
-          <img
-            src="{% static 'jornalistas/img/upload.png' %}"
-            width="140"
-            height="39"
-            alt=""
-            style="margin-top: -4vh;"
-          />
-        </div>
+  
+  <div class="container" id="">
+    <!--
+    <div class="subtitulo">
+      <h3>Perfil do Jornalista</h3>
+    </div>
+    -->
+    
+    <!-- foto de perfil -->
+    <!-- 
+    <div class="foto-perfil">
+      <img
+        src="{% static 'jornalistas/img/perfil.png' %}"
+        width="128"
+        height="130"
+        alt=""
+        style="margin-left: 2.5vh;"
+      />
+      <img
+        src="{% static 'jornalistas/img/upload.png' %}"
+        width="140"
+        height="39"
+        alt=""
+        style="margin-top: -4vh;"
+      />
+    </div>
+    !-->
 
-        <div class="card card-jornalista w-75">
-          <div class="titulo">
-            <div class="circ-l"> </div>   
-            Dados Pessoais
-          </div>
-        
-          <div class="row">
-            <div class="col-md-6">
-                <p class="perfil-texto"><strong>Nome de guerra: </strong>
-                  {% if jornalista.show_nome_de_guerra %}
-                    {{ jornalista.nome_de_guerra }}
-                  {% else %}
-                    Não informado
-                  {% endif %}
-                </p>
-                <p class="perfil-texto"><strong>Associações: </strong>
-                  {% if jornalista.show_associacoes %}
-                    {{ jornalista.associacoes.all|join:", "}}
-                  {% else %}
-                    Não informado
-                  {% endif %}
-                  </p>
-                <p class="perfil-texto"><strong>MTb: </strong>
-                  {% if jornalista.show_registro %}
-                    {{ jornalista.registro }}
-                  {% else %}
-                    Não informado
-                  {% endif %}
-                </p>
-            </div>
-            <div class="col-md-6">
-                <p class="perfil-texto"><strong>Nome Completo: </strong>
-                  {% if jornalista.show_nome and jornalista.show_sobrenome  %}
-                    {{ jornalista.nome }} {{ jornalista.sobrenome }}
-                  {% else %}
-                    Não informado
-                  {% endif %}
-                  </p>
-                <p class="perfil-texto"><strong>Data de nascimento: </strong>
-                  {% if jornalista.show_data_de_nascimento %}
-                    {{ jornalista.data_de_nascimento }}
-                  {% else %}
-                    Não informado
-                  {% endif %}
-                </p>
-            </div>
-          </div>
-          
+    <!-- profile data -->
+    <div class="row container mb-1 mt-4">
 
-          <h2 class="subtitulo">Redes Sociais</h2>
-          <div class="row">
-            <div class="col-md-6">
-              {% for rede_social in jornalista.redessociais_set.all %}
-                {% if forloop.counter == 4 %}
-                </div>
-                  <div class="col-md-6">
+      <!-- first column of the first row -->
+      <div class="col-md-2">
+          <!-- profile picture -->
+         <div class="row foto_outro_perfil pt-3">
+            <div class="profile_other_picture" >
+              <img src="{% static 'jornalistas/img/camera.png' %} "/>
+            </div>
+         </div>
+
+           <div class="row ">
+              <div class="col-md-3">
+                <i class="bi bi-facebook"></i>
+              </div>
+
+              <div class="col-md-3">
+                <img src="{% static '/jornalistas/img/x-social-media-logo-icon.png' %}" class="img_icon_tweeter"/>
+              </div>
+
+              <div class="col-md-3">
+                <i class="bi bi-instagram"></i>
+              </div>
+
+              <div class="col-md-3">
+                <i class="bi bi-linkedin"></i>
+              </div>
+           </div>
+
+            <!--
+            <h2 class="subtitulo">Redes Sociais</h2>
+            <div class="row">
+              <div class="col-md-6">
+                {% for rede_social in jornalista.redessociais_set.all %}
+                  {% if forloop.counter == 4 %}
+                  </div>
+                    <div class="col-md-6">
+                  {% endif %}
+                  <p class="perfil-texto"><strong>{{ rede_social.tipo_de_rede_social.descricao }}: </strong><a href="{{ rede_social.link }}" class="link-jornalista">{{ rede_social.link }}</a></p>
+                {% empty %}
+                  <p class="perfil-text"><strong>Nenhuma rede social cadastrada.</strong></p>
+                {% endfor %}
+              </div>
+            </div>
+            -->
+      </div>
+      <!-- end of first column of the first row--> 
+
+      <!-- profile personal data -->
+      <div class="col-md-10">
+
+        <div class="row">
+          <!-- nome completo -->
+              <p class="perfil_nome fs-3">
+                {% if jornalista.show_nome and jornalista.show_sobrenome  %}
+                  {{ jornalista.nome }} {{ jornalista.sobrenome }}
+                {% else %}
+                  Não informado
                 {% endif %}
-                <p class="perfil-texto"><strong>{{ rede_social.tipo_de_rede_social.descricao }}: </strong><a href="{{ rede_social.link }}" class="link-jornalista">{{ rede_social.link }}</a></p>
-              {% empty %}
-                <p class="perfil-text"><strong>Nenhuma rede social cadastrada.</strong></p>
-              {% endfor %}
-            </div>
-          </div>
-          
-          
-          <div class="separador"> </div>
-
-          <div class="titulo">
-            <div class="circ-l"> </div>   
-            Formação
-          </div>
-
-          {% for d in jornalista.diploma_set.all %}
-          <div class="card card-jornalista w-75" id="diploma-form">
-            <div class="row align-items-center justify-content-center">
-              <div class="col-md-6 d-flex justify-content-end">
-                <img src="{{ d.arquivo.url }}" alt="Imagem do diploma" width='300' height='300'>
-              </div>
-              <div class="col-md-6">
-                <a href="{% url 'jornalistas:download_diploma' d.pk %}" class="btn btn-primary mb-2">Baixar Diploma</a>
-                <p class="h6" class="perfil-text text-center"><strong>Descrição:</strong> {{ d.descricao }}</p>
-              </div>
-            </div>
-          </div>
-          {% empty %}
-            <p class="perfil-text"><strong>Nenhum Diploma cadastrado</strong></p>
-          {% endfor %}
-          
-          <div class="separador"> </div>   
-
-          <div class="titulo">
-            <div class="circ-l"> 
-            
-          </div> 
-            Dados Profissionais
-          </div>
-          
-          <h2 class="subtitulo">Histórico Profissional</h2>
-          {% for h in jornalista.historicoprofissional_set.all %}
-          <div class="card card-jornalista w-75" id="historico-form">
-            <div class="row gy-2 gx-3">
-              <div class="col-md-6">
-                  <p class="perfil-texto"><strong>Veículo de comunicação: </strong>{{ h.veiculo_de_comunicacao }}</p>
-                  <p class="perfil-texto"><strong>Data de início: </strong>{{ h.data_inicio }}</p>
-                  <p class="perfil-texto"><strong>Cargo: </strong>{{ h.cargo }}</p>
-              </div>
-              <div class="col-md-6">
-                  <p class="perfil-texto"><strong>Tipo de Veículo: </strong>{{ h.tipo_de_veiculo }}</p>
-                  <p class="perfil-texto"><strong>Data de Termino: </strong>
-                    {% if h.data_termino %}
-                    {{ h.data_termino }}
-                    {% else %}
-                    Cargo Atual
-                    {% endif %}
-                </p>
-              </div>
-            </div>
-            <div class="row gy-2 gx-3">
-                <div class="col-md-12">
-                    <p class="perfil-texto"><strong>Descrição: </strong>{{ h.descricao }} </p>
-                </div>
-            </div>
-          </div>
-          {% empty %}
-            <p class="perfil-text"><strong>Nenhum Histórico cadastrado</strong></p>
-          {% endfor %}
-
-          <div class="titulo">
-            <div class="circ-l"> </div>   
-            Currículo
-          </div>
-          
-          <div class="container text-center">
-            {% if jornalista.curriculo %}
-              <a href="{% url 'jornalistas:download_curriculo' jornalista_form.instance.pk %}" class="btn btn-primary mb-2">Baixar Currículo Atual</a>
-            {% else %}
-              <p class="perfil-text"><strong>Nenhum currículo cadastrado</strong></p>
-            {% endif %}
-            {{ jornalista.curriculo }}
-          </div>
-          
-          <div class="separador"></div> 
-
+              </p>
+              <!-- fim do nome completo -->
         </div>
+      
+        <div class="row">
+          <div class="col-md-6">
 
+              <!-- nome de guerra -->
+              <p class="perfil-texto"><span class="perfil_titulo">Nome de guerra: </span>
+                {% if jornalista.show_nome_de_guerra %}
+                  {{ jornalista.nome_de_guerra }}
+                {% else %}
+                  Não informado
+                {% endif %}
+              </p>
+              <!-- fim de nome de guerra -->
+
+              <!-- data de nascimento -->
+              <p class="perfil-texto"><span class="perfil_titulo">Data de nascimento: </span>
+                {% if jornalista.show_data_de_nascimento %}
+                  {{ jornalista.data_de_nascimento }}
+                {% else %}
+                  Não informado
+                {% endif %}
+              </p>
+              <!-- fim de data de nascimento -->
+
+              <!-- estado  -->
+              <p class="perfil-texto"><span class="perfil_titulo">Estado: </span>
+
+                {% if jornalista.show_estado %}
+                  {{ jornalista.estado }}
+                {% else %}
+                  Não informado
+                {% endif %}
+              </p>
+              <!-- fim de estado-->
+          </div>
+
+          <div class="col-md-6">
+              <!-- MTb -->
+              <p class="perfil-texto"><span class="perfil_titulo">MTb: </span>
+                {% if jornalista.show_registro %}
+                  {{ jornalista.registro }}
+                {% else %}
+                  Não informado
+                {% endif %}
+              </p>
+              <!-- fim de MTb -->  
+
+              <!-- nome de Cidade -->
+              <p class="perfil-texto"><span class="perfil_titulo">Cidade: </span>
+                {% if jornalista.show_cidade%}
+                  {{ jornalista.cidade }}
+                {% else %}
+                  Não informado
+                {% endif %}
+              </p>
+              <!-- fim de nome de Cidade -->
+
+               <!-- nome da Funcao -->
+              <p class="perfil-texto"><span class="perfil_titulo">Função: </span>
+                {% if jornalista.show_funcao%}
+                  {{ jornalista.nome_funcao }}
+                {% else %}
+                  Não informado
+                {% endif %}
+              </p>
+              <!-- fim de nome de Funcao-->
+          </div>
         </div>
       </div>
-  </body>
+      <!-- end of profile personal data -->
+    </div>
+    <!-- end of profile data -->
+
+
+    <!-- confiability percentage -->
+    <div class="row container indice_de_confiabilidade mb-1" id = "" >
+        <div class="texto_de_confiabilidade mx-auto w-50">
+          <span>
+            Confiabilidade: 100%
+          </span>
+        </div>
+    </div>
+    <!-- end of confiability percentage -->
+
+    <!-- other profile data organized as navs --> 
+    <div class="row container ">
+        <ul class="nav nav-tabs  bg-light d-flex justify-content-center" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="minimundo-tab" data-bs-toggle="tab" data-bs-target="#minibio" type="button" role="tab" aria-controls="minimundo" aria-selected="true">
+              Minimundo
+            </button>
+          </li>
+
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="experiencia-tab" data-bs-toggle="tab" data-bs-target="#experiencia" type="button" role="tab" aria-controls="experiencia" aria-selected="false">
+              Experiência profissional
+            </button>
+          </li>
+
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="cv-tab" data-bs-toggle="tab" data-bs-target="#cv" type="button" role="tab" aria-controls="cv" aria-selected="false">
+              CV
+            </button>
+          </li>
+
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="formacao-tab" data-bs-toggle="tab" data-bs-target="#formacao" type="button" role="tab" aria-controls="formacao" aria-selected="true">
+              Formação
+            </button>
+          </li>
+
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="idiomas-tab" data-bs-toggle="tab" data-bs-target="#idiomas" type="button" role="tab" aria-controls="idiomas" aria-selected="false">
+              Idiomas
+            </button>
+          </li>
+
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="publicacoes-tab" data-bs-toggle="tab" data-bs-target="#publicacoes" type="button" role="tab" aria-controls="publicacoes" aria-selected="false">
+              Publicações
+            </button>
+          </li>
+        </ul>
+
+        <div class="tab-content" id="myTabContent">
+
+          <div class="tab-pane fade show active" id="minibio" role="tabpanel" aria-labelledby="minimundo-tab">
+              <div class="row perfil_topico w-75 mx-auto fs-4 mt-3 mb-3">
+                Minibio
+              </div>
+
+              <div class="row card-jornalista w-75">
+                Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+              </div>
+          </div>
+
+          <div class="tab-pane fade" id="experiencia" role="tabpanel" aria-labelledby="experiencia-tab">
+            <div class="row perfil_topico w-75 mx-auto fs-4 mt-3 mb-3">
+                Experiencia Profissional
+              </div>
+
+              <div class="row card-jornalista w-75">
+              
+                  <h2 class="subtitulo">Histórico Profissional</h2>
+                  {% for h in jornalista.historicoprofissional_set.all %}
+                  <div class="card-jornalista w-75" id="historico-form">
+                    <div class="row gy-2 gx-3">
+                      <div class="col-md-6">
+                          <p class="perfil-texto"><strong>Veículo de comunicação: </strong>{{ h.veiculo_de_comunicacao }}</p>
+                          <p class="perfil-texto"><strong>Data de início: </strong>{{ h.data_inicio }}</p>
+                          <p class="perfil-texto"><strong>Cargo: </strong>{{ h.cargo }}</p>
+                      </div>
+
+                      <div class="col-md-6">
+                          <p class="perfil-texto"><strong>Tipo de Veículo: </strong>{{ h.tipo_de_veiculo }}</p>
+                          <p class="perfil-texto"><strong>Data de Termino: </strong>
+                            {% if h.data_termino %}
+                            {{ h.data_termino }}
+                            {% else %}
+                            Cargo Atual
+                            {% endif %}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="row gy-2 gx-3">
+                        <div class="col-md-12">
+                            <p class="perfil-texto"><strong>Descrição: </strong>{{ h.descricao }} </p>
+                        </div>
+                    </div>
+
+                  </div>
+                  {% empty %}
+                    <p class="perfil-text"><strong>Nenhum Histórico cadastrado</strong></p>
+                  {% endfor %}
+              </div>
+          </div>
+
+          <div class="tab-pane fade" id="cv" role="tabpanel" aria-labelledby="cv-tab">
+              <div class="row perfil_topico w-75 mx-auto fs-4 mt-3 mb-3">
+                CV 
+              </div>
+
+              <div class="row card-jornalista w-75">
+        
+                <div class="container text-center">
+                  {% if jornalista.curriculo %}
+                    <a href="{% url 'jornalistas:download_curriculo' jornalista.pk %}" class="btn btn-primary mb-2">Baixar Currículo Atual</a> 
+                  {% else %}
+                    <p class="perfil-text"><strong>Nenhum currículo cadastrado</strong></p>
+                  {% endif %}
+                  <!-- {{ jornalista.curriculo }} -->
+                </div>
+              </div>
+          </div>
+
+          <div class="tab-pane fade" id="formacao" role="tabpanel" aria-labelledby="formacao-tab">
+                <div class="row perfil_topico w-75 mx-auto fs-4 mt-3 mb-3">
+                  Formação
+                </div>
+
+                <div class="row d-flex justify-content-center">
+         
+                  {% for d in jornalista.diploma_set.all %}
+                  <div class="card-jornalista w-75 " id="diploma-form">
+                    <div class="row align-items-center justify-content-center">
+                      <div class="col-md-12 d-flex justify-content-end">
+                        <img src="{{ d.arquivo.url }}" alt="Imagem do diploma" width='300' height='300'>
+                      </div>
+                      <div class="col-md-12">
+                        <a href="{% url 'jornalistas:download_diploma' d.pk %}" class="btn btn-primary mb-2">Baixar Diploma</a>
+                        <p class="h6" class="perfil-text text-center"><strong>Descrição:</strong> {{ d.descricao }}</p>
+                      </div>
+                    </div>
+                  </div>
+                    {% empty %}
+                      <p class="perfil-text"><strong>Nenhum Diploma cadastrado</strong></p>
+                    {% endfor %}
+                </div>
+          </div>
+          
+
+          <div class="tab-pane fade" id="idiomas" role="tabpanel" aria-labelledby="idiomas-tab">
+              <div class="row perfil_topico w-75 mx-auto fs-4 mt-3 mb-3">
+                Idiomas
+              </div>
+
+              <div class="row">
+              </div>
+          </div>
+
+          <div class="tab-pane fade" id="publicacoes" role="tabpanel" aria-labelledby="publicacoes-tab">
+              <div class="row perfil_topico w-75 mx-auto fs-4 mt-3 mb-3">
+                Publicacoes
+              </div>
+
+              <div class="row">
+              </div>
+          </div>
+
+        </div>
+    </div>   
+    <!-- end of other profile data organized as navs -->
+
+  </div>
+  
 </main>
 {% endblock content %}
 
