@@ -488,11 +488,12 @@ table th, table td{
 
 .jornalistas_perfil_busca {
     background-color: #fff;
+    height: 100%;
+
 }
 
 
 .card_jornalista_busca {
-    width: 25%;
     justify-content: start;
     display: flex;
     flex-direction: column;
@@ -506,6 +507,7 @@ table th, table td{
     margin-bottom: 6vh;
     transition-timing-function: ease;
     /*background-color: #F2F2F2; */
+    height:  100%;
 }
 
 .foto_perfil_busca {
@@ -610,3 +612,84 @@ table th, table td{
     background-color: #014369;
 
 }
+
+.perfil_titulo {
+    font-weight:  bold;
+    color: #0288BB ;
+}
+
+.perfil_topico {
+    color:  #0288BB;
+
+}
+
+.perfil_nome {
+    font-weight:  bold;
+}
+
+.foto_outro_perfil {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  background-color: transparent;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.profile_other_picture {
+  box-sizing: border-box;
+  background: #CCE6F5;
+  border-color: #CED9DD;
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 100%;
+  z-index: 2;
+  position: static;
+  width: 75%;
+  height: 25%;
+
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+
+}
+
+.profile_other_picture img {
+  box-sizing: border-box;
+  width: 40%;
+  height: 40%;
+  padding-top: 30%;
+  padding-bottom: 30%;
+
+}
+
+.img_icon_tweeter {
+    width: 18px;
+    height:  18px;
+    margin-top:  5px;
+}
+
+.texto_de_confiabilidade {
+    color:  #fff;
+
+}
+
+.indice_de_confiabilidade {
+    background-color: #0288BB;
+}
+
+button.active {
+    color: #0288BB !important;
+}
+
+
+
+
+
+
+
+
+
+
+

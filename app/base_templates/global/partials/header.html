@@ -90,7 +90,7 @@
             {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'jornalistas:editar' user.jornalista.id %}"
-                    {% if "perfil" in request.path %} 
+                    {% if "editar-perfil" in request.path %} 
                         style="color: #929293" 
                     {% endif %}
                     >
@@ -121,6 +121,14 @@
             {% endif %}
 
 
+            {% if user.revisor and user.jornalista.is_aprovado %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'revisores:analise_jornalistas' %}"
+                    {% if "revisor" in request.path %}
+                        style="color: #929293"
+                    {% endif %}
+                    >Revisar</a></li>
+            {% endif %}
+
 
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'core:contato' %}"
@@ -131,14 +139,6 @@
                     Contato
                 </a>
             </li>
-
-            {% if user.revisor and user.jornalista.is_aprovado %}
-                <li class="nav-item"><a class="nav-link" href="{% url 'revisores:analise_jornalistas' %}"
-                    {% if "revisor" in request.path %}
-                        style="color: #929293"
-                    {% endif %}
-                    >Revisar</a></li>
-            {% endif %}
        
         </ul>
     </div>

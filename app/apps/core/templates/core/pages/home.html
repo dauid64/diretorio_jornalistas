@@ -83,7 +83,7 @@
         {% for jornalista in jornalistas %}
 
             <a href="{% url 'jornalistas:perfil' jornalista.id %} " style="display: block" class="">
-            <div class="row jornalistas_perfil_busca">
+            <div class="row jornalistas_perfil_busca w-50">
 
                         <!--
                         <div class="image-pessoa" style="border: none;">
@@ -111,12 +111,12 @@
                             <h5>{{ jornalista.nome_de_guerra }}</h5>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <span><strong>Associações: </strong>
+                                    <div><strong>Associações: </strong>
                                         {% if jornalista.show_associacoes %}
                                             {{ jornalista.associacoes.all|join:", "}}
                                         {% else %}
                                             Não informado
-                                        {% endif %}</span>
+                                        {% endif %}</div>
                                 </div>
                             </div>
                         </div>
