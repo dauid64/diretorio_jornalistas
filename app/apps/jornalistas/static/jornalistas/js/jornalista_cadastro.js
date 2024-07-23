@@ -1,4 +1,3 @@
-
 let number_of_alert_persona_data = 0
 const alert_personal_data = `
 <!-- alert for personal data form -->
@@ -30,9 +29,11 @@ function click_input_file() {
 }
 
 let login_data = document.getElementById("login_data");
-let personal_data_= document.getElementById("personal_data");
+let personal_data = document.getElementById("personal_data");
 
-personal_data.addEventListener("click", filling_personal_data);
+if (personal_data != null) {
+  personal_data.addEventListener("click", filling_personal_data);
+}
 
 let profile_picture_circle = document.getElementsByClassName("profile_picture")[0];
 
