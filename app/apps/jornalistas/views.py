@@ -247,6 +247,7 @@ class EditarJornalistaView(View):
         POST = request.POST
         print(POST)
         FILES = request.FILES
+        print("FILES: ", FILES)
         request.session['jornalista_data'] = POST
         jornalista = get_object_or_404(Jornalista, pk=pk)
         jornalista_logado = request.user.jornalista
@@ -282,6 +283,7 @@ class EditarJornalistaView(View):
         )
         if redes_sociais_form.is_valid() and jornalista_form.is_valid() \
                 and diploma_forms.is_valid():
+        
             jornalista_form.save()
             diploma_forms.save()
             redes_sociais_form.save()

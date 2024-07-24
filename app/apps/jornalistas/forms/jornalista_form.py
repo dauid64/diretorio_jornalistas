@@ -10,6 +10,7 @@ class JornalistaForm(forms.ModelForm):
     class Meta:
         model = Jornalista
         fields = [
+            'foto',
             'nome_de_guerra',
             'nome',
             'sobrenome',
@@ -36,6 +37,7 @@ class JornalistaForm(forms.ModelForm):
         ]
 
         labels = {
+            'foto':'foto',
             'cpf': 'CPF',
             'genero': 'Gênero',
             'registro': 'MTb',
@@ -54,6 +56,12 @@ class JornalistaForm(forms.ModelForm):
         }
 
         widgets = {
+            'foto': forms.FileInput(
+                attrs={
+                    'class': '',
+                    'id':'input_profile_photo'
+                }
+            ),
             'associacoes': forms.SelectMultiple(
                 attrs={
                     'class': 'select2 form-control'

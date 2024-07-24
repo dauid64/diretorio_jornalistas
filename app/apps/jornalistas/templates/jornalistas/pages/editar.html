@@ -32,33 +32,6 @@
   </div>
   <body>
       <div class="tela-cadastro" id="Primeiro">
-        <!--
-        <div class="subtitulo">
-          <h3>Crie uma nova conta</h3>
-        </div>
-
-      -->
-        
-        <!-- foto de perfil area -->
-        <!--
-        <div class="foto-perfil">
-          <img
-            src="{% static 'jornalistas/img/perfil.png' %}"
-            width="128"
-            height="130"
-            alt=""
-            style="margin-left: 2.5vh;"
-          />
-          <img
-            src="{% static 'jornalistas/img/upload.png' %}"
-            width="140"
-            height="39"
-            alt=""
-            style="margin-top: -4vh;"
-          />
-        </div>
-        -->
-
         <!-- alert -->
         <div class="container row pt-3 pb-0 mb-0 mx-auto">
           <div class="alert alert-warning alert-dismissible show justify-content-between mb-0" role="alert">
@@ -72,52 +45,54 @@
           </div>
         </div>
         <!-- end of alert -->
-
-        <!-- foto de perfil nova area -->
-        <div class="row container" id = "row_perfil_picture" >
-            <div class="col-md-12">
-
-               <div class="foto-perfil">
-
-                {% if jornalista.foto %}
-                  <div class="profile_picture_defined" >
-                      <img src="{{ jornalista.foto.url }}"
-                        class="img_defined"/>
-                  </div>
-               {% else %}
-                  <div class="profile_picture_not_defined" >
-                      <img src="{% static 'jornalistas/img/camera.png' %} " class="img_not_defined"/> 
-                  </div>
-                {% endif %}
-
-                <input type="file" name="profile_photo" id="input_profile_photo"/>
-                </div> 
-            </div>  
-        </div>
-
-        <!-- end of foto the perfil nova area -->
   
         <form method="POST" action="" class="form-cadastro" enctype='multipart/form-data' id='form_jornalista'>
           {% csrf_token %}
 
-        <div class="card-jornalista row col-md-0 w-75">
-          <div class="titulo">
-            <div class="circ-l"> </div>   
-            Dados Pessoais
+
+          <!-- foto de perfil nova area -->
+          <div class="row container" id = "row_perfil_picture" >
+              <div class="col-md-12">
+
+                 <div class="foto-perfil">
+
+                  {% if jornalista.foto %}
+                    <div class="profile_picture_defined" >
+                        <img src="{{ jornalista.foto.url }}"
+                          class="img_defined"/>
+                    </div>
+                 {% else %}
+
+                      <div class="profile_picture_not_defined" >
+                          <img src="{% static 'jornalistas/img/camera.png' %} " class="img_not_defined"/> 
+                      </div>
+                  {% endif %}
+
+                  {{jornalista_form.foto}}
+
+
+              </div>  
           </div>
+          <!-- end of foto the perfil nova area -->
 
-          {% include "jornalistas/partials/form_dados_pessoais.html" %}
+          <div class="card-jornalista row col-md-0 w-75">
+            <div class="titulo">
+              <div class="circ-l"> </div>   
+              Dados Pessoais
+            </div>
 
-          <h2 class="subtitulo">Redes Sociais</h2>
+            {% include "jornalistas/partials/form_dados_pessoais.html" %}
 
-          {% include "jornalistas/partials/form_redes_sociais.html" %}
+            <h2 class="subtitulo">Redes Sociais</h2>
 
-          <div class="titulo">
-            <div class="circ-l"> </div>   
-            Formação
-          </div>
-          
-          {% include "jornalistas/partials/form_formacao.html" %}
+            {% include "jornalistas/partials/form_redes_sociais.html" %}
+
+            <div class="titulo">
+              <div class="circ-l"> </div>   
+              Formação
+            </div>
+            
+            {% include "jornalistas/partials/form_formacao.html" %}
 
         </form>
 

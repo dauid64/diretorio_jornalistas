@@ -23,31 +23,6 @@
   </div>
   
   <div class="container" id="">
-    <!--
-    <div class="subtitulo">
-      <h3>Perfil do Jornalista</h3>
-    </div>
-    -->
-    
-    <!-- foto de perfil -->
-    <!-- 
-    <div class="foto-perfil">
-      <img
-        src="{% static 'jornalistas/img/perfil.png' %}"
-        width="128"
-        height="130"
-        alt=""
-        style="margin-left: 2.5vh;"
-      />
-      <img
-        src="{% static 'jornalistas/img/upload.png' %}"
-        width="140"
-        height="39"
-        alt=""
-        style="margin-top: -4vh;"
-      />
-    </div>
-    !-->
 
     <!-- profile data -->
     <div class="row container mb-1 mt-4">
@@ -55,7 +30,7 @@
       <!-- first column of the first row -->
       <div class="col-md-2">
           <!-- profile picture -->
-         <div class="row foto_outro_perfil pt-3">
+         <div class="row foto_outro_perfil ">
            {% if jornalista.foto %}
               <div class="profile_other_picture_defined" >
                   <img src="{{ jornalista.foto.url }}"
@@ -68,7 +43,7 @@
             {% endif %}
          </div>
 
-           <div class="row ">
+         <div class="row ">
               <div class="col-md-3">
                 <i class="bi bi-facebook"></i>
               </div>
@@ -84,7 +59,7 @@
               <div class="col-md-3">
                 <i class="bi bi-linkedin"></i>
               </div>
-           </div>
+         </div>
 
             <!--
             <h2 class="subtitulo">Redes Sociais</h2>

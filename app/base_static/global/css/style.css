@@ -618,8 +618,6 @@ table th, table td{
 }
 
 
-
-
 /* ------------------------------*/
 
 .foto-perfil {
@@ -629,6 +627,7 @@ table th, table td{
   background-color: transparent;
   justify-content: center;
   align-items: center;
+  margin-bottom: -5%;
 
 }
 
@@ -725,6 +724,11 @@ table th, table td{
   background-color: transparent;
   justify-content: center;
   align-items: center;
+  height: 80%;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 100%;
 }
 
 
@@ -737,8 +741,8 @@ table th, table td{
   border-radius: 100%;
   z-index: 2;
   position: static;
-  width: 75%;
-  height: 25%;
+  width: 80%;
+  height: 100%;
 
   display: flex;
   justify-content: center;
@@ -755,8 +759,8 @@ table th, table td{
   border-radius: 100%;
   z-index: 2;
   position: static;
-  width: 80%;
-  height: 25%;
+  width: 70%;
+  height: 80%;
 
   display: flex;
   justify-content: center;
@@ -769,17 +773,18 @@ table th, table td{
 
 .profile_other_picture_not_defined img.img_not_defined {
   box-sizing: border-box;
-  width: 40%;
-  height: 40%;
-  padding-top: 30%;
-  padding-bottom: 30%;
+  width: 70%;
+  height: 80%;
+  padding-top: 15%;
+  padding-bottom: 0%;
+
 
 }
 
 .profile_other_picture_defined img.img_defined {
   box-sizing: border-box;
   width: 100%;
-  height: 95%;
+  height: 100%;
   padding-top: 0%;
   padding-bottom: 0%;
   border-radius:  100%;
