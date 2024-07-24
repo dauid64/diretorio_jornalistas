@@ -245,6 +245,7 @@ class EditarJornalistaView(View):
 
     def post(self, request, pk):
         POST = request.POST
+        print(POST)
         FILES = request.FILES
         request.session['jornalista_data'] = POST
         jornalista = get_object_or_404(Jornalista, pk=pk)

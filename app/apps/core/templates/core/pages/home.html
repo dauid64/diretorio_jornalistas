@@ -79,11 +79,11 @@
 
     {% csrf_token %}
     {% if jornalistas %}
-    <div class="card_jornalista_busca container d-flex w-25" >
+    <div class="card_jornalista_busca container d-flex" >
         {% for jornalista in jornalistas %}
 
-            <a href="{% url 'jornalistas:perfil' jornalista.id %}" style="width:100%; height:25%" class="">
-            <div class="row jornalistas_perfil_busca w-100">
+            <a href="{% url 'jornalistas:perfil' jornalista.id %}"  class="w-50 d-flex align-items-center container" >
+            <div class="row jornalistas_perfil_busca">
 
                         <!--
                         <div class="image-pessoa" style="border: none;">
@@ -97,17 +97,24 @@
                          -->
 
                         <!-- profile picture -->
-                        <div class="foto_perfil_busca col-md-4 pt-1">
-                            <div class="profile_picture_search" >
-                                <img src="{% static 'jornalistas/img/camera.png' %} "/>
-                    
-                            </div>
+                        <div class="foto_perfil_busca col-md-3 pt-1">
+                            {% if jornalista.foto %}
+                              <div class="profile_picture_search_defined" >
+                                  <img src="{{ jornalista.foto.url }}"
+                                    class="img_defined"/>
+                              </div>
+                           {% else %}
+                              <div class="profile_picture_search_not_defined" >
+                                  <img src="{% static 'jornalistas/img/camera.png' %} " class="img_not_defined"/> 
+                              </div>
+                            {% endif %}
+
                         </div> 
             
                          <!-- end of profile picture -->
 
                         <!-- <div class="card"> -->
-                        <div class="jornalista_perfil_texto col-md-8" >
+                        <div class="jornalista_perfil_texto col-md-9" >
                             <h5>{{ jornalista.nome_de_guerra }}</h5>
                             <div class="row">
                                 <div class="col-md-12">

@@ -35,6 +35,10 @@ if (personal_data != null) {
   personal_data.addEventListener("click", filling_personal_data);
 }
 
-let profile_picture_circle = document.getElementsByClassName("profile_picture")[0];
+let profile_picture_circle = document.getElementsByClassName("profile_picture_defined")[0];
+
+if (profile_picture_circle == null) {
+  profile_picture_circle = document.getElementsByClassName("profile_picture_not_defined")[0];
+}
 
 profile_picture_circle.addEventListener("click", click_input_file);

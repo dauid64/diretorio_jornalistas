@@ -489,6 +489,7 @@ table th, table td{
 .jornalistas_perfil_busca {
     background-color: #fff;
     height: 100%;
+    width:  100%;
 
 }
 
@@ -510,6 +511,7 @@ table th, table td{
     height:  70%;
 }
 
+/* ------------------------- */
 .foto_perfil_busca {
   display: flex;
   flex-direction: column;
@@ -517,7 +519,7 @@ table th, table td{
   background-color: transparent;
   justify-content: center;
   align-items: center;
-  height: 90%;
+  height: 100%;
 
 }
 
@@ -555,6 +557,70 @@ table th, table td{
   margin-top: 3%vh;
 }
 
+/* ----------------------------*/
+
+.profile_picture_search_not_defined {
+  box-sizing: border-box;
+  background: #CCE6F5;
+  border-color: #CED9DD;
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 100%;
+  z-index: 2;
+  position: static;
+  width: 50%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+
+}
+
+.profile_picture_search_defined {
+  box-sizing: border-box;
+  background: #CCE6F5;
+  border-color: #CED9DD;
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 100%;
+  z-index: 2;
+  position: static;
+  width: 50%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+
+  padding-left:  0;
+  padding-right:  0;
+
+}
+
+.profile_picture_search_not_defined img.img_not_defined {
+  box-sizing: border-box;
+  width: 80%;
+  height: 80%;
+  padding-top: 20%;
+  padding-bottom: 0%;
+
+}
+
+.profile_picture_search_defined img.img_defined {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding-top: 0%;
+  padding-bottom: 0%;
+  border-radius:  100%;
+
+}
+
+
+
+
+/* ------------------------------*/
 
 .foto-perfil {
   display: flex;
@@ -566,7 +632,7 @@ table th, table td{
 
 }
 
-.profile_picture {
+.profile_picture_defined {
   box-sizing: border-box;
   background: #CCE6F5;
   border-color: #CED9DD;
@@ -584,7 +650,34 @@ table th, table td{
 
 }
 
-.profile_picture img {
+.profile_picture_defined img.img_defined {
+  box-sizing: border-box;
+  width: 40%;
+  height: 40%;
+  padding-top: 30%;
+  padding-bottom: 30%;
+
+}
+
+.profile_picture_not_defined {
+  box-sizing: border-box;
+  background: #CCE6F5;
+  border-color: #CED9DD;
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 100%;
+  z-index: 2;
+  position: static;
+  width: 10%;
+  height: 25%;
+
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+
+}
+
+.profile_picture_not_defined img.img_not_defined {
   box-sizing: border-box;
   width: 40%;
   height: 40%;
@@ -635,7 +728,7 @@ table th, table td{
 }
 
 
-.profile_other_picture {
+.profile_other_picture_not_defined {
   box-sizing: border-box;
   background: #CCE6F5;
   border-color: #CED9DD;
@@ -653,12 +746,43 @@ table th, table td{
 
 }
 
-.profile_other_picture img {
+.profile_other_picture_defined {
+  box-sizing: border-box;
+  background: #CCE6F5;
+  border-color: #CED9DD;
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 100%;
+  z-index: 2;
+  position: static;
+  width: 80%;
+  height: 25%;
+
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+
+  padding-left:  0;
+  padding-right:  0;
+
+}
+
+.profile_other_picture_not_defined img.img_not_defined {
   box-sizing: border-box;
   width: 40%;
   height: 40%;
   padding-top: 30%;
   padding-bottom: 30%;
+
+}
+
+.profile_other_picture_defined img.img_defined {
+  box-sizing: border-box;
+  width: 100%;
+  height: 95%;
+  padding-top: 0%;
+  padding-bottom: 0%;
+  border-radius:  100%;
 
 }
 

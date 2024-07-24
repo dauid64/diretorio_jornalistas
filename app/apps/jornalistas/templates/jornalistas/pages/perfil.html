@@ -56,9 +56,16 @@
       <div class="col-md-2">
           <!-- profile picture -->
          <div class="row foto_outro_perfil pt-3">
-            <div class="profile_other_picture" >
-              <img src="{% static 'jornalistas/img/camera.png' %} "/>
-            </div>
+           {% if jornalista.foto %}
+              <div class="profile_other_picture_defined" >
+                  <img src="{{ jornalista.foto.url }}"
+                    class="img_defined"/>
+              </div>
+           {% else %}
+              <div class="profile_other_picture_not_defined" >
+                  <img src="{% static 'jornalistas/img/camera.png' %} " class="img_not_defined"/> 
+              </div>
+            {% endif %}
          </div>
 
            <div class="row ">
