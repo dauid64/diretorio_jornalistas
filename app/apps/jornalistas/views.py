@@ -76,6 +76,7 @@ class PerfilJornalistaView(DetailView):
 
 class CadastroJornalistaView(View):
     def get(self, request):
+        jornalista = None
         jornalista_form = JornalistaForm()
         usuario_form = RegisterUserForm()
 
@@ -105,6 +106,7 @@ class CadastroJornalistaView(View):
             request,
             'jornalistas/pages/cadastro.html',
             context={
+                'jornalista': jornalista,
                 'usuario_form': usuario_form,
                 'jornalista_form': jornalista_form,
                 'diploma_forms': diploma_forms,
@@ -235,6 +237,7 @@ class EditarJornalistaView(View):
             request,
             'jornalistas/pages/editar.html',
             context={
+                'jornalista': jornalista,
                 'jornalista_form': jornalista_form,
                 'diploma_forms': diploma_forms,
                 'historico_form': historico_form,
