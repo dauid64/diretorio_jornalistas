@@ -4,9 +4,31 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic import View
-from apps.autenticacao.forms import RegisterUserForm, LoginForm
+from apps.autenticacao.forms import RegisterUserForm, LoginForm, RecuperarSenhaForm
 from django.contrib import messages
 
+
+class RecuperarSenha(View):
+    def get(self, request):
+        form = RecuperarSenhaForm()
+        return render(
+            request,
+            'autenticacao/pages/recuperar_senha.html',
+            context = {
+                'form': form
+            }
+        );
+
+    def post(self, request):
+        form = RecuperarSenhaForm()
+
+        return render(
+            request,
+            "autenticacao/pages/recuperar_senha.html",
+            context = {
+                'form': form
+            }
+        );
 
 class RegisterUserView(View):
     def get(self, request):

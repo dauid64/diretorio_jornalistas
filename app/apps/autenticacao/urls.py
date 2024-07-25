@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import RegisterUserView, LoginUserView, LogoutUserView
+from .views import RegisterUserView, LoginUserView, LogoutUserView, RecuperarSenha
 
 
 app_name = 'autenticacao'
@@ -15,5 +15,10 @@ urlpatterns = [
         'logout',
         LogoutUserView.as_view(),
         name='logout'
-    )
+    ),
+    path(
+        'recuperar_senha',
+        RecuperarSenha.as_view(),
+        name='recuperar_senha'
+    ),
 ]

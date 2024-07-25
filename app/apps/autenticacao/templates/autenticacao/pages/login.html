@@ -52,14 +52,14 @@
           </div class="">
                {% block esqueceu_senha %} <div class="small">
                 <p class="">
-                  <a class="fw-bold link" href="#">
+                  <a class="fw-bold link" href="{% url 'autenticacao:recuperar_senha' %}">
                     Recuperar senha
                   </a>
                 </p>
                {% endblock %}
           </div> 
-      </form>
-    </div>
+        </form>
+      </div>
   </div>
 </main>
 
