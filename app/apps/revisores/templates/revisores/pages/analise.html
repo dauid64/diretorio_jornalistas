@@ -17,18 +17,23 @@
             {% for jornalista in jornalistas %}
             <div class="d-flex" id='jornalista_{{ jornalista.id }} row'>
 
-                <!--
-                <div class="image-pessoa" style="border: none;">
-                    <img
-                        src="{% static 'jornalistas/img/perfil.png' %}"
-                        width="130"
-                        height="130"
-                        alt=""
-                    />
-                </div>
-                -->
+                <!-- profile picture -->
+                <div class="foto_perfil_analise col-md-2 pt-1">
+                    {% if jornalista.foto %}
+                      <div class="profile_picture_analyse_defined" >
+                          <img src="{{ jornalista.foto.url }}"
+                            class="img_defined"/>
+                      </div>
+                   {% else %}
+                      <div class="profile_picture_analyse_not_defined" >
+                          <img src="{% static 'jornalistas/img/camera.png' %} " class="img_not_defined"/> 
+                      </div>
+                    {% endif %}
+
+                </div> 
 
                 <!-- profile image -->
+                <!--
                 <div class="col-md-2">
                    <div class="foto_perfil_analise">
                       <div class="profile_picture_analise" >
@@ -36,6 +41,7 @@
                       </div>
                     </div> 
                 </div>  
+                -->
 
                 <!-- end of profile image -->
 

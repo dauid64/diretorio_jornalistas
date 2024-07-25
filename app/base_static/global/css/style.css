@@ -810,7 +810,7 @@ button.active {
     color: #0288BB !important;
 }
 
-.foto_perfil_analise {
+.foto_perfil_analise_defined {
   display: flex;
   flex-direction: column;
   border: none;
@@ -821,7 +821,7 @@ button.active {
   height: 100%;
 }
 
-.profile_picture_analise {
+.profile_picture_analyse_defined {
   box-sizing: border-box;
   background: #CCE6F5;
   border-color: #CED9DD;
@@ -839,7 +839,46 @@ button.active {
 
 }
 
-.profile_picture_analise img {
+.profile_picture_analyse_defined img.img_defined {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding-top: 0%;
+  padding-bottom: 0%;
+  border-radius:  100%;
+
+}
+
+.foto_perfil_analise_not_defined {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  background-color: transparent;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  height: 100%;
+}
+
+.profile_picture_analyse_not_defined {
+  box-sizing: border-box;
+  background: #CCE6F5;
+  border-color: #CED9DD;
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 100%;
+  z-index: 2;
+  position: static;
+  width: 50%;
+  height: 55%;
+
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+
+}
+
+.profile_picture_analyse_not_defined img.img_not_defined {
   box-sizing: border-box;
   width: 80%;
   height: 80%;
@@ -847,6 +886,7 @@ button.active {
   padding-bottom: 5%;
 
 }
+
 
 
 
