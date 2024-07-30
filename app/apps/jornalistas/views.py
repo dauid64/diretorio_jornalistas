@@ -18,6 +18,8 @@ from apps.revisores.models import Revisor
 from django.http import HttpResponse
 import os
 
+from apps.opcoes.models import Cidades, Estados
+
 
 PER_PAGE = int(os.getenv('PER_PAGE', 5))
 
@@ -79,6 +81,9 @@ class CadastroJornalistaView(View):
         jornalista = None
         jornalista_form = JornalistaForm()
         usuario_form = RegisterUserForm()
+
+        # sort the cities in alphabetical order to show the user
+        jornalista_form.fields["cidade"].queryset=Cidades.objects.order_by("descricao")
 
         diploma_formset = inlineformset_factory(
             Jornalista,
@@ -203,6 +208,10 @@ class EditarJornalistaView(View):
             instance=jornalista,
             data=jornalista_data
         )
+
+        # sort the cities in alphabetical order to show the user
+        jornalista_form.fields["cidade"].queryset=Cidades.objects.order_by("descricao")
+
         historico_form = HistoricoForm(experiencia_data)
         referencia_formset = inlineformset_factory(
             HistoricoProfissional,

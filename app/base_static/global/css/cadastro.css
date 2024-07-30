@@ -16,6 +16,7 @@ a:hover {
   box-shadow: 0 0 0 0.25rem var(--primary-focus);
 }
 
+
 .form-group .select2-selection {
   display: block;
   width: 100%;
@@ -27,12 +28,12 @@ a:hover {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  /* background-color: var(--bs-body-bg); */
   background-color: #CCE6F5;
   background-clip: padding-box;
   border-radius: var(--bs-border-radius);
   transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
+
 
 /*
 .tela-cadastro {

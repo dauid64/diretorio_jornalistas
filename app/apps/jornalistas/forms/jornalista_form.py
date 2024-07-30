@@ -1,9 +1,11 @@
 from django import forms
 from apps.jornalistas.models import Jornalista
+from apps.opcoes.models import Cidades, Estados
 from django.core.exceptions import ValidationError
 
 
 class JornalistaForm(forms.ModelForm):
+
     def __init__(self, *args, **kwargs):
         super(JornalistaForm, self).__init__(*args, **kwargs)
 
@@ -43,10 +45,10 @@ class JornalistaForm(forms.ModelForm):
         ]
 
         labels = {
-            'cidade':'cidade',
-            'estado':'estado',
+            'cidade':'Cidade',
+            'estado':'Estado',
             'show_funcao':'show_funcao',
-            'funcao':'funcao',
+            'funcao':'Função',
             'foto':'foto',
             'cpf': 'CPF',
             'genero': 'Gênero',
@@ -66,14 +68,14 @@ class JornalistaForm(forms.ModelForm):
         }
 
         widgets = {
-            'cidade': form.Select(
+            'cidade': forms.Select(
                 attrs={
-                    'class':'form-select'
+                    'class':'form-control'
                 }
             ),
-            'estado': form.Select(
+            'estado': forms.Select(
                 attrs={
-                    'class':'form-select'
+                    'class':' form-control'
                 }
             ),
             'funcao': forms.TextInput(
@@ -223,6 +225,7 @@ class JornalistaForm(forms.ModelForm):
                 }
             ),
         }
+
 
     def clean_telefone(self):
         data = self.cleaned_data['telefone']
