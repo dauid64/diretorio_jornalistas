@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from apps.revisores.models import Revisor
 from apps.associacoes.models import Associacao
 from apps.opcoes.models import Genero, EstadoCivil
+from apps.opcoes.models import Estados, Cidades
 
 
 class JornalistasManager(models.Manager):
@@ -43,7 +44,11 @@ class Jornalista(models.Model):
     curriculo = models.FileField(upload_to='curriculos/%Y/%m/%d/', blank=True, null=True)
     funcao = models.CharField(max_length=255, null=True, blank=True)
     show_funcao = models.BooleanField(blank=True,default=False)
-    
+    cidade = models.ForeignKey(Cidades, on_delete=models.SET_NULL,null=True, blank=True)
+    estado = models.ForeignKey(Estados, on_delete=models.SET_NULL,null=True, blank=True)
+    show_cidade = models.BooleanField(blank=True, default=False)
+    show_estado = models.BooleanField(blank=True, default=False)
+
     objects = JornalistasManager()
 
     @property

@@ -10,6 +10,8 @@ class JornalistaForm(forms.ModelForm):
     class Meta:
         model = Jornalista
         fields = [
+            'cidade',
+            'estado',
             'funcao',
             'foto',
             'nome_de_guerra',
@@ -35,10 +37,14 @@ class JornalistaForm(forms.ModelForm):
             'show_genero',
             'show_estado_civil',
             'show_registro',
-            'show_funcao'
+            'show_funcao',
+            'show_estado',
+            'show_cidade'
         ]
 
         labels = {
+            'cidade':'cidade',
+            'estado':'estado',
             'show_funcao':'show_funcao',
             'funcao':'funcao',
             'foto':'foto',
@@ -60,6 +66,16 @@ class JornalistaForm(forms.ModelForm):
         }
 
         widgets = {
+            'cidade': form.Select(
+                attrs={
+                    'class':'form-select'
+                }
+            ),
+            'estado': form.Select(
+                attrs={
+                    'class':'form-select'
+                }
+            ),
             'funcao': forms.TextInput(
                 attrs={
                     'class':'form-control',
@@ -192,6 +208,16 @@ class JornalistaForm(forms.ModelForm):
                 }
             ),
             'show_funcao': forms.CheckboxInput(
+                attrs ={
+                    'class':'form-check-input'
+                }
+            ),
+             'show_estado': forms.CheckboxInput(
+                attrs ={
+                    'class':'form-check-input'
+                }
+            ),
+              'show_cidade': forms.CheckboxInput(
                 attrs ={
                     'class':'form-check-input'
                 }

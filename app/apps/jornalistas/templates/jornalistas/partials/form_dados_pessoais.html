@@ -245,3 +245,46 @@
   <!-- end of function field -->
 </div>
 <!-- END ROW 4 -->
+
+<!-- ROW 5 -->
+<div class="row gy-2 gx-3">
+  <div class="col-md-4">
+    <div class="form-group">
+      {{ jornalista_form.show_estado_civil }}
+      <label for="{{ jornalista_form.estado_civil.id_for_label }}" class="form-label">{{ jornalista_form.estado_civil.label }}</label>
+      {% if jornalista_form.estado_civil.field.required %}<span class="required"> *</span>{% endif %}
+      {{ jornalista_form.estado_civil }}
+      {% if jornalista_form.estado_civil.help_text %}
+        <small  class="text-muted">
+            {{  jornalista_form.estado_civil.help_text }}
+        </small>
+      {% endif %}
+      {% if jornalista_form.estado_civil.errors %}
+        {% for error in jornalista_form.estado_civil.errors %}
+          <div class="alert alert-danger"> {{ error }}</div>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+
+    <div class="col-md-4">
+    <div class="form-group">
+      {{ jornalista_form.show_estado_civil }}
+      <label for="{{ jornalista_form.estado_civil.id_for_label }}" class="form-label">{{ jornalista_form.estado_civil.label }}</label>
+      {% if jornalista_form.estado_civil.field.required %}<span class="required"> *</span>{% endif %}
+      {{ jornalista_form.estado_civil }}
+      {% if jornalista_form.estado_civil.help_text %}
+        <small  class="text-muted">
+            {{  jornalista_form.estado_civil.help_text }}
+        </small>
+      {% endif %}
+      {% if jornalista_form.estado_civil.errors %}
+        {% for error in jornalista_form.estado_civil.errors %}
+          <div class="alert alert-danger"> {{ error }}</div>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+ 
+</div>
+<!-- end row 5 -->
