@@ -219,5 +219,29 @@
       {% endif %}
     </div>
   </div>
+
+  <!-- begin of function field -->
+  <div class="col-md-4">
+    <div class="form-group">
+      {{ jornalista_form.show_funcao }}
+      <label for="{{ jornalista_form.funcao.id_for_funcao }}" class="form-label">{{ jornalista_form.funcao.label }}</label>
+      {% if jornalista_form.funcao.field.required %}<span class="required"> *</span>{% endif %}
+
+      {{ jornalista_form.funcao }}
+
+      {% if jornalista_form.funcao.help_text %}
+        <small  class="text-muted">
+            {{  jornalista_form.funcao.help_text }}
+        </small>
+      {% endif %}
+      
+      {% if jornalista_form.funcao.errors %}
+        {% for error in jornalista_form.funcao.errors %}
+          <div class="alert alert-danger"> {{ error }}</div>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+  <!-- end of function field -->
 </div>
 <!-- END ROW 4 -->

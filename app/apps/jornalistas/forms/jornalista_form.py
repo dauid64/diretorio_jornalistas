@@ -10,6 +10,7 @@ class JornalistaForm(forms.ModelForm):
     class Meta:
         model = Jornalista
         fields = [
+            'funcao',
             'foto',
             'nome_de_guerra',
             'nome',
@@ -33,10 +34,13 @@ class JornalistaForm(forms.ModelForm):
             'show_telefone',
             'show_genero',
             'show_estado_civil',
-            'show_registro'
+            'show_registro',
+            'show_funcao'
         ]
 
         labels = {
+            'show_funcao':'show_funcao',
+            'funcao':'funcao',
             'foto':'foto',
             'cpf': 'CPF',
             'genero': 'Gênero',
@@ -56,6 +60,13 @@ class JornalistaForm(forms.ModelForm):
         }
 
         widgets = {
+            'funcao': forms.TextInput(
+                attrs={
+                    'class':'form-control',
+                    'id':'',
+                }
+            ),
+
             'foto': forms.FileInput(
                 attrs={
                     'class': '',
@@ -178,6 +189,11 @@ class JornalistaForm(forms.ModelForm):
             'show_registro': forms.CheckboxInput(
                 attrs={
                     'class': 'form-check-input'
+                }
+            ),
+            'show_funcao': forms.CheckboxInput(
+                attrs ={
+                    'class':'form-check-input'
                 }
             ),
         }

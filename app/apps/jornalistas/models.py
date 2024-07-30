@@ -41,7 +41,9 @@ class Jornalista(models.Model):
     aprovado = models.BooleanField(default=False)
     revisor_responsavel = models.ForeignKey(Revisor, on_delete=models.PROTECT, null=True, blank=True)
     curriculo = models.FileField(upload_to='curriculos/%Y/%m/%d/', blank=True, null=True)
-
+    funcao = models.CharField(max_length=255, null=True, blank=True)
+    show_funcao = models.BooleanField(blank=True,default=False)
+    
     objects = JornalistasManager()
 
     @property
