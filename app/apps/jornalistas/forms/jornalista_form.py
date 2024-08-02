@@ -12,6 +12,7 @@ class JornalistaForm(forms.ModelForm):
     class Meta:
         model = Jornalista
         fields = [
+            'minibio',
             'cidade',
             'estado',
             'funcao',
@@ -45,6 +46,7 @@ class JornalistaForm(forms.ModelForm):
         ]
 
         labels = {
+            'minibio':'Minibio',
             'cidade':'Cidade',
             'estado':'Estado',
             'show_funcao':'show_funcao',
@@ -68,6 +70,13 @@ class JornalistaForm(forms.ModelForm):
         }
 
         widgets = {
+
+            'minibio': forms.Textarea(
+                attrs={
+                    'class':'form-control',
+                    'id':''
+                }
+            ),
             'cidade': forms.Select(
                 attrs={
                     'class':'form-control'

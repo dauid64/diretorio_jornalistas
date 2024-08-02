@@ -48,6 +48,7 @@ class Jornalista(models.Model):
     estado = models.ForeignKey(Estados, on_delete=models.SET_NULL,null=True, blank=True)
     show_cidade = models.BooleanField(blank=True, default=False)
     show_estado = models.BooleanField(blank=True, default=False)
+    minibio = models.TextField(blank=True, null=True)
 
     objects = JornalistasManager()
 

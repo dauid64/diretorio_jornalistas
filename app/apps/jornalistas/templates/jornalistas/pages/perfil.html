@@ -181,55 +181,74 @@
     <!-- other profile data organized as navs --> 
     <div class="row container ">
         <ul class="nav nav-tabs  bg-light d-flex justify-content-center" id="myTab" role="tablist">
+
+          <!-- minibio field -->
           <li class="nav-item" role="presentation">
             <button class="nav-link active" id="minimundo-tab" data-bs-toggle="tab" data-bs-target="#minibio" type="button" role="tab" aria-controls="minimundo" aria-selected="true">
               Minibio
             </button>
           </li>
+          <!-- end of minibio field -->
 
+          <!-- experiencia profissional field --
           <li class="nav-item" role="presentation">
             <button class="nav-link" id="experiencia-tab" data-bs-toggle="tab" data-bs-target="#experiencia" type="button" role="tab" aria-controls="experiencia" aria-selected="false">
               Experiência profissional
             </button>
           </li>
+          !-- end of experiencia profissional field -->
 
+          <!-- Curriculum Vitae field -->
           <li class="nav-item" role="presentation">
             <button class="nav-link" id="cv-tab" data-bs-toggle="tab" data-bs-target="#cv" type="button" role="tab" aria-controls="cv" aria-selected="false">
-              CV
+              Curriculum Vitae
             </button>
           </li>
+          <!-- end of Curriculum Vitae field -->
 
+
+          <!-- formacao field --
           <li class="nav-item" role="presentation">
             <button class="nav-link" id="formacao-tab" data-bs-toggle="tab" data-bs-target="#formacao" type="button" role="tab" aria-controls="formacao" aria-selected="true">
               Formação
             </button>
           </li>
+          !-- end of formacao field -->
 
+          <!-- idiomas field --
           <li class="nav-item" role="presentation">
             <button class="nav-link" id="idiomas-tab" data-bs-toggle="tab" data-bs-target="#idiomas" type="button" role="tab" aria-controls="idiomas" aria-selected="false">
               Idiomas
             </button>
           </li>
+          !-- end of idiomas field -->
 
+          <!-- publicacoes field --
           <li class="nav-item" role="presentation">
             <button class="nav-link" id="publicacoes-tab" data-bs-toggle="tab" data-bs-target="#publicacoes" type="button" role="tab" aria-controls="publicacoes" aria-selected="false">
               Publicações
             </button>
           </li>
+          !-- end of publicacoes field -->
+
         </ul>
 
         <div class="tab-content" id="myTabContent">
-
+          <!-- minibio field -->
           <div class="tab-pane fade show active" id="minibio" role="tabpanel" aria-labelledby="minimundo-tab">
               <div class="row perfil_topico w-75 mx-auto fs-4 mt-3 mb-3">
                 Minibio
               </div>
 
               <div class="row card-jornalista w-75">
-                Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                {% for line in  jornalista.minibio.splitlines %}
+                  {{line}} <br>
+                {% endfor %}
               </div>
           </div>
+          <!-- end of minibio field -->
 
+          <!-- experiencia profissional -->
           <div class="tab-pane fade" id="experiencia" role="tabpanel" aria-labelledby="experiencia-tab">
             <div class="row perfil_topico w-75 mx-auto fs-4 mt-3 mb-3">
                 Experiência Profissional
@@ -271,10 +290,12 @@
                   {% endfor %}
               </div>
           </div>
+          <!-- end of experiencia profisional -->
 
+          <!-- CV field -->
           <div class="tab-pane fade" id="cv" role="tabpanel" aria-labelledby="cv-tab">
               <div class="row perfil_topico w-75 mx-auto fs-4 mt-3 mb-3">
-                CV 
+                Curriculum Vitae
               </div>
 
               <div class="row card-jornalista w-75">
@@ -289,7 +310,9 @@
                 </div>
               </div>
           </div>
+          <!-- end of CV field -->
 
+          <!-- formacao field -->
           <div class="tab-pane fade" id="formacao" role="tabpanel" aria-labelledby="formacao-tab">
                 <div class="row perfil_topico w-75 mx-auto fs-4 mt-3 mb-3">
                   Formação
@@ -314,8 +337,9 @@
                     {% endfor %}
                 </div>
           </div>
-          
+          !-- end of formacao field -->
 
+          <!-- idiomas field -->
           <div class="tab-pane fade" id="idiomas" role="tabpanel" aria-labelledby="idiomas-tab">
               <div class="row perfil_topico w-75 mx-auto fs-4 mt-3 mb-3">
                 Idiomas
@@ -324,6 +348,8 @@
               <div class="row">
               </div>
           </div>
+          <!-- end of idiomas field -->
+
 
           <div class="tab-pane fade" id="publicacoes" role="tabpanel" aria-labelledby="publicacoes-tab">
               <div class="row perfil_topico w-75 mx-auto fs-4 mt-3 mb-3">
