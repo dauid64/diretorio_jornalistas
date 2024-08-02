@@ -206,14 +206,15 @@
           </li>
           <!-- end of Curriculum Vitae field -->
 
-
-          <!-- formacao field --
-          <li class="nav-item" role="presentation">
-            <button class="nav-link" id="formacao-tab" data-bs-toggle="tab" data-bs-target="#formacao" type="button" role="tab" aria-controls="formacao" aria-selected="true">
-              Formação
-            </button>
-          </li>
-          !-- end of formacao field -->
+          {% if user.is_authenticated and user.is_revisor %}
+            <!-- formacao field -->
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="formacao-tab" data-bs-toggle="tab" data-bs-target="#formacao" type="button" role="tab" aria-controls="formacao" aria-selected="true">
+                Diploma
+              </button>
+            </li>
+            <!-- end of formacao field -->
+          {% endif %}
 
           <!-- idiomas field --
           <li class="nav-item" role="presentation">
@@ -315,7 +316,7 @@
           <!-- formacao field -->
           <div class="tab-pane fade" id="formacao" role="tabpanel" aria-labelledby="formacao-tab">
                 <div class="row perfil_topico w-75 mx-auto fs-4 mt-3 mb-3">
-                  Formação
+                  Diploma
                 </div>
 
                 <div class="row d-flex justify-content-center">
@@ -323,12 +324,19 @@
                   {% for d in jornalista.diploma_set.all %}
                   <div class="card-jornalista w-75 " id="diploma-form">
                     <div class="row align-items-center justify-content-center">
-                      <div class="col-md-12 d-flex justify-content-end">
-                        <img src="{{ d.arquivo.url }}" alt="Imagem do diploma" width='300' height='300'>
+
+                      <div class="col-md-12 d-flex justify-content-center">
+                        <!--<img src="{{ d.arquivo.url }}" alt="Imagem do diploma" width='300' height='300'> -->
+                        <img src="{{ d.arquivo.url }}" alt="Imagem do diploma" style="width: 80%; height: 80%">
                       </div>
-                      <div class="col-md-12">
+
+                      <div class="col-md-12 d-flex justify-content-center mt-2">
                         <a href="{% url 'jornalistas:download_diploma' d.pk %}" class="btn btn-primary mb-2">Baixar Diploma</a>
-                        <p class="h6" class="perfil-text text-center"><strong>Descrição:</strong> {{ d.descricao }}</p>
+                        <div class="h6" class="d-flex align-items-center">
+                            <div class="pt-2 ps-1">
+                              <strong>Descrição:</strong> {{ d.descricao }}
+                            </div>
+                        </div>
                       </div>
                     </div>
                   </div>
