@@ -206,7 +206,14 @@
           </li>
           <!-- end of Curriculum Vitae field -->
 
-          {% if user.is_authenticated and user.is_revisor %}
+          {% if user.is_authenticated %}
+            <!--
+            {% for estado in estados %}
+              {{estado}}
+            {% endfor %}
+            -->
+
+
             <!-- formacao field -->
             <li class="nav-item" role="presentation">
               <button class="nav-link" id="formacao-tab" data-bs-toggle="tab" data-bs-target="#formacao" type="button" role="tab" aria-controls="formacao" aria-selected="true">

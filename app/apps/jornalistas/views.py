@@ -75,6 +75,12 @@ class PerfilJornalistaView(DetailView):
     template_name = 'jornalistas/pages/perfil.html'
     context_object_name = 'jornalista'
 
+    def get_context_data(self,*args, **kwargs):
+        context = super().get_context_data(*args,**kwargs)
+        #context['jornalista'] = model
+        context['estados'] = Estados.objects.all()
+        return context
+
 
 class CadastroJornalistaView(View):
     def get(self, request):
