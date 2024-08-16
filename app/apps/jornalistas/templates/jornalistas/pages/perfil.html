@@ -207,11 +207,14 @@
           <!-- end of Curriculum Vitae field -->
 
           {% if user.is_authenticated %}
-            <!--
-            {% for estado in estados %}
-              {{estado}}
-            {% endfor %}
-            -->
+
+             <!--
+              {{ user.username }}
+              {{ lista_de_revisores }}
+              {{ jornalista.usuario }}
+              {{ jornalista.usuario|stringformat:"s" }}
+              -->
+            {% if user.username in lista_de_revisores %}
 
 
             <!-- formacao field -->
@@ -221,6 +224,7 @@
               </button>
             </li>
             <!-- end of formacao field -->
+            {% endif %}
           {% endif %}
 
           <!-- idiomas field --
@@ -327,6 +331,12 @@
                 </div>
 
                 <div class="row d-flex justify-content-center">
+                  <!--
+                   {% for estado in estados %}
+                   {{estado}}
+                   {% endfor %}
+                   -->
+            
          
                   {% for d in jornalista.diploma_set.all %}
                   <div class="card-jornalista w-75 " id="diploma-form">

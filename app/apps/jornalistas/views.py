@@ -75,10 +75,29 @@ class PerfilJornalistaView(DetailView):
     template_name = 'jornalistas/pages/perfil.html'
     context_object_name = 'jornalista'
 
+    jornalistas = Jornalista.objects.all()
+    revisores = Revisor.objects.all()
+
+    for v in jornalistas:
+        print(v.usuario)
+
+    print()
+
+    for v in revisores:
+        print(v.usuario)
+
+    print()
+    user_is_revisor = True
+
+    list_of_revisors  = [user.usuario.username for user in revisores]
+
     def get_context_data(self,*args, **kwargs):
         context = super().get_context_data(*args,**kwargs)
         #context['jornalista'] = model
+        context['lista_de_revisores'] = PerfilJornalistaView.list_of_revisors
+
         context['estados'] = Estados.objects.all()
+        context['user_is_revisor'] = PerfilJornalistaView.user_is_revisor
         return context
 
 
