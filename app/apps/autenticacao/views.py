@@ -11,6 +11,7 @@ from django.contrib import messages
 class RecuperarSenha(View):
     def get(self, request):
         form = RecuperarSenhaForm()
+
         return render(
             request,
             'autenticacao/pages/recuperar_senha.html',
@@ -20,7 +21,14 @@ class RecuperarSenha(View):
         );
 
     def post(self, request):
-        form = RecuperarSenhaForm()
+        form = RecuperarSenhaForm(request.POST)
+
+        email = request.POST['email']
+
+        if form.is_valid():
+            cd = form.cleaned_data
+
+            print("form sended!")
 
         return render(
             request,

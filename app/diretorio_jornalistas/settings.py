@@ -184,3 +184,23 @@ CSRF_TRUSTED_ORIGINS = [
     h.strip() for h in os.getenv('CSRF_TRUSTED_ORIGINS').split(',')
     if h.strip()
 ]
+
+# email server configuration
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER ='diretorioprofissaojornalista@gmail.com'
+EMAIL_HOST_PASSWORD = 'NxyY5YbPY5'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True 
+
+
+
+
+
+
+
+
+
+
+
+
+
