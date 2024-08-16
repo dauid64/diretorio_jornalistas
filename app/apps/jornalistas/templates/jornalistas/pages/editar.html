@@ -11,6 +11,10 @@
   .hide {
     display: none;
   }
+
+  #curriculo_id {
+    display: none;
+  }
 </style>
 {% endblock styles %}
 {% block content %}
@@ -154,7 +158,15 @@
           
           <div class="container text-center">
             {% if jornalista_form.instance.curriculo %}
+              <!--
               <a href="{% url 'jornalistas:download_curriculo' jornalista_form.instance.pk %}" class="btn btn-primary mb-2">Baixar Currículo Atual</a>
+              -->
+
+              <a href="" class="btn btn-primary mb-2" id="link_to_update_cv">Atualizar Currículo Atual
+              </a>
+            {% else %}
+              <a href="" class="btn btn-primary mb-2" id="link_to_update_cv">Inserir Currículo
+              </a>
             {% endif %}
             {{ jornalista_form.curriculo }}
             {% if jornalista_form.curriculo.errors %}
@@ -181,6 +193,8 @@
           </div>
 
         </div>
+
+
 
         </div>
       </div>

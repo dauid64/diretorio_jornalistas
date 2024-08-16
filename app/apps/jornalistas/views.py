@@ -78,6 +78,7 @@ class PerfilJornalistaView(DetailView):
     jornalistas = Jornalista.objects.all()
     revisores = Revisor.objects.all()
 
+    """
     for v in jornalistas:
         print(v.usuario)
 
@@ -87,6 +88,7 @@ class PerfilJornalistaView(DetailView):
         print(v.usuario)
 
     print()
+    """
     user_is_revisor = True
 
     list_of_revisors  = [user.usuario.username for user in revisores]

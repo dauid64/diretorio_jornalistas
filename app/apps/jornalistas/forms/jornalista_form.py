@@ -160,7 +160,8 @@ class JornalistaForm(forms.ModelForm):
             ),
             'curriculo': forms.FileInput(
                 attrs={
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'id': 'curriculo_id'
                 }
             ),
             'show_nome_de_guerra': forms.CheckboxInput(

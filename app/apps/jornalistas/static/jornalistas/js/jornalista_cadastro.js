@@ -42,3 +42,18 @@ if (profile_picture_circle == null) {
 }
 
 profile_picture_circle.addEventListener("click", click_input_file);
+
+let jornalista_curriculo_input = document.getElementById("curriculo_id");
+let jornalista_curriculo_atualizar = document.getElementById("link_to_update_cv")
+
+jornalista_curriculo_atualizar.addEventListener("click",()=>{
+  jornalista_curriculo_input.click()
+})
+
+
+
+
+
+
+
+
