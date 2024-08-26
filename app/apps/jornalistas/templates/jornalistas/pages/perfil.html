@@ -166,7 +166,7 @@
              <!-- Email -->
               <p class="perfil-texto"><span class="perfil_titulo">E-mail: </span>
                 {% if jornalista.show_email %}
-                  {{ user.email }}
+                  {{ jornalista.usuario.email }}
                 {% else %}
                   Não informado
                 {% endif %}
