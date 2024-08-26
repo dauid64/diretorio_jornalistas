@@ -188,7 +188,7 @@ CSRF_TRUSTED_ORIGINS = [
 # email server configuration
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER ='diretorioprofissaojornalista@gmail.com'
-EMAIL_HOST_PASSWORD = 'NxyY5YbPY5'
+EMAIL_HOST_PASSWORD = 'upld sqfp invn epxw'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True 
 

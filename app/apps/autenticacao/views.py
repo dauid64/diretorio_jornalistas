@@ -1,3 +1,4 @@
+import random
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
@@ -6,6 +7,8 @@ from django.utils.decorators import method_decorator
 from django.views.generic import View
 from apps.autenticacao.forms import RegisterUserForm, LoginForm, RecuperarSenhaForm
 from django.contrib import messages
+from django.core.mail import send_mail
+from apps.jornalistas.models import Jornalista
 
 
 class RecuperarSenha(View):
@@ -25,8 +28,36 @@ class RecuperarSenha(View):
 
         email = request.POST['email']
 
-        if form.is_valid():
+        jornalistas = Jornalista.objects.all()
+        users = [jornalista.usuario for jornalista in jornalistas]
+
+        found = False
+        username = ''
+        target_user =None
+
+        for user in users:
+            if user.email == email:
+                found = True 
+                username = user.username
+                target_user = user
+
+
+
+
+        new_password = int(random.random()*10**6)
+
+        if form.is_valid() and found:
+            target_user.set_password(str(new_password));
+            target_user.save();
+
             cd = form.cleaned_data
+            subject: str = "Nova Senha da APJOR"
+            message: str = f"Usuário {username} sua nova senha é {new_password}"
+            sender="diretorioprofissaojornalista@gmail.com"
+            list_of_targets = [email]
+
+
+            send_mail(subject,message,sender,list_of_targets)
 
             print("form sended!")
 
