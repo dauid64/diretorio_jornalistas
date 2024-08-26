@@ -75,8 +75,7 @@ class PerfilJornalistaView(DetailView):
     template_name = 'jornalistas/pages/perfil.html'
     context_object_name = 'jornalista'
 
-    jornalistas = Jornalista.objects.all()
-    revisores = Revisor.objects.all()
+    
 
     """
     for v in jornalistas:
@@ -90,13 +89,15 @@ class PerfilJornalistaView(DetailView):
     print()
     """
     user_is_revisor = True
-
-    list_of_revisors  = [user.usuario.username for user in revisores]
-
     def get_context_data(self,*args, **kwargs):
+
+        jornalistas = Jornalista.objects.all()
+        revisores = Revisor.objects.all()
+        list_of_revisors  = [user.usuario.username for user in revisores]
+
         context = super().get_context_data(*args,**kwargs)
         #context['jornalista'] = model
-        context['lista_de_revisores'] = PerfilJornalistaView.list_of_revisors
+        context['lista_de_revisores'] = list_of_revisors
 
         context['estados'] = Estados.objects.all()
         context['user_is_revisor'] = PerfilJornalistaView.user_is_revisor
@@ -220,6 +221,7 @@ class CadastroJornalistaView(View):
 class EditarJornalistaView(View):
     def get(self, request, pk):
         jornalista = get_object_or_404(Jornalista, pk=pk)
+        usuario = jornalista.usuario
         jornalista_logado = request.user.jornalista
         if jornalista != jornalista_logado:
             messages.warning(
@@ -234,6 +236,12 @@ class EditarJornalistaView(View):
         jornalista_form = JornalistaForm(
             instance=jornalista,
             data=jornalista_data
+        )
+
+        usuario_data = request.session.get("usuario_data",None)
+        usuario_form = RegisterUserForm(
+            instance=usuario,
+            data=usuario_data
         )
 
         # sort the cities in alphabetical order to show the user
@@ -273,6 +281,7 @@ class EditarJornalistaView(View):
             request,
             'jornalistas/pages/editar.html',
             context={
+                'usuario_form': usuario_form,
                 'jornalista': jornalista,
                 'jornalista_form': jornalista_form,
                 'diploma_forms': diploma_forms,
@@ -284,6 +293,8 @@ class EditarJornalistaView(View):
 
     def post(self, request, pk):
         POST = request.POST
+        usuario_form = RegisterUserForm(POST)
+
         print(POST)
         FILES = request.FILES
         print("FILES: ", FILES)
@@ -299,6 +310,7 @@ class EditarJornalistaView(View):
                 reverse('core:home')
             )
         jornalista_form = JornalistaForm(instance=jornalista, data=POST, files=FILES)
+        usuario_form = RegisterUserForm(instance=jornalista.usuario,data=POST)
         diploma_formset = inlineformset_factory(
             Jornalista,
             Diploma,
@@ -322,6 +334,16 @@ class EditarJornalistaView(View):
         )
         if redes_sociais_form.is_valid() and jornalista_form.is_valid() \
                 and diploma_forms.is_valid():
+
+            #user = usuario_form.save(commit=False)
+            #user.set_password(user.password)
+            #user.save()
+
+            user  = jornalista.usuario 
+            user.email = POST['email']
+            user.set_password(POST['password'])
+
+            user.save()
         
             jornalista_form.save()
             diploma_forms.save()

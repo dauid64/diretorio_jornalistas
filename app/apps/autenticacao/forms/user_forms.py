@@ -37,7 +37,7 @@ class RegisterUserForm(forms.ModelForm):
         ]
         labels = {
             'username': 'Usuário',
-            'email': 'Email',
+            'email': 'E-mail',
             'password': 'Senha'
         }
 
@@ -58,7 +58,7 @@ class RegisterUserForm(forms.ModelForm):
             'email': forms.EmailInput(
                 attrs={
                     "class": "form-control",
-                    "placeholder": "Email"
+                    "placeholder": "E-mail"
                 }
             ),
             'password': forms.PasswordInput(

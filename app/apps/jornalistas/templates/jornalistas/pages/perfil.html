@@ -96,7 +96,7 @@
         </div>
       
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-4">
 
               <!-- nome de guerra -->
               <p class="perfil-texto"><span class="perfil_titulo">Nome de guerra: </span>
@@ -130,7 +130,7 @@
               <!-- fim de estado-->
           </div>
 
-          <div class="col-md-6">
+          <div class="col-md-4">
               <!-- MTb -->
               <p class="perfil-texto"><span class="perfil_titulo">MTb: </span>
                 {% if jornalista.show_registro %}
@@ -160,6 +160,19 @@
                 {% endif %}
               </p>
               <!-- fim de nome de Funcao-->
+          </div>
+
+          <div class="col-md-4">
+             <!-- Email -->
+              <p class="perfil-texto"><span class="perfil_titulo">E-mail: </span>
+                {% if jornalista.show_email %}
+                  {{ user.email }}
+                {% else %}
+                  Não informado
+                {% endif %}
+              </p>
+              <!-- fim de email -->  
+
           </div>
         </div>
       </div>

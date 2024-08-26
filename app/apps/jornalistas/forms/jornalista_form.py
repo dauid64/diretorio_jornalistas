@@ -42,7 +42,8 @@ class JornalistaForm(forms.ModelForm):
             'show_registro',
             'show_funcao',
             'show_estado',
-            'show_cidade'
+            'show_cidade',
+            'show_email'
         ]
 
         labels = {
@@ -70,6 +71,13 @@ class JornalistaForm(forms.ModelForm):
         }
 
         widgets = {
+
+            'show_email': forms.CheckboxInput (
+                attrs={
+                    'class':'form-check-input',
+                }
+
+            ),
 
             'minibio': forms.Textarea(
                 attrs={

@@ -50,6 +50,8 @@ class Jornalista(models.Model):
     show_estado = models.BooleanField(blank=True, default=False)
     minibio = models.TextField(blank=True, null=True)
 
+    show_email = models.BooleanField(blank=True,default=False);
+
     objects = JornalistasManager()
 
     @property
