@@ -185,6 +185,7 @@ CSRF_TRUSTED_ORIGINS = [
     if h.strip()
 ]
 
+
 # email server configuration
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER ='diretorioprofissaojornalista@gmail.com'
@@ -192,8 +193,14 @@ EMAIL_HOST_PASSWORD = 'upld sqfp invn epxw'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True 
 
-
-
+"""
+# email server configuration
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER ='profissaojornalista@profissaojornalista.com.br'
+EMAIL_HOST_PASSWORD = 'Ish1k@w@9o7t048qlw'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = True
+"""
 
 
 

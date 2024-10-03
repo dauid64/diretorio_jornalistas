@@ -65,7 +65,8 @@ class RecuperarSenha(View):
             request,
             "autenticacao/pages/recuperar_senha.html",
             context = {
-                'form': form
+                'form': form,
+                'found': found
             }
         );
 

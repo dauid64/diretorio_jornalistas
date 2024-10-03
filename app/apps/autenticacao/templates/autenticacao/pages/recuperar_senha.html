@@ -4,6 +4,8 @@
 {% block content %}
 
 <main class=" container">
+
+
 	<div class="row mt-5 container d-flex justify-content-center">
 		<h1 class="text-center"> Recuperação de Senha </h1>
 	</div>
@@ -24,6 +26,23 @@
 	          </div>
 	        </form>
       	</div>
+
+      	{% if request.method == "POST" %}
+	      	{% if found %}
+	      		<!--<script>alert("found!");</script>-->
+
+	      		<div class="alert alert-warning alert-dismissible fade show alert-primary" role="alert">
+					Nova senha enviada para email informado
+				  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				</div>
+	      	{% else %}
+	      		<!-- <script>alert("not found!"); </script> -->
+	      		<div class="alert alert-warning alert-dismissible fade show alert-danger" role="alert">
+				  	Email não cadastrado
+				  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				</div>
+	      	{% endif %}
+	    {% endif %}
 	</div>
 </main>
 
