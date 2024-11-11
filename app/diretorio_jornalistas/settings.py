@@ -186,21 +186,11 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 
-# email server configuration
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER ='diretorioprofissaojornalista@gmail.com'
-EMAIL_HOST_PASSWORD = 'upld sqfp invn epxw'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True 
-
-"""
-# email server configuration
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_HOST_USER ='profissaojornalista@profissaojornalista.com.br'
-EMAIL_HOST_PASSWORD = 'Ish1k@w@9o7t048qlw'
-EMAIL_PORT = 465
-EMAIL_USE_TLS = True
-"""
+EMAIL_HOST = os.getenv("EMAIL_HOST","not found")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "not found")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD","not found")
+EMAIL_PORT = int(os.getenv("EMAIL_PORT","not found"))
+EMAIL_USE_TLS = bool(os.getenv("EMAIL_USE_TLS","not_found"))
 
 
 
