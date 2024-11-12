@@ -185,13 +185,18 @@ CSRF_TRUSTED_ORIGINS = [
     if h.strip()
 ]
 
-
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = os.getenv("EMAIL_HOST","not found")
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "not found")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD","not found")
 EMAIL_PORT = int(os.getenv("EMAIL_PORT","not found"))
 EMAIL_USE_TLS = bool(os.getenv("EMAIL_USE_TLS","not_found"))
 
+SMTP_HOST = os.getenv("SMTP_HOST","not found")
+SMTP_PORT = os.getenv("SMTP_PORT","not found")
+SMTP_USER = os.getenv("SMTP_USER", "not found")
+SMTP_PASSWORD = os.getenv("SMTP_PASSWORD", "not found")
+SMTP_SENDER = os.getenv("SMTP_SENDER","not found")
 
 
 

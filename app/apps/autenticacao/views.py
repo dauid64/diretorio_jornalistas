@@ -1,4 +1,7 @@
 import random
+import smtplib
+from django.conf import settings
+from email.mime.text import MIMEText
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
@@ -24,6 +27,8 @@ class RecuperarSenha(View):
         );
 
     def post(self, request):
+
+
         form = RecuperarSenhaForm(request.POST)
 
         email = request.POST['email']
@@ -42,8 +47,6 @@ class RecuperarSenha(View):
                 target_user = user
 
 
-
-
         new_password = int(random.random()*10**6)
 
         if form.is_valid() and found:
@@ -52,12 +55,29 @@ class RecuperarSenha(View):
 
             cd = form.cleaned_data
             subject: str = "Nova Senha da APJOR"
-            message: str = f"Usuário {username} sua nova senha é {new_password}"
-            sender="diretorioprofissaojornalista@gmail.com"
-            list_of_targets = [email]
+            message: str = f"Olá usuário {username}, sua nova senha é {new_password}"
+            #sender="diretorio@profissaojornalista.com.br" #"diretorio@profissaojornalista.com.br"
+            #list_of_targets = [email]
 
 
-            send_mail(subject,message,sender,list_of_targets)
+            #send_mail(subject,message,sender,list_of_targets)
+
+            user = settings.SMTP_USER
+            password = settings.SMTP_PASSWORD
+            sender = settings.SMTP_SENDER
+            recipients = email
+
+            msg = MIMEText(message)
+
+            msg['Subject'] = subject
+            msg['From'] = sender
+            msg['To'] = recipients
+
+            s = smtplib.SMTP(settings.SMTP_HOST, settings.SMTP_PORT)
+            s.set_debuglevel(int(settings.DEBUG))
+            s.login(user, password)
+            s.sendmail(sender, recipients, msg.as_string())
+            s.quit()        
 
             print("form sended!")
 
