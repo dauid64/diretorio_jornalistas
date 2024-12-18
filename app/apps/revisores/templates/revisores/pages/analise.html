@@ -15,16 +15,37 @@
         {% if jornalistas %}
         <div class="card-jornalista">
             {% for jornalista in jornalistas %}
-            <div class="d-flex" id='jornalista_{{ jornalista.id }}'>
-                <div class="image-pessoa" style="border: none;">
-                    <img
-                        src="{% static 'jornalistas/img/perfil.png' %}"
-                        width="130"
-                        height="130"
-                        alt=""
-                    />
-                </div>
-                <div class="card">
+            <div class="d-flex" id='jornalista_{{ jornalista.id }} row'>
+
+                <!-- profile picture -->
+                <div class="foto_perfil_analise col-md-2 pt-1">
+                    {% if jornalista.foto %}
+                      <div class="profile_picture_analyse_defined" >
+                          <img src="{{ jornalista.foto.url }}"
+                            class="img_defined"/>
+                      </div>
+                   {% else %}
+                      <div class="profile_picture_analyse_not_defined" >
+                          <img src="{% static 'jornalistas/img/camera.png' %} " class="img_not_defined"/> 
+                      </div>
+                    {% endif %}
+
+                </div> 
+
+                <!-- profile image -->
+                <!--
+                <div class="col-md-2">
+                   <div class="foto_perfil_analise">
+                      <div class="profile_picture_analise" >
+                        <img src="{% static 'jornalistas/img/camera.png' %} "/>
+                      </div>
+                    </div> 
+                </div>  
+                -->
+
+                <!-- end of profile image -->
+
+                <div class="col-md-10 mb-3">
                     <h5>{{ jornalista.nome_de_guerra }}</h5>
                     <div class="row mb-2">
                         <div class="col-md-6">
@@ -34,7 +55,7 @@
                             <span><strong>Data de Nascimento:</strong> {{ jornalista.data_de_nascimento }}</span>
                         </div>
                     </div>
-                    <div class="row mb-2">
+                    <div class="row mb-2 ">
                         <div class="col-md-6">
                             <span><strong>Registro:</strong> {{ jornalista.registro }}</span>
                         </div>
@@ -49,7 +70,15 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <a href="{% url 'revisores:analise_jornalista_perfil' jornalista.id %}"><button class="btn btn-primary" type="button">Ver perfil</button></a>
+                            <!--
+                                <a href="{% url 'revisores:analise_jornalista_perfil' jornalista.id %}">
+                            -->
+                            <a href="{% url 'jornalistas:perfil' jornalista.id %}">
+                                <button class="btn btn-primary" type="button"
+                                >
+                                    Ver perfil
+                                </button>
+                            </a>
                         </div>
                         <div class="col d-flex justify-content-end">
                             <form id='form_aprovar' style="margin-right: 2rem;">

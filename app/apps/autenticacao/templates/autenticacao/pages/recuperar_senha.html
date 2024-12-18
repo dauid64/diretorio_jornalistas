@@ -1,0 +1,49 @@
+{% extends 'global/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<main class=" container">
+
+
+	<div class="row mt-5 container d-flex justify-content-center">
+		<h1 class="text-center"> Recuperação de Senha </h1>
+	</div>
+
+	<div class="row mt-5 container d-flex justify-content-center">
+		<div class="col d-flex justify-content-center">
+	        <form class="text-center " method="POST" action="">
+	          {% csrf_token %}
+	          
+	          <div class="row mt-1 d-flex justify-content-center">
+	          	<label for="" class="form-label">Digite o email cadastrado: </label>
+
+	          	{{form.email}}
+	          </div>
+
+	          <div class="row mt-1 d-flex justify-content-center ">
+	          	<input type="submit" class="btn btn-primary w-25 " value="Enviar"/>
+	          </div>
+	        </form>
+      	</div>
+
+      	{% if request.method == "POST" %}
+	      	{% if found %}
+	      		<!--<script>alert("found!");</script>-->
+
+	      		<div class="alert alert-warning alert-dismissible fade show alert-primary" role="alert">
+					Nova senha enviada para email informado
+				  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				</div>
+	      	{% else %}
+	      		<!-- <script>alert("not found!"); </script> -->
+	      		<div class="alert alert-warning alert-dismissible fade show alert-danger" role="alert">
+				  	Email não cadastrado
+				  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				</div>
+	      	{% endif %}
+	    {% endif %}
+	</div>
+</main>
+
+{% endblock content %}

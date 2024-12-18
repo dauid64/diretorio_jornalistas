@@ -1,12 +1,94 @@
+import random
+import smtplib
+from django.conf import settings
+from email.mime.text import MIMEText
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic import View
-from apps.autenticacao.forms import RegisterUserForm, LoginForm
+from apps.autenticacao.forms import RegisterUserForm, LoginForm, RecuperarSenhaForm
 from django.contrib import messages
+from django.core.mail import send_mail
+from apps.jornalistas.models import Jornalista
 
+
+class RecuperarSenha(View):
+    def get(self, request):
+        form = RecuperarSenhaForm()
+
+        return render(
+            request,
+            'autenticacao/pages/recuperar_senha.html',
+            context = {
+                'form': form
+            }
+        );
+
+    def post(self, request):
+
+
+        form = RecuperarSenhaForm(request.POST)
+
+        email = request.POST['email']
+
+        jornalistas = Jornalista.objects.all()
+        users = [jornalista.usuario for jornalista in jornalistas]
+
+        found = False
+        username = ''
+        target_user =None
+
+        for user in users:
+            if user.email == email:
+                found = True 
+                username = user.username
+                target_user = user
+
+
+        new_password = int(random.random()*10**6)
+
+        if form.is_valid() and found:
+            target_user.set_password(str(new_password));
+            target_user.save();
+
+            cd = form.cleaned_data
+            subject: str = "Nova Senha da APJOR"
+            message: str = f"Olá usuário {username}, sua nova senha é {new_password}"
+            #sender="diretorio@profissaojornalista.com.br" #"diretorio@profissaojornalista.com.br"
+            #list_of_targets = [email]
+
+
+            #send_mail(subject,message,sender,list_of_targets)
+
+            user = settings.SMTP_USER
+            password = settings.SMTP_PASSWORD
+            sender = settings.SMTP_SENDER
+            recipients = email
+
+            msg = MIMEText(message)
+
+            msg['Subject'] = subject
+            msg['From'] = sender
+            msg['To'] = recipients
+
+            s = smtplib.SMTP(settings.SMTP_HOST, settings.SMTP_PORT)
+            s.set_debuglevel(int(settings.DEBUG))
+            s.login(user, password)
+            s.sendmail(sender, recipients, msg.as_string())
+            s.quit()        
+
+            print("form sended!")
+
+        return render(
+            request,
+            "autenticacao/pages/recuperar_senha.html",
+            context = {
+                'form': form,
+                'found': found
+            }
+        );
 
 class RegisterUserView(View):
     def get(self, request):

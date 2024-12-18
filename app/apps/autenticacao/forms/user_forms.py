@@ -3,6 +3,20 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
 
+class RecuperarSenhaForm(forms.Form):
+    email = forms.EmailField(
+        required=True,
+        widget = forms.EmailInput(  
+            attrs={
+                'id':'input_recover_password',
+                'class':'email_input_recover_password w-50 form-control',
+                'placeholder':'email@com.br'
+            }
+        )
+    )
+
+
+
 class RegisterUserForm(forms.ModelForm):
     confirm_password = forms.CharField(
         label='Confirmar Senha',
@@ -23,7 +37,7 @@ class RegisterUserForm(forms.ModelForm):
         ]
         labels = {
             'username': 'Usuário',
-            'email': 'Email',
+            'email': 'E-mail',
             'password': 'Senha'
         }
 
@@ -44,7 +58,7 @@ class RegisterUserForm(forms.ModelForm):
             'email': forms.EmailInput(
                 attrs={
                     "class": "form-control",
-                    "placeholder": "Email"
+                    "placeholder": "E-mail"
                 }
             ),
             'password': forms.PasswordInput(

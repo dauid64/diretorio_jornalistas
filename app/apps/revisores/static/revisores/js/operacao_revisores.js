@@ -1,4 +1,5 @@
 function aprovarJornalista(url) {
+
     token = $("#form_aprovar input[name='csrfmiddlewaretoken']").val()
 
     $.ajax({
@@ -22,7 +23,9 @@ function aprovarJornalista(url) {
     })
 }
 
-function reprovarJornalista(url) {
+function reprovarJornalista(url ) {
+
+
     token = $("#form_reprovar input[name='csrfmiddlewaretoken']").val()
 
     $.ajax({

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from apps.revisores.models import Revisor
 from apps.associacoes.models import Associacao
 from apps.opcoes.models import Genero, EstadoCivil
+from apps.opcoes.models import Estados, Cidades
 
 
 class JornalistasManager(models.Manager):
@@ -41,6 +42,15 @@ class Jornalista(models.Model):
     aprovado = models.BooleanField(default=False)
     revisor_responsavel = models.ForeignKey(Revisor, on_delete=models.PROTECT, null=True, blank=True)
     curriculo = models.FileField(upload_to='curriculos/%Y/%m/%d/', blank=True, null=True)
+    funcao = models.CharField(max_length=255, null=True, blank=True)
+    show_funcao = models.BooleanField(blank=True,default=False)
+    cidade = models.ForeignKey(Cidades, on_delete=models.SET_NULL,null=True, blank=True)
+    estado = models.ForeignKey(Estados, on_delete=models.SET_NULL,null=True, blank=True)
+    show_cidade = models.BooleanField(blank=True, default=False)
+    show_estado = models.BooleanField(blank=True, default=False)
+    minibio = models.TextField(blank=True, null=True)
+
+    show_email = models.BooleanField(blank=True,default=False);
 
     objects = JornalistasManager()
 
@@ -62,5 +72,5 @@ class Jornalista(models.Model):
 
 class Diploma(models.Model):
     jornalista = models.ForeignKey(Jornalista, on_delete=models.CASCADE)
-    descricao = models.CharField(max_length=255)
-    arquivo = models.ImageField(upload_to='diplomas/%Y/%m/%d/')
+    descricao = models.CharField(max_length=255, null=True, blank=True)
+    arquivo = models.ImageField(upload_to='diplomas/%Y/%m/%d/', null=True, blank=True)

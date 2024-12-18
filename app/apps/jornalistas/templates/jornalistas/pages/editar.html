@@ -11,6 +11,10 @@
   .hide {
     display: none;
   }
+
+  #curriculo_id {
+    display: none;
+  }
 </style>
 {% endblock styles %}
 {% block content %}
@@ -32,35 +36,8 @@
   </div>
   <body>
       <div class="tela-cadastro" id="Primeiro">
-        <!--
-        <div class="subtitulo">
-          <h3>Crie uma nova conta</h3>
-        </div>
-
-      -->
-        
-        <!-- foto de perfil area -->
-        <!--
-        <div class="foto-perfil">
-          <img
-            src="{% static 'jornalistas/img/perfil.png' %}"
-            width="128"
-            height="130"
-            alt=""
-            style="margin-left: 2.5vh;"
-          />
-          <img
-            src="{% static 'jornalistas/img/upload.png' %}"
-            width="140"
-            height="39"
-            alt=""
-            style="margin-top: -4vh;"
-          />
-        </div>
-        -->
-
         <!-- alert -->
-        <div class="container row pt-3 pb-0 mb-0">
+        <div class="container row pt-3 pb-0 mb-0 mx-auto">
           <div class="alert alert-warning alert-dismissible show justify-content-between mb-0" role="alert">
             <div>
               Em Dados Pessoais, marque a caixinha ao lado de cada item para selecionar os dados que deseja exibir para a comunidade do DPJB. Caso contrário, eles serão ocultados no seu perfil.
@@ -72,48 +49,71 @@
           </div>
         </div>
         <!-- end of alert -->
-
-        <!-- foto de perfil nova area -->
-        <div class="row container" id = "row_perfil_picture" >
-            <div class="col-md-12">
-
-               <div class="foto-perfil">
-                  <div class="profile_picture" >
-                    <img src="{% static 'jornalistas/img/camera.png' %} "/>
-                    <input type="file" name="profile_photo" id="input_profile_photo"/>
-                  </div>
-                </div> 
-            </div>  
-        </div>
-
-        <!-- end of foto the perfil nova area -->
   
         <form method="POST" action="" class="form-cadastro" enctype='multipart/form-data' id='form_jornalista'>
           {% csrf_token %}
 
-        <div class="card-jornalista row col-md-0 w-75">
-          <div class="titulo">
-            <div class="circ-l"> </div>   
-            Dados Pessoais
+
+          <!-- foto de perfil nova area -->
+          <div class="row container" id = "row_perfil_picture" >
+              <div class="col-md-12">
+
+                 <div class="foto-perfil">
+
+                  {% if jornalista.foto %}
+                    <div class="profile_picture_defined" >
+                        <img src="{{ jornalista.foto.url }}"
+                          class="img_defined"/>
+                    </div>
+                 {% else %}
+
+                      <div class="profile_picture_not_defined" >
+                          <img src="{% static 'jornalistas/img/camera.png' %} " class="img_not_defined"/> 
+                      </div>
+                  {% endif %}
+
+                  {{jornalista_form.foto}}
+
+
+              </div>  
           </div>
+          <!-- end of foto the perfil nova area -->
 
-          {% include "jornalistas/partials/form_dados_pessoais.html" %}
 
-          <h2 class="subtitulo">Redes Sociais</h2>
 
-          {% include "jornalistas/partials/form_redes_sociais.html" %}
+          <div class="card-jornalista row col-md-0 w-75">
 
-          <div class="titulo">
-            <div class="circ-l"> </div>   
-            Formação
-          </div>
-          
-          {% include "jornalistas/partials/form_formacao.html" %}
+            <div class="titulo">
+              <div class="circ-l"> </div>   
+              Dados de Login
+            </div>
+
+            {% include "jornalistas/partials/form_usuario.html" %}
+
+            <div class="titulo">
+              <div class="circ-l"> </div>   
+              Dados Pessoais
+            </div>
+
+            {% include "jornalistas/partials/form_dados_pessoais.html" %}
+
+            <h2 class="subtitulo">Redes Sociais</h2>
+
+            {% include "jornalistas/partials/form_redes_sociais.html" %}
+
+            <div class="titulo">
+              <div class="circ-l"> </div>   
+              Formação
+            </div>
+            
+            {% include "jornalistas/partials/form_formacao.html" %}
 
         </form>
 
+          <!-- dados profissionais field --
           <div class="titulo">
             <div class="circ-l"> 
+
             
           </div> 
             Dados Profissionais
@@ -158,6 +158,8 @@
             </div>
           {% endfor %}
           <button type="button" class="incluir btn-centralizar" data-bs-toggle="modal" data-bs-target="#historico_modal">Incluir Experiência</button>
+
+          -- end of dados profissionais field -->
           
           <div class="titulo">
             <div class="circ-l"> </div>   
@@ -166,7 +168,15 @@
           
           <div class="container text-center">
             {% if jornalista_form.instance.curriculo %}
+              <!--
               <a href="{% url 'jornalistas:download_curriculo' jornalista_form.instance.pk %}" class="btn btn-primary mb-2">Baixar Currículo Atual</a>
+              -->
+
+              <a href="" class="btn btn-primary mb-2" id="link_to_update_cv">Atualizar Currículo
+              </a>
+            {% else %}
+              <a href="" class="btn btn-primary mb-2" id="link_to_update_cv">Inserir Currículo
+              </a>
             {% endif %}
             {{ jornalista_form.curriculo }}
             {% if jornalista_form.curriculo.errors %}
@@ -193,6 +203,8 @@
           </div>
 
         </div>
+
+
 
         </div>
       </div>
@@ -255,6 +267,9 @@
       }
     });
   });
+</script>
+
+<script src="{% static 'jornalistas/js/jornalista_cadastro.js' %}">
 </script>
 {% endblock scripts %}
 

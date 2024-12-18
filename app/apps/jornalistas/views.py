@@ -18,6 +18,8 @@ from apps.revisores.models import Revisor
 from django.http import HttpResponse
 import os
 
+from apps.opcoes.models import Cidades, Estados
+
 
 PER_PAGE = int(os.getenv('PER_PAGE', 5))
 
@@ -73,11 +75,43 @@ class PerfilJornalistaView(DetailView):
     template_name = 'jornalistas/pages/perfil.html'
     context_object_name = 'jornalista'
 
+    
+
+    """
+    for v in jornalistas:
+        print(v.usuario)
+
+    print()
+
+    for v in revisores:
+        print(v.usuario)
+
+    print()
+    """
+    user_is_revisor = True
+    def get_context_data(self,*args, **kwargs):
+
+        jornalistas = Jornalista.objects.all()
+        revisores = Revisor.objects.all()
+        list_of_revisors  = [user.usuario.username for user in revisores]
+
+        context = super().get_context_data(*args,**kwargs)
+        #context['jornalista'] = model
+        context['lista_de_revisores'] = list_of_revisors
+
+        context['estados'] = Estados.objects.all()
+        context['user_is_revisor'] = PerfilJornalistaView.user_is_revisor
+        return context
+
 
 class CadastroJornalistaView(View):
     def get(self, request):
+        jornalista = None
         jornalista_form = JornalistaForm()
         usuario_form = RegisterUserForm()
+
+        # sort the cities in alphabetical order to show the user
+        jornalista_form.fields["cidade"].queryset=Cidades.objects.order_by("descricao")
 
         diploma_formset = inlineformset_factory(
             Jornalista,
@@ -105,6 +139,7 @@ class CadastroJornalistaView(View):
             request,
             'jornalistas/pages/cadastro.html',
             context={
+                'jornalista': jornalista,
                 'usuario_form': usuario_form,
                 'jornalista_form': jornalista_form,
                 'diploma_forms': diploma_forms,
@@ -186,6 +221,7 @@ class CadastroJornalistaView(View):
 class EditarJornalistaView(View):
     def get(self, request, pk):
         jornalista = get_object_or_404(Jornalista, pk=pk)
+        usuario = jornalista.usuario
         jornalista_logado = request.user.jornalista
         if jornalista != jornalista_logado:
             messages.warning(
@@ -201,6 +237,16 @@ class EditarJornalistaView(View):
             instance=jornalista,
             data=jornalista_data
         )
+
+        usuario_data = request.session.get("usuario_data",None)
+        usuario_form = RegisterUserForm(
+            instance=usuario,
+            data=usuario_data
+        )
+
+        # sort the cities in alphabetical order to show the user
+        jornalista_form.fields["cidade"].queryset=Cidades.objects.order_by("descricao")
+
         historico_form = HistoricoForm(experiencia_data)
         referencia_formset = inlineformset_factory(
             HistoricoProfissional,
@@ -235,6 +281,8 @@ class EditarJornalistaView(View):
             request,
             'jornalistas/pages/editar.html',
             context={
+                'usuario_form': usuario_form,
+                'jornalista': jornalista,
                 'jornalista_form': jornalista_form,
                 'diploma_forms': diploma_forms,
                 'historico_form': historico_form,
@@ -245,7 +293,11 @@ class EditarJornalistaView(View):
 
     def post(self, request, pk):
         POST = request.POST
+        usuario_form = RegisterUserForm(POST)
+
+        print(POST)
         FILES = request.FILES
+        print("FILES: ", FILES)
         request.session['jornalista_data'] = POST
         jornalista = get_object_or_404(Jornalista, pk=pk)
         jornalista_logado = request.user.jornalista
@@ -258,6 +310,7 @@ class EditarJornalistaView(View):
                 reverse('core:home')
             )
         jornalista_form = JornalistaForm(instance=jornalista, data=POST, files=FILES)
+        usuario_form = RegisterUserForm(instance=jornalista.usuario,data=POST)
         diploma_formset = inlineformset_factory(
             Jornalista,
             Diploma,
@@ -281,6 +334,17 @@ class EditarJornalistaView(View):
         )
         if redes_sociais_form.is_valid() and jornalista_form.is_valid() \
                 and diploma_forms.is_valid():
+
+            #user = usuario_form.save(commit=False)
+            #user.set_password(user.password)
+            #user.save()
+
+            user  = jornalista.usuario 
+            user.email = POST['email']
+            user.set_password(POST['password'])
+
+            user.save()
+        
             jornalista_form.save()
             diploma_forms.save()
             redes_sociais_form.save()

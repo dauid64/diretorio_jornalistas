@@ -489,6 +489,7 @@ table th, table td{
 .jornalistas_perfil_busca {
     background-color: #fff;
     height: 100%;
+    width:  100%;
 
 }
 
@@ -510,6 +511,7 @@ table th, table td{
     height:  70%;
 }
 
+/* ------------------------- */
 .foto_perfil_busca {
   display: flex;
   flex-direction: column;
@@ -517,7 +519,7 @@ table th, table td{
   background-color: transparent;
   justify-content: center;
   align-items: center;
-  height: 90%;
+  height: 100%;
 
 }
 
@@ -555,6 +557,68 @@ table th, table td{
   margin-top: 3%vh;
 }
 
+/* ----------------------------*/
+
+.profile_picture_search_not_defined {
+  box-sizing: border-box;
+  background: #CCE6F5;
+  border-color: #CED9DD;
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 100%;
+  z-index: 2;
+  position: static;
+  width: 50%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+
+}
+
+.profile_picture_search_defined {
+  box-sizing: border-box;
+  background: #CCE6F5;
+  border-color: #CED9DD;
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 100%;
+  z-index: 2;
+  position: static;
+  width: 50%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+
+  padding-left:  0;
+  padding-right:  0;
+
+}
+
+.profile_picture_search_not_defined img.img_not_defined {
+  box-sizing: border-box;
+  width: 80%;
+  height: 80%;
+  padding-top: 20%;
+  padding-bottom: 0%;
+
+}
+
+.profile_picture_search_defined img.img_defined {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding-top: 0%;
+  padding-bottom: 0%;
+  border-radius:  100%;
+
+}
+
+
+/* ------------------------------*/
 
 .foto-perfil {
   display: flex;
@@ -563,14 +627,11 @@ table th, table td{
   background-color: transparent;
   justify-content: center;
   align-items: center;
-}
-
-.bi-camera {
-  color: #0000ff;
+  margin-bottom: -5%;
 
 }
 
-.profile_picture {
+.profile_picture_defined {
   box-sizing: border-box;
   background: #CCE6F5;
   border-color: #CED9DD;
@@ -588,7 +649,35 @@ table th, table td{
 
 }
 
-.profile_picture img {
+.profile_picture_defined img.img_defined {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding-top: 0%;
+  padding-bottom: 0;
+  border-radius: 100%;
+
+}
+
+.profile_picture_not_defined {
+  box-sizing: border-box;
+  background: #CCE6F5;
+  border-color: #CED9DD;
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 100%;
+  z-index: 2;
+  position: static;
+  width: 10%;
+  height: 25%;
+
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+
+}
+
+.profile_picture_not_defined img.img_not_defined {
   box-sizing: border-box;
   width: 40%;
   height: 40%;
@@ -602,6 +691,8 @@ table th, table td{
   position: relative;
   top: 50px;
   margin-top: 3%vh;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .partial_messages_alert {
@@ -634,10 +725,15 @@ table th, table td{
   background-color: transparent;
   justify-content: center;
   align-items: center;
+  height: 80%;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 100%;
 }
 
 
-.profile_other_picture {
+.profile_other_picture_not_defined {
   box-sizing: border-box;
   background: #CCE6F5;
   border-color: #CED9DD;
@@ -646,8 +742,8 @@ table th, table td{
   border-radius: 100%;
   z-index: 2;
   position: static;
-  width: 75%;
-  height: 25%;
+  width: 80%;
+  height: 100%;
 
   display: flex;
   justify-content: center;
@@ -655,12 +751,44 @@ table th, table td{
 
 }
 
-.profile_other_picture img {
+.profile_other_picture_defined {
   box-sizing: border-box;
-  width: 40%;
-  height: 40%;
-  padding-top: 30%;
-  padding-bottom: 30%;
+  background: #CCE6F5;
+  border-color: #CED9DD;
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 100%;
+  z-index: 2;
+  position: static;
+  width: 70%;
+  height: 80%;
+
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+
+  padding-left:  0;
+  padding-right:  0;
+
+}
+
+.profile_other_picture_not_defined img.img_not_defined {
+  box-sizing: border-box;
+  width: 70%;
+  height: 80%;
+  padding-top: 15%;
+  padding-bottom: 0%;
+
+
+}
+
+.profile_other_picture_defined img.img_defined {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding-top: 0%;
+  padding-bottom: 0%;
+  border-radius:  100%;
 
 }
 
@@ -681,6 +809,83 @@ table th, table td{
 
 button.active {
     color: #0288BB !important;
+}
+
+.foto_perfil_analise_defined {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  background-color: transparent;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  height: 100%;
+}
+
+.profile_picture_analyse_defined {
+  box-sizing: border-box;
+  background: #CCE6F5;
+  border-color: #CED9DD;
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 100%;
+  z-index: 2;
+  position: static;
+  width: 50%;
+  height: 55%;
+
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+
+}
+
+.profile_picture_analyse_defined img.img_defined {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding-top: 0%;
+  padding-bottom: 0%;
+  border-radius:  100%;
+
+}
+
+.foto_perfil_analise_not_defined {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  background-color: transparent;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  height: 100%;
+}
+
+.profile_picture_analyse_not_defined {
+  box-sizing: border-box;
+  background: #CCE6F5;
+  border-color: #CED9DD;
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 100%;
+  z-index: 2;
+  position: static;
+  width: 50%;
+  height: 55%;
+
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+
+}
+
+.profile_picture_analyse_not_defined img.img_not_defined {
+  box-sizing: border-box;
+  width: 80%;
+  height: 80%;
+  padding-top: 20%;
+  padding-bottom: 5%;
+
 }
 
 

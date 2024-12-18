@@ -38,15 +38,26 @@
             <div class="col-md-10">
 
                <div class="foto-perfil">
-                  <div class="profile_picture" >
-                    <img src="{% static 'jornalistas/img/camera.png' %} "/>
-                    <input type="file" name="profile_photo" id="input_profile_photo"/>
-                  </div>
+
+                  {% if jornalista.foto %}
+                    <div class="profile_picture_defined" >
+                        <img src="{{ jornalista.foto.url }}"
+                          class="img_defined"/>
+                    </div>
+                 {% else %}
+                    <div class="profile_picture_not_defined" >
+                        <img src="{% static 'jornalistas/img/camera.png' %} " class="img_not_defined"/> 
+                    </div>
+                  {% endif %}
+                      
+                  <!--<input type="file" name="profile_photo" id="input_profile_photo"/>-->
+                  {{jornalista_form.foto}}
+      
                 </div> 
             </div>  
           </div>
 
-          <div class="row">
+          <div class="row mt-5">
 
             <div class="col-md-10">
 

@@ -100,5 +100,15 @@ Para usar o DPJB, siga estas etapas:
         </sub>
       </a>
     </td>
+    <td align="center">
+      <a href="https://github.com/Daltro-Oliveira-Vinuto" title="Github">
+        <img src="https://avatars.githubusercontent.com/u/18556262?s=400&u=7cf8646ecf6740c9aab7ca310959f38b68410d9c&v=4" width="100px;" alt="Foto de Daltro Oliveira Vinuto"/><br>
+        <sub>
+          <b>Daltro Oliveira Vinuto</b>
+        </sub>
+      </a>
+    </td>
+
+
   </tr>
 </table>

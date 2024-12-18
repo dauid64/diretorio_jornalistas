@@ -1,15 +1,22 @@
 from django import forms
 from apps.jornalistas.models import Jornalista
+from apps.opcoes.models import Cidades, Estados
 from django.core.exceptions import ValidationError
 
 
 class JornalistaForm(forms.ModelForm):
+
     def __init__(self, *args, **kwargs):
         super(JornalistaForm, self).__init__(*args, **kwargs)
 
     class Meta:
         model = Jornalista
         fields = [
+            'minibio',
+            'cidade',
+            'estado',
+            'funcao',
+            'foto',
             'nome_de_guerra',
             'nome',
             'sobrenome',
@@ -32,10 +39,20 @@ class JornalistaForm(forms.ModelForm):
             'show_telefone',
             'show_genero',
             'show_estado_civil',
-            'show_registro'
+            'show_registro',
+            'show_funcao',
+            'show_estado',
+            'show_cidade',
+            'show_email'
         ]
 
         labels = {
+            'minibio':'Minibio',
+            'cidade':'Cidade Natal',
+            'estado':'Estado',
+            'show_funcao':'show_funcao',
+            'funcao':'Função',
+            'foto':'foto',
             'cpf': 'CPF',
             'genero': 'Gênero',
             'registro': 'MTb',
@@ -54,6 +71,43 @@ class JornalistaForm(forms.ModelForm):
         }
 
         widgets = {
+
+            'show_email': forms.CheckboxInput (
+                attrs={
+                    'class':'form-check-input',
+                }
+
+            ),
+
+            'minibio': forms.Textarea(
+                attrs={
+                    'class':'form-control',
+                    'id':''
+                }
+            ),
+            'cidade': forms.Select(
+                attrs={
+                    'class':'form-control'
+                }
+            ),
+            'estado': forms.Select(
+                attrs={
+                    'class':' form-control'
+                }
+            ),
+            'funcao': forms.TextInput(
+                attrs={
+                    'class':'form-control',
+                    'id':'',
+                }
+            ),
+
+            'foto': forms.FileInput(
+                attrs={
+                    'class': '',
+                    'id':'input_profile_photo'
+                }
+            ),
             'associacoes': forms.SelectMultiple(
                 attrs={
                     'class': 'select2 form-control'
@@ -114,7 +168,8 @@ class JornalistaForm(forms.ModelForm):
             ),
             'curriculo': forms.FileInput(
                 attrs={
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'id': 'curriculo_id'
                 }
             ),
             'show_nome_de_guerra': forms.CheckboxInput(
@@ -172,7 +227,23 @@ class JornalistaForm(forms.ModelForm):
                     'class': 'form-check-input'
                 }
             ),
+            'show_funcao': forms.CheckboxInput(
+                attrs ={
+                    'class':'form-check-input'
+                }
+            ),
+             'show_estado': forms.CheckboxInput(
+                attrs ={
+                    'class':'form-check-input'
+                }
+            ),
+              'show_cidade': forms.CheckboxInput(
+                attrs ={
+                    'class':'form-check-input'
+                }
+            ),
         }
+
 
     def clean_telefone(self):
         data = self.cleaned_data['telefone']
